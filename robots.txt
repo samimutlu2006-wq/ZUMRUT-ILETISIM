@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /depo.html
+Disallow: /giris.html

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sayfa bulunamadı · Zümrüt İletişim</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    :root { --metin: #1d1d1f; --metin-2: #6e6e73; --mavi: #0071e3; --gri: #f5f5f7; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--metin); background: #fff; -webkit-font-smoothing: antialiased; letter-spacing: -0.022em;
+      display: flex; flex-direction: column;
+    }
+    header { height: 48px; display: flex; align-items: center; justify-content: center; background: rgba(250, 250, 252, .85); border-bottom: 1px solid rgba(0, 0, 0, .06); }
+    header a { display: inline-flex; align-items: center; gap: 8px; color: var(--metin); font-weight: 600; font-size: 17px; text-decoration: none; }
+    header svg { width: 22px; height: 22px; }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 20px 80px; text-align: center; }
+    .kod { font-size: clamp(88px, 18vw, 160px); line-height: 1; font-weight: 700; letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #3ee0a1, #0c9a6a 45%, #05603f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; font-weight: 600; margin: 18px 0 0; }
+    p { font-size: 19px; line-height: 1.45; color: var(--metin-2); max-width: 520px; margin: 12px auto 30px; }
+    .butonlar { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 22px; border-radius: 980px; font-size: 17px; text-decoration: none; border: 1px solid var(--mavi); transition: background-color .2s, color .2s; }
+    .btn--dolu { background: var(--mavi); color: #fff; }
+    .btn--dolu:hover { background: #0077ed; }
+    .btn--cizgi { color: var(--mavi); background: transparent; }
+    .btn--cizgi:hover { background: var(--mavi); color: #fff; }
+    footer { background: var(--gri); color: var(--metin-2); font-size: 12px; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="./" data-kok>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ee0a1"/><stop offset=".55" stop-color="#0c9a6a"/><stop offset="1" stop-color="#05603f"/></linearGradient></defs><path d="M19.2 5.9h25.6l13.3 13.3v25.6L44.8 58.1H19.2L5.9 44.8V19.2z" fill="url(#g)"/><path d="M24 16.5h16l7.5 7.5v16L40 47.5H24L16.5 40V24z" fill="#fff" fill-opacity=".2"/></svg>
+      Zümrüt İletişim
+    </a>
+  </header>
+  <main>
+    <div>
+      <div class="kod" aria-hidden="true">404</div>
+      <h1>Aradığınız sayfa bulunamadı.</h1>
+      <p>Bağlantı değişmiş ya da ürün kaldırılmış olabilir. Ana sayfadan ya da ürün listesinden devam edebilirsiniz.</p>
+      <div class="butonlar">
+        <a class="btn btn--dolu" href="./" data-kok>← Ana Sayfaya Dön</a>
+        <a class="btn btn--cizgi" href="./urunler.html?k=tumu" data-kok="urunler.html?k=tumu">Tüm ürünler</a>
+      </div>
+    </div>
+  </main>
+  <footer>Zümrüt İletişim · Kadir Has Cd. No:131/A, Kocasinan / Kayseri · 0542 303 24 83</footer>
+  <script>
+    /* GitHub Pages hem kullanıcı sitesi (kullanici.github.io) hem proje sitesi (kullanici.github.io/depo) olabilir.
+       Ana sayfanın gerçek adresini bulup bağlantıları ona göre ayarla. */
+    (function () {
+      var parca = location.pathname.split('/').filter(Boolean);
+      var adaylar = [];
+      if (parca.length) adaylar.push('/' + parca[0] + '/');
+      adaylar.push('/');
+      function uygula(kok) {
+        Array.prototype.forEach.call(document.querySelectorAll('[data-kok]'), function (a) {
+          a.href = kok + (a.getAttribute('data-kok') || '');
+        });
+      }
+      function dene(i) {
+        if (i >= adaylar.length) return uygula('/');
+        fetch(adaylar[i] + 'data/veri.js', { method: 'HEAD', cache: 'no-store' })
+          .then(function (r) { if (r.ok) uygula(adaylar[i]); else dene(i + 1); }, function () { dene(i + 1); });
+      }
+      if (location.protocol.indexOf('http') === 0) dene(0);
+    })();
+  </script>
+</body>
+</html>
