@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-09-29T21:23:18.415Z",
+  "guncelleme": "2026-09-29T22:37:56.119Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz.",
@@ -1513,23 +1513,19 @@ window.ZI_VERI = {
         "diger": "Nano-SIM + eSIM (Türkiye modeli)"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ucgen"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-18-pro-burgonya-1.webp",
+        "assets/img/urunler/iphone-18-pro-burgonya-2.webp"
       ],
       "stok": 3,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-09-15T08:24:00.000Z",
-      "guncelleme": "2026-09-17T08:10:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "gorselRenkleri": [
+        "Burgonya",
+        "Burgonya"
+      ]
     },
     {
       "id": "iphone-18-pro-max",
@@ -1599,23 +1595,19 @@ window.ZI_VERI = {
         "diger": "Nano-SIM + eSIM (Türkiye modeli)"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ucgen"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-18-pro-burgonya-1.webp",
+        "assets/img/urunler/iphone-18-pro-burgonya-2.webp"
       ],
       "stok": 3,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-09-15T08:24:00.000Z",
-      "guncelleme": "2026-09-17T08:10:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "gorselRenkleri": [
+        "Burgonya",
+        "Burgonya"
+      ]
     },
     {
       "id": "iphone-air",
@@ -1680,23 +1672,17 @@ window.ZI_VERI = {
         "diger": "5,6 mm kalınlık · Türkiye modeli yalnızca eSIM destekler"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "tek"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-air-gok-mavisi-1.webp"
       ],
       "stok": 2,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-08-18T08:40:00.000Z",
-      "guncelleme": "2026-08-20T08:26:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "gorselRenkleri": [
+        "Gök Mavisi"
+      ]
     },
     {
       "id": "iphone-17",
@@ -1723,6 +1709,10 @@ window.ZI_VERI = {
       ],
       "renkler": [
         {
+          "ad": "Ada Çayı",
+          "kod": "#b7c3a6"
+        },
+        {
           "ad": "Lavanta",
           "kod": "#c7bedd"
         },
@@ -1737,10 +1727,6 @@ window.ZI_VERI = {
         {
           "ad": "Sis Mavisi",
           "kod": "#a9bcd0"
-        },
-        {
-          "ad": "Ada Çayı",
-          "kod": "#b7c3a6"
         }
       ],
       "cikisYili": 2025,
@@ -1761,23 +1747,17 @@ window.ZI_VERI = {
         "diger": "Nano-SIM + eSIM (Türkiye modeli)"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ikili"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-17-ada-cayi-1.webp"
       ],
       "stok": 4,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-08-20T08:26:00.000Z",
-      "guncelleme": "2026-08-22T08:12:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "gorselRenkleri": [
+        "Ada Çayı"
+      ]
     },
     {
       "id": "iphone-17e",
@@ -1833,23 +1813,19 @@ window.ZI_VERI = {
         "batarya": "26 saate kadar video oynatma · 15W MagSafe kablosuz şarj"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "tekli"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-17e-beyaz-pembe-1.webp",
+        "assets/img/urunler/iphone-17e-beyaz-pembe-1.webp"
       ],
       "stok": 5,
       "aktif": true,
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-07-29T08:00:00.000Z",
-      "guncelleme": "2026-07-31T08:46:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "gorselRenkleri": [
+        "Açık Pembe",
+        "Beyaz"
+      ]
     },
     {
       "id": "iphone-16",
@@ -1909,23 +1885,21 @@ window.ZI_VERI = {
         "batarya": "22 saate kadar video oynatma · 25W’a kadar MagSafe şarj"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ikili"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
+        "assets/img/urunler/iphone-16-laciverttas-1.webp",
+        "assets/img/urunler/iphone-16-siyah-1.webp",
+        "assets/img/urunler/iphone-16-pembe-1.webp"
       ],
       "stok": 2,
       "aktif": true,
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-06-29T08:30:00.000Z",
-      "guncelleme": "2026-07-01T08:16:00.000Z"
+      "guncelleme": "2026-09-29T22:37:56.109Z",
+      "gorselRenkleri": [
+        "Laciverttaş",
+        "Siyah",
+        "Pembe"
+      ]
     },
     {
       "id": "galaxy-s26-ultra",

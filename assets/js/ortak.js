@@ -244,8 +244,10 @@
     var ogeler = [];
     (u.gorseller || []).forEach(function (x, i) { if (x) ogeler.push({ x: x, renk: etiket[i] || '' }); });
     if (ogeler.length && secili && secili.ad && etiket.some(Boolean)) {
+      /* Seçilen rengin fotoğrafı varsa o (+ renksiz fotoğraflar); yoksa renksiz fotoğraflar; o da yoksa bu renge boyanmış çizim */
       var eslesen = ogeler.filter(function (o) { return o.renk === secili.ad; });
-      if (eslesen.length) ogeler = eslesen.concat(ogeler.filter(function (o) { return !o.renk; }));
+      var genel = ogeler.filter(function (o) { return !o.renk && typeof o.x === 'string'; });
+      ogeler = eslesen.length ? eslesen.concat(genel) : genel;
     }
     var liste = ogeler.map(function (o) { return o.x; });
     if (!liste.length) liste = ZI.cizim ? ZI.cizim.varsayilan(u, r) : [];

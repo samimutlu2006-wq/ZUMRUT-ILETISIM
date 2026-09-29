@@ -168,6 +168,8 @@
   function galeriKur(u, secili) {
     var sahne = $('#sahne'), kucukler = $('#kucukler'), noktalar = $('#gnoktalar');
     function listele() { return ZI.gorseller(u, secili.renk); }
+    /* Ürünün herhangi bir fotoğrafı varsa sahne dikey kalır; renk değiştirirken zıplamaz */
+    var fotolu = (u.gorseller || []).some(function (x) { return typeof x === 'string' && !/\.svg(\?|$)/i.test(x); });
     function yenile(ilk) {
       var liste = listele();
       if (secili.gorsel >= liste.length) secili.gorsel = 0;
@@ -186,7 +188,7 @@
       }).join('') : '';
       noktalar.innerHTML = liste.length > 1 ? liste.map(function (x, i) { return '<span class="' + (i === secili.gorsel ? 'aktif' : '') + '"></span>'; }).join('') : '';
       $$('.zi-galeri__ok', sahne).forEach(function (b) { b.hidden = liste.length < 2; });
-      sahne.classList.toggle('foto-modu', !!(liste[0] && liste[0].foto));
+      sahne.classList.toggle('foto-modu', fotolu);
       if (!ilk) $$('img.aktif', sahne).forEach(function (im) { im.animate([{ opacity: 0.2, transform: 'scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.28,.11,.32,1)' }); });
     }
     function goster(i) {
