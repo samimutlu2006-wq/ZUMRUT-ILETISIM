@@ -88,7 +88,8 @@
       '<div class="zi-bilgi__fiyat" id="fiyat"><div class="zi-bilgi__fiyat-deger" id="fiyat-deger"></div><p class="zi-bilgi__fiyat-not">' + k(m.fiyatNotu) + '</p></div>' +
       (u.secenekler.length ? '<div class="zi-secim"><div class="zi-secim__baslik">' + secimBaslik + '<span id="secenek-ad"></span></div><div class="zi-secenekler" role="group" aria-label="' + secimBaslik + ' seçimi">' +
         u.secenekler.map(function (s, i) {
-          return '<button class="zi-secenek" type="button" data-s="' + i + '" aria-pressed="false"><b>' + k(s.ad) + '</b><span>' + (s.fiyat != null && s.fiyat !== '' ? ZI.fiyatYaz(s.fiyat) : 'Fiyat için arayın') + '</span></button>';
+          var sf = s.fiyat != null && s.fiyat !== '' ? s.fiyat : u.fiyat;
+          return '<button class="zi-secenek" type="button" data-s="' + i + '" aria-pressed="false"><b>' + k(s.ad) + '</b><span>' + (sf != null && sf !== '' ? ZI.fiyatYaz(sf) : 'Fiyat için arayın') + '</span></button>';
         }).join('') + '</div></div>' : '') +
       (u.renkler.length ? '<div class="zi-secim"><div class="zi-secim__baslik">Renk<span id="renk-ad"></span></div><div class="zi-renk-secici" role="group" aria-label="Renk seçimi">' +
         u.renkler.map(function (r, i) {
@@ -136,10 +137,12 @@
     if (u.pilSagligi != null && u.pilSagligi !== '' && cihaz) {
       var p = Number(u.pilSagligi), sinif = p >= 85 ? '' : (p >= 80 ? ' orta' : ' dusuk');
       kartlar.push('<div class="zi-ozet__kart' + (p >= 85 ? ' iyi' : ' uyari') + '">' + ZI.ikon('pil') + '<div style="flex:1"><small>Pil sağlığı</small><b>%' + p + (u.durum === 'sifir' ? ' · Yeni cihaz' : '') + '</b>' +
+        (u.pilDongu != null && u.pilDongu !== '' ? '<small style="margin-top:2px">' + k(u.pilDongu) + ' şarj döngüsü</small>' : '') +
         '<div class="zi-pil-cubuk' + sinif + '"><i style="width:0" data-pil="' + p + '"></i></div></div></div>');
     }
     if (u.cikisYili || u.cikisTarihi) kartlar.push('<div class="zi-ozet__kart">' + ZI.ikon('takvim') + '<div><small>Çıkış yılı</small><b>' + k(u.cikisYili || '') + '</b>' + (u.cikisTarihi ? '<small style="margin-top:2px">' + k(u.cikisTarihi) + '</small>' : '') + '</div></div>');
     if (u.uretimYili) kartlar.push('<div class="zi-ozet__kart">' + ZI.ikon('takvim') + '<div><small>Üretim yılı</small><b>' + k(u.uretimYili) + '</b></div></div>');
+    if (u.garanti) kartlar.push('<div class="zi-ozet__kart' + (/garantisiz|yok/i.test(u.garanti) ? '' : ' iyi') + '">' + ZI.ikon('kalkan') + '<div><small>Garanti</small><b>' + k(u.garanti) + '</b></div></div>');
     if (u.degisenParca && cihaz) {
       var temiz = /yok|orijinal/i.test(u.degisenParca) && !/değişti|degisti/i.test(u.degisenParca);
       kartlar.push('<div class="zi-ozet__kart zi-ozet__kart--genis ' + (temiz ? 'iyi' : 'uyari') + '">' + ZI.ikon(temiz ? 'onay' : 'parca') + '<div><small>Değişen parça</small><b>' + k(u.degisenParca) + '</b></div></div>');
@@ -164,7 +167,7 @@
 
   function galeriKur(u, secili) {
     var sahne = $('#sahne'), kucukler = $('#kucukler'), noktalar = $('#gnoktalar');
-    function listele() { return ZI.gorseller(u, secili.renk && secili.renk.kod); }
+    function listele() { return ZI.gorseller(u, secili.renk); }
     function yenile(ilk) {
       var liste = listele();
       if (secili.gorsel >= liste.length) secili.gorsel = 0;
@@ -183,6 +186,7 @@
       }).join('') : '';
       noktalar.innerHTML = liste.length > 1 ? liste.map(function (x, i) { return '<span class="' + (i === secili.gorsel ? 'aktif' : '') + '"></span>'; }).join('') : '';
       $$('.zi-galeri__ok', sahne).forEach(function (b) { b.hidden = liste.length < 2; });
+      sahne.classList.toggle('foto-modu', !!(liste[0] && liste[0].foto));
       if (!ilk) $$('img.aktif', sahne).forEach(function (im) { im.animate([{ opacity: 0.2, transform: 'scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.28,.11,.32,1)' }); });
     }
     function goster(i) {
@@ -247,7 +251,7 @@
       var r = e.target.closest('.zi-renk');
       if (r) {
         var yeni = u.renkler[Number(r.dataset.r)];
-        if (yeni !== secili.renk) { secili.renk = yeni; fiyatGuncelle(false); if (ZI._galeriYenile) ZI._galeriYenile(); }
+        if (yeni !== secili.renk) { secili.renk = yeni; secili.gorsel = 0; fiyatGuncelle(false); if (ZI._galeriYenile) ZI._galeriYenile(); }
       }
     });
     fiyatGuncelle(false);

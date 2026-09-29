@@ -10,7 +10,7 @@
     d.documentElement.classList.remove('no-js');
     ZI.navCiz();
     ZI.veriYukle().then(function (v) { ZI.navDoldur(v); });
-    $('#giris-tas').innerHTML = ZI.markaTas();
+    $('#giris-tas').innerHTML = ZI.logo('tam', 'zi-logo');
 
     // Zaten giriş yapılmışsa doğrudan panele geç
     if (ZI.guvenlik.oturum()) { location.replace('depo.html'); return; }

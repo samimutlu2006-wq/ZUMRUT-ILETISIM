@@ -97,15 +97,14 @@
     uyari: '<path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.2h.01"/>'
   };
 
-  ZI.markaTas = function () {
-    var id = 'zt' + Math.random().toString(36).slice(2, 7);
-    return '<svg class="zi-marka__tas" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0" stop-color="#3ee0a1"/><stop offset=".55" stop-color="#0c9a6a"/><stop offset="1" stop-color="#05603f"/></linearGradient></defs>' +
-      '<path d="M7.2 2.2h9.6l5 5v9.6l-5 5H7.2l-5-5V7.2z" fill="url(#' + id + ')"/>' +
-      '<path d="M9 6.2h6l2.8 2.8v6L15 17.8H9L6.2 15V9z" fill="#fff" fill-opacity=".2"/>' +
-      '<path d="M7.2 2.2 9 6.2M16.8 2.2 15 6.2M21.8 7.2 17.8 9M21.8 16.8 17.8 15M16.8 21.8 15 17.8M7.2 21.8 9 17.8M2.2 16.8 6.2 15M2.2 7.2 6.2 9" stroke="#fff" stroke-opacity=".38" stroke-width=".7"/>' +
-      '<path d="M9 6.2h6l1.2 1.2H9.8z" fill="#fff" fill-opacity=".45"/></svg>';
+  /* Mağaza logosu (vektör). Renk, kapsayıcının "color" değerinden gelir (currentColor). */
+  var LOGO = { vb: '0 0 918.7 199.5', d: 'M217.7 160.7L217.7 164.2 218.5 164.8 321.3 164.8 322.3 163.8 322.3 161 321.5 160 218.3 160ZM812.7 160.7L812.7 164 813.5 164.8 916.3 164.8 917.5 164 917.5 160.8 916.7 160 818.3 159.8 813.2 160ZM706.8 144.8L706.7 186.3 707.2 186.8 710.5 187 711.7 186.2 711.7 150.5 712.2 150 713.3 150.8 737.8 186.3 739 187 741.8 187 743.3 186 768.3 150.2 769 150.2 769.3 150.7 769.3 186.2 770.3 187 773.5 187 774.3 186.5 774.5 145.2 774 144.5 767 144.3 765.7 145 740.8 180.3 740 180.2 715.8 145.5 714 144.3 707.8 144.3ZM677.5 144.3L676.7 145.3 676.7 186.2 677.5 187 680.8 187 681.7 186 681.7 145.2 680.5 144.3ZM577 144.3L576 145 576 186.2 577.3 187 580 187 580.8 186.3 580.8 145 579.8 144.3ZM509.3 144.7L509 147.8 509.7 148.5 529.8 148.5 530.7 149.2 530.7 185.7 531 186.7 531.8 187 535.2 186.8 535.7 186.2 535.7 149.3 536.7 148.5 556.8 148.5 557.5 147.3 557.3 145 556.2 144.3 510.3 144.3ZM450 144.7L449.7 145.3 449.7 185.8 450 186.7 450.7 187 491.8 186.8 492.3 186.2 492.3 183.7 491.2 182.8 455.5 182.8 454.7 182 454.7 168 455.3 167.2 489.7 167.2 490.5 166.5 490.5 163.3 489.8 162.8 455.5 162.8 454.7 162.2 454.8 149 455.7 148.5 491.2 148.5 491.8 148 491.7 144.8 491 144.3 451 144.3ZM391.2 144.5L390.7 145 390.8 186.5 391.5 187 429 186.8 429.5 186 429.5 183.7 428.7 182.8 396.5 182.8 395.7 181.8 395.7 145.2 395 144.5ZM361.7 144.3L360.7 145.2 360.7 186.3 361.8 187 364.8 187 365.8 185.8 365.7 145 364.8 144.3ZM611.2 145.8L609 147 606.8 149.2 605.8 151.2 605 155.7 605.2 159.8 605.8 162.2 608.7 165.3 611.7 166.7 615 167.3 643 167.8 646.2 169 647.8 171 648.3 175.8 647.3 179.3 644.3 181.7 639 182.7 626.7 183 616 182.5 612.2 181.2 610.7 179.7 609.8 174.2 606 173.8 605.2 174.3 605.7 180.2 606.7 182.7 608.3 184.5 611 186 614.5 186.7 627.2 187.5 627.7 188.2 627.8 192.3 628.7 192.8 632.7 192.8 633.5 193.5 633.8 194.5 633.5 196 632.7 196.7 628.2 196.8 627.7 197.3 627.7 199 628.3 199.5 635 199.3 636.2 198.5 636.7 196.8 636.5 191.5 635.3 190.7 631.3 190.3 630.5 189.3 630.5 187.8 631.7 187.2 637.8 187.2 644.8 186.3 649.7 184.5 652.2 181.7 653.5 177.5 653.5 172.5 652.3 168.3 650.2 165.7 645.8 163.8 640.3 163.2 616.8 163.2 614.3 162.7 612.3 161.7 610.8 159.7 610.3 158 610.7 153 612.3 150.7 615 149.5 618.5 148.8 626.5 148.3 637.8 148.5 644.7 149.8 646.7 151.7 647.3 155.5 647.8 156.2 651.3 156.3 652.3 155.7 652.3 153.8 651.2 149.5 648.8 146.7 646.5 145.3 638 144 617.7 144.3ZM677 133L676.7 133.8 677 139.3 681.5 139.3 681.8 138.8 681.8 133.5 681 132.8ZM576.5 133L576 133.5 576.2 139.2 576.7 139.5 580.7 139.3 581 138.8 580.8 133.2 580.2 132.8ZM361.2 133L360.7 134 360.8 139 361.3 139.5 365.5 139.3 365.8 138.8 365.8 133.5 365 132.8ZM715.3 17.2L715.3 81.3 717.2 89.8 718.8 93.2 721.7 96.5 723.7 98 728.5 100.3 734.3 101.5 767.3 102.2 789.7 101.5 798.8 100.3 805.3 98.3 808 96.8 810.2 94.8 812.2 91.7 813.5 88.2 814.8 79.3 814.8 17.2 814.3 16.7 803.5 16.5 802.8 17 802.8 75.8 802.2 82 800.7 85.8 798.2 88.2 793 89.8 786.2 90.5 758.8 91 738 90 732.8 88.7 731.2 87.7 729.5 85.8 727.7 80.5 727.7 17.5 726.7 16.5 716.3 16.5ZM326.3 17L326.3 81.8 327 86.3 328.2 90.2 330.8 94.7 333 96.8 338.7 100 345.3 101.5 379.2 102.2 400.2 101.5 410 100.3 416.7 98.2 419.3 96.5 421.5 94.3 424.5 87.8 425.3 84 425.8 77.8 425.8 17.2 425.5 16.7 414.5 16.5 413.7 17.3 413.7 77 413 82.3 411.3 86.2 410.3 87.3 408 88.7 402.8 90 380 91 351.3 90.3 345.7 89.3 343.2 88.3 341 86.7 339.3 83.3 338.5 78.8 338.5 17.3 337.7 16.5 327.2 16.5ZM823.3 16.5L822.7 17.5 822.8 26.3 823.3 27 863 27 864.2 27.7 864.3 100.7 865 101.3 876.3 101.2 876.7 100.3 876.7 27.8 877.5 27 918 27 918.7 26 918.5 16.8 916.8 16.3ZM600.8 17L600.8 100.7 601.2 101.2 612.3 101.3 613 100.7 613 68.8 614 67.8 671.2 67.8 677.3 68.7 680 69.8 682.3 71.7 683.8 74.5 684.7 77.8 685 100.8 685.7 101.3 696.2 101.3 696.8 100.8 697 76.3 696.3 71.8 695.2 69.2 693.2 66.7 687.2 63.3 687.7 62.5 691.2 61.2 695.2 58 697 54.3 698.2 49 698.5 39.2 697.3 30.7 695.5 26.2 692.2 22 691 21 685.7 18.5 679.5 17 674.8 16.5 602 16.3ZM613 28L614 27 672.5 27.2 678.3 28.2 681.7 29.7 683.2 31 685.3 35.3 685.8 38.2 685.8 44.8 685 49.3 683.5 52.5 682.2 54 678.3 56 674 57 667.3 57.5 614.2 57.5 613 56.5ZM446.3 16.8L446.2 100.5 446.7 101.2 457.7 101.3 458.5 100.5 458.5 31.7 459.2 31 464.3 37.8 507.3 100 509 101.3 517.2 101.3 518.3 100.5 566 31.7 567.2 31 567.7 31.7 567.7 100.7 568.5 101.3 578.8 101.3 579.8 100.7 579.8 17 579.3 16.5 563.3 16.3 561.3 17.3 515.7 83 513.2 85.8 512 85 465 17.3 463.2 16.3 447.5 16.3ZM220 17L220 26.3 220.5 27 291.3 27 291.8 27.3 291.8 28.2 217.3 90.7 216.7 91.7 216.5 100.5 217 101.2 313.8 101.3 314.3 100.8 314.5 92.2 314.3 91.3 313.7 90.8 238 90.8 237.5 90.2 240.2 87.5 311.7 27.7 313.2 25.7 313.2 17.3 312.5 16.5 221.3 16.3ZM144 10.7L105.8 10.5 105.2 10.8 106.3 13.3 134.3 52.8 136.2 56.2 49.2 144 49.2 144.7 49.8 145 87 145 88.7 144.3 177 56.7 176.8 55ZM56.8 10.8L56.8 11.7 87.8 56.5 87.8 57.3 0.3 144.2 0 145 0 189.3 0.3 190 149 190 171.8 153.7 171.7 152.3 33.7 152.3 33 151.8 33 151.2 128.7 56.8 128.3 55.7 96.2 11 93.8 10.5 57.5 10.5ZM7.7 11L14 20.3 37.7 52.5 75.8 52.7 76.5 52.3 76.5 51.7 46.8 11 45.5 10.5 8.3 10.5ZM770.5 0.7L770.3 9.5 771 10.5 789.3 10.5 790 10 790 0.8 789.2 0 771.3 0ZM740.2 0.8L740.2 9.7 740.8 10.5 759.3 10.5 759.7 10.2 759.8 0.8 759.3 0.2 741.2 0ZM381.3 1L381.3 8.3 382 10.5 400.3 10.5 401.2 9.7 401.2 1 400.3 0 382.3 0ZM351 0.8L351 9.7 351.7 10.5 370.2 10.5 370.7 10 370.7 0.7 370 0 351.8 0Z' };
+  var ISARET = { vb: '0 0 177 179.5', d: 'M144 0.2L105.8 0 105.2 0.3 106.3 2.8 134.3 42.3 136.2 45.7 49.2 133.5 49.2 134.2 49.8 134.5 87 134.5 88.7 133.8 177 46.2 176.8 44.5ZM56.8 0.3L56.8 1.2 87.8 46 87.8 46.8 0.3 133.7 0 134.5 0 178.8 0.3 179.5 149 179.5 171.8 143.2 171.7 141.8 33.7 141.8 33 141.3 33 140.7 128.7 46.3 128.3 45.2 96.2 0.5 93.8 0 57.5 0ZM7.7 0.5L14 9.8 37.7 42 75.8 42.2 76.5 41.8 76.5 41.2 46.8 0.5 45.5 0 8.3 0Z' };
+  ZI.logo = function (tip, sinif) {
+    var l = tip === 'isaret' ? ISARET : LOGO;
+    return '<svg class="' + (sinif || 'zi-logo') + '" viewBox="' + l.vb + '" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="' + l.d + '"/></svg>';
   };
+  ZI.markaTas = function () { return ZI.logo('isaret', 'zi-marka__tas'); };
 
   /* =====================================================================
      Tarayıcı deposu (IndexedDB anahtar-değer)
@@ -180,6 +179,7 @@
       u.renkler = Array.isArray(u.renkler) ? u.renkler : [];
       u.secenekler = Array.isArray(u.secenekler) ? u.secenekler : [];
       u.gorseller = Array.isArray(u.gorseller) ? u.gorseller : [];
+      if (Array.isArray(u.gorselRenkleri)) { u.gorselRenkleri = u.gorseller.map(function (x, i) { return u.gorselRenkleri[i] || ''; }); if (!u.gorselRenkleri.some(Boolean)) delete u.gorselRenkleri; }
       u.ozellikler = u.ozellikler || {};
       u.stok = Number(u.stok) || 0;
       u.aktif = u.aktif !== false;
@@ -234,9 +234,20 @@
   /* =====================================================================
      Ürün yardımcıları
      ===================================================================== */
-  ZI.gorseller = function (u, renkKodu) {
-    var r = renkKodu || (u.renkler && u.renkler[0] && u.renkler[0].kod) || null;
-    var liste = (u.gorseller || []).filter(Boolean);
+  /* Ürün görselleri. "renk" bir renk nesnesi ({ad, kod}) ya da renk kodu olabilir.
+     Fotoğraflar renklere etiketlenmişse (gorselRenkleri) seçilen rengin fotoğrafları öne alınır. */
+  ZI.gorseller = function (u, renk) {
+    var renkler = u.renkler || [];
+    var secili = renk && typeof renk === 'object' ? renk : (renk ? (renkler.filter(function (x) { return x.kod === renk; })[0] || { kod: renk }) : (renkler[0] || null));
+    var r = (secili && secili.kod) || null;
+    var etiket = Array.isArray(u.gorselRenkleri) ? u.gorselRenkleri : [];
+    var ogeler = [];
+    (u.gorseller || []).forEach(function (x, i) { if (x) ogeler.push({ x: x, renk: etiket[i] || '' }); });
+    if (ogeler.length && secili && secili.ad && etiket.some(Boolean)) {
+      var eslesen = ogeler.filter(function (o) { return o.renk === secili.ad; });
+      if (eslesen.length) ogeler = eslesen.concat(ogeler.filter(function (o) { return !o.renk; }));
+    }
+    var liste = ogeler.map(function (o) { return o.x; });
     if (!liste.length) liste = ZI.cizim ? ZI.cizim.varsayilan(u, r) : [];
     return liste.map(function (x) {
       if (typeof x === 'string') return { src: (ZI.gorselOnbellek && ZI.gorselOnbellek[x]) || x, foto: !/\.svg(\?|$)/i.test(x) };
@@ -263,9 +274,12 @@
     return '<span class="zi-rozet ' + (ikinci ? 'zi-rozet--ikinciel' : 'zi-rozet--sifir') + '">' +
       k(uzun ? ZI.durumEtiketi(u) : (ikinci ? '2. El' : 'Sıfır')) + '</span>';
   };
+  function fiyatVar(x) { return x != null && x !== '' && !isNaN(x); }
+  /* Sitede gösterilecek fiyatlar: seçeneklerin fiyatları; seçenek yoksa ya da fiyatı boş seçenek varsa genel satış fiyatı */
   ZI.fiyatlar = function (u) {
-    var f = (u.secenekler || []).map(function (s) { return s.fiyat; }).filter(function (x) { return x != null && x !== '' && !isNaN(x); }).map(Number);
-    if (u.fiyat != null && u.fiyat !== '' && !isNaN(u.fiyat)) f.push(Number(u.fiyat));
+    var sec = u.secenekler || [];
+    var f = sec.map(function (s) { return s.fiyat; }).filter(fiyatVar).map(Number);
+    if (fiyatVar(u.fiyat) && (!sec.length || sec.some(function (s) { return !fiyatVar(s.fiyat); }))) f.push(Number(u.fiyat));
     return f;
   };
   ZI.baslangicFiyati = function (u) { var f = ZI.fiyatlar(u); return f.length ? Math.min.apply(null, f) : null; };
@@ -455,7 +469,7 @@
     nav.classList.add('zi-nav');
     nav.innerHTML =
       '<div class="zi-nav__ic">' +
-      '<a class="zi-marka" href="index.html" aria-label="Zümrüt İletişim ana sayfa">' + ZI.markaTas() + '<span>Zümrüt İletişim</span></a>' +
+      '<a class="zi-marka" href="index.html" aria-label="Zümrüt İletişim ana sayfa">' + ZI.logo('tam', 'zi-logo') + '</a>' +
       '<ul class="zi-menu" role="list">' + MENU.map(function (m) {
         return '<li class="zi-menu__oge" data-menu="' + m.id + '"><a class="zi-menu__dugme" href="' + m.link + '" aria-haspopup="true" aria-expanded="false" aria-controls="zi-mega">' + k(m.ad) + '</a></li>';
       }).join('') + '</ul>' +
@@ -792,7 +806,7 @@
       (m.instagram ? '<li><a href="' + k(m.instagram) + '" target="_blank" rel="noopener">Instagram</a></li>' : '') +
       '<li><a href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">Yol tarifi</a></li><li><a href="giris.html">Yönetici Girişi</a></li></ul></div>' +
       '</div>' +
-      '<div class="zi-alt__son"><span>Copyright © ' + yil + ' ' + k(m.ad) + '. Tüm hakları saklıdır.</span><nav aria-label="Alt bağlantılar"><span>' + k(m.adres) + '</span></nav></div>' +
+      '<div class="zi-alt__son"><span class="zi-alt__marka">' + ZI.logo('tam', 'zi-logo zi-logo--alt') + '<span>Copyright © ' + yil + ' ' + k(m.ad) + '. Tüm hakları saklıdır.</span></span><nav aria-label="Alt bağlantılar"><span>' + k(m.adres) + '</span></nav></div>' +
       '</div>';
   };
 

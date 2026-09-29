@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-09-27T09:00:00.000Z",
+  "guncelleme": "2026-09-29T21:23:18.415Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz.",
@@ -56,36 +56,86 @@ window.ZI_VERI = {
   },
   "vitrin": [
     {
-      "id": "duo",
+      "id": "iphone-18-pro",
       "aktif": true,
-      "tema": "acik",
-      "sahne": "katlanir",
+      "tema": "koyu",
+      "sahne": "foto",
+      "yerlesim": "sag",
+      "gorseller": [
+        "assets/img/vitrin/iphone-18-pro.webp"
+      ],
+      "zemin": [
+        "#271e1f",
+        "#5d474d",
+        "#9e8380"
+      ],
+      "karistir": false,
       "etiket": "Yeni",
-      "baslik": "iPhone Duo",
-      "altBaslik": "Merhaba, merhaba.",
-      "urunId": "iphone-duo",
+      "baslik": "iPhone 18 Pro",
+      "altBaslik": "A20 Pro çip. Üç 48 MP kamera.",
+      "urunId": "iphone-18-pro",
+      "urunler": [
+        "iphone-18-pro"
+      ],
       "buton1": {
         "metin": "Daha Fazla Bilgi",
-        "link": "urun.html?id=iphone-duo"
+        "link": "urun.html?id=iphone-18-pro"
       },
       "buton2": {
         "metin": "Fiyatları Görüntüleyin",
-        "link": "urun.html?id=iphone-duo#fiyat"
+        "link": "urun.html?id=iphone-18-pro#fiyat"
+      }
+    },
+    {
+      "id": "iphone-air",
+      "aktif": true,
+      "tema": "acik",
+      "sahne": "foto",
+      "yerlesim": "sag",
+      "gorseller": [
+        "assets/img/vitrin/iphone-air.webp"
+      ],
+      "zemin": [
+        "#7f9eb2",
+        "#c0d1db",
+        "#f7f8fc"
+      ],
+      "karistir": false,
+      "etiket": "",
+      "baslik": "iPhone Air",
+      "altBaslik": "Yalnızca 5,6 mm. Şimdiye kadarki en ince iPhone.",
+      "urunId": "iphone-air",
+      "urunler": [
+        "iphone-air"
+      ],
+      "buton1": {
+        "metin": "Daha Fazla Bilgi",
+        "link": "urun.html?id=iphone-air"
+      },
+      "buton2": {
+        "metin": "Fiyatları Görüntüleyin",
+        "link": "urun.html?id=iphone-air#fiyat"
       }
     },
     {
       "id": "galaxy-s",
       "aktif": true,
       "tema": "koyu",
-      "sahne": "lansman",
+      "sahne": "foto",
+      "yerlesim": "alt",
+      "gorseller": [
+        "assets/img/vitrin/galaxy-s.webp"
+      ],
+      "zemin": [
+        "#000000"
+      ],
+      "karistir": false,
       "etiket": "Samsung",
       "baslik": "Galaxy S Serisi",
       "altBaslik": "Yapay zekâ gücü.",
       "urunId": "galaxy-s26-ultra",
       "urunler": [
-        "galaxy-s26",
-        "galaxy-s26-ultra",
-        "galaxy-s26-plus"
+        "galaxy-s26-ultra"
       ],
       "buton1": {
         "metin": "Daha Fazla Bilgi",
@@ -97,19 +147,53 @@ window.ZI_VERI = {
       }
     },
     {
-      "id": "ikinci-el",
+      "id": "iphone-16",
       "aktif": true,
       "tema": "acik",
-      "sahne": "yelpaze",
-      "etiket": "İkinci El & Takas",
-      "urunId": "iphone-16-pro-2el",
-      "baslik": "Şeffaf ikinci el.",
-      "altBaslik": "Pil sağlığı, değişen parça ve çıkış yılı her cihazda açıkça yazılı. Eskisini getirin, takasla yenileyin.",
-      "urunler": [
-        "iphone-16-pro-2el",
-        "iphone-17-pro-2el",
-        "galaxy-s25-ultra-2el"
+      "sahne": "foto",
+      "yerlesim": "sag",
+      "gorseller": [
+        "assets/img/vitrin/iphone-16-laciverttas.webp",
+        "assets/img/vitrin/iphone-16-pembe.webp"
       ],
+      "zemin": [
+        "#f5f5f7"
+      ],
+      "karistir": true,
+      "etiket": "",
+      "baslik": "iPhone 16",
+      "altBaslik": "A18 çip. 48 MP Fusion kamera.",
+      "urunId": "iphone-16",
+      "urunler": [
+        "iphone-16"
+      ],
+      "buton1": {
+        "metin": "Daha Fazla Bilgi",
+        "link": "urun.html?id=iphone-16"
+      },
+      "buton2": {
+        "metin": "Fiyatları Görüntüleyin",
+        "link": "urun.html?id=iphone-16#fiyat"
+      }
+    },
+    {
+      "id": "takas",
+      "aktif": true,
+      "tema": "koyu",
+      "sahne": "foto",
+      "yerlesim": "kart",
+      "gorseller": [
+        "assets/img/vitrin/iphone-18-pro-renkler.webp"
+      ],
+      "zemin": [
+        "#1d1d1f"
+      ],
+      "karistir": false,
+      "etiket": "İkinci El & Takas",
+      "baslik": "Takasla yenileyin.",
+      "altBaslik": "Eski telefonunuzu getirin, yenisine geçin. Takas teklifini WhatsApp’tan hemen alın.",
+      "urunId": "",
+      "urunler": [],
       "buton1": {
         "metin": "İkinci El Cihazlar",
         "link": "urunler.html?k=ikinci-el"
@@ -121,6 +205,1164 @@ window.ZI_VERI = {
     }
   ],
   "urunler": [
+    {
+      "id": "iphone-14-pro-max-256-gb-2el",
+      "kod": "SY007",
+      "ad": "iPhone 14 Pro Max 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Uzay Siyahı",
+          "kod": "#3b3a3c"
+        }
+      ],
+      "cikisYili": 2022,
+      "cikisTarihi": "Eylül 2022",
+      "uretimYili": null,
+      "pilSagligi": 77,
+      "degisenParca": "",
+      "kisaAciklama": "Kusursuz · Pil %77 · Firma garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Pil sağlığı %77. Firma garantili.",
+      "ozellikler": {
+        "islemci": "A16 Bionic",
+        "ram": "6 GB",
+        "ekran": "6,7 inç Super Retina XDR (OLED), ProMotion 120 Hz, Always-On",
+        "kamera": "48 MP Ana + 12 MP Ultra Geniş + 12 MP Telefoto (3x)",
+        "onKamera": "12 MP TrueDepth",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-14-pro-max-256-gb-2el-uzay-siyahi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:23:18.415Z",
+      "guncelleme": "2026-09-29T21:23:18.415Z",
+      "garanti": "Firma garantili"
+    },
+    {
+      "id": "iphone-15-pro-max-1-tb-2el",
+      "kod": "ZI-1053",
+      "ad": "iPhone 15 Pro Max 1 TB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [],
+      "cikisYili": 2023,
+      "cikisTarihi": "Eylül 2023",
+      "uretimYili": null,
+      "pilSagligi": 100,
+      "degisenParca": "Batarya değişti",
+      "kisaAciklama": "Kusursuz · Pil %100 (batarya değişti) · Firma garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Bataryası değişmiş, pil sağlığı %100. Firma garantili.",
+      "ozellikler": {
+        "islemci": "A17 Pro",
+        "ram": "8 GB",
+        "ekran": "6,7 inç Super Retina XDR (OLED), ProMotion 120 Hz, Always-On",
+        "kamera": "48 MP Ana + 12 MP Ultra Geniş + 12 MP Telefoto (5x)",
+        "onKamera": "12 MP TrueDepth",
+        "diger": "USB-C, titanyum kasa, Eylem düğmesi",
+        "depolama": "1 TB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-15-pro-max-1-tb-2el-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:22:18.415Z",
+      "guncelleme": "2026-09-29T21:22:18.415Z",
+      "garanti": "Firma garantili"
+    },
+    {
+      "id": "iphone-15-pro-max-256-gb-2el",
+      "kod": "SY026",
+      "ad": "iPhone 15 Pro Max 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Çok Temiz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [],
+      "cikisYili": 2023,
+      "cikisTarihi": "Eylül 2023",
+      "uretimYili": null,
+      "pilSagligi": 93,
+      "degisenParca": "Batarya değişti",
+      "kisaAciklama": "Kozmetik 10 üzerinden 9 · Pil %93 (batarya değişti) · Firma garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik 10 üzerinden 9. Bataryası değişmiş, pil sağlığı %93. Firma garantili.",
+      "ozellikler": {
+        "islemci": "A17 Pro",
+        "ram": "8 GB",
+        "ekran": "6,7 inç Super Retina XDR (OLED), ProMotion 120 Hz, Always-On",
+        "kamera": "48 MP Ana + 12 MP Ultra Geniş + 12 MP Telefoto (5x)",
+        "onKamera": "12 MP TrueDepth",
+        "diger": "USB-C, titanyum kasa, Eylem düğmesi",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-15-pro-max-256-gb-2el-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:21:18.415Z",
+      "guncelleme": "2026-09-29T21:21:18.415Z",
+      "garanti": "Firma garantili"
+    },
+    {
+      "id": "iphone-15-pro-max-256-gb-2el-2",
+      "kod": "SY005",
+      "ad": "iPhone 15 Pro Max 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [],
+      "cikisYili": 2023,
+      "cikisTarihi": "Eylül 2023",
+      "uretimYili": null,
+      "pilSagligi": 78,
+      "degisenParca": "",
+      "kisaAciklama": "Kusursuz · Pil %78 · Firma garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Pil sağlığı %78. Firma garantili.",
+      "ozellikler": {
+        "islemci": "A17 Pro",
+        "ram": "8 GB",
+        "ekran": "6,7 inç Super Retina XDR (OLED), ProMotion 120 Hz, Always-On",
+        "kamera": "48 MP Ana + 12 MP Ultra Geniş + 12 MP Telefoto (5x)",
+        "onKamera": "12 MP TrueDepth",
+        "diger": "USB-C, titanyum kasa, Eylem düğmesi",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-15-pro-max-256-gb-2el-2-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:20:18.415Z",
+      "guncelleme": "2026-09-29T21:20:18.415Z",
+      "garanti": "Firma garantili"
+    },
+    {
+      "id": "iphone-17-256-gb-2el",
+      "kod": "SY013",
+      "ad": "iPhone 17 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Sis Mavisi",
+          "kod": "#a9bcd0"
+        }
+      ],
+      "cikisYili": 2025,
+      "cikisTarihi": "Eylül 2025",
+      "uretimYili": null,
+      "pilSagligi": 100,
+      "degisenParca": "",
+      "kisaAciklama": "Kusursuz · Pil %100 · 23 ay garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Pil sağlığı %100. 23 ay garantili.",
+      "ozellikler": {
+        "islemci": "A19 (6 çekirdekli CPU, 5 çekirdekli GPU)",
+        "ram": "8 GB",
+        "ekran": "6,3 inç Super Retina XDR (OLED), ProMotion 120 Hz",
+        "kamera": "48 MP Fusion Ana + 48 MP Fusion Ultra Geniş",
+        "onKamera": "18 MP Center Stage",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-17-256-gb-2el-sis-mavisi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:19:18.415Z",
+      "guncelleme": "2026-09-29T21:19:18.415Z",
+      "garanti": "23 ay garantili"
+    },
+    {
+      "id": "iphone-air-256-gb-2el",
+      "kod": "SY014",
+      "ad": "iPhone Air 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Pamuk Beyazı",
+          "kod": "#f2f1ed"
+        }
+      ],
+      "cikisYili": 2025,
+      "cikisTarihi": "Eylül 2025",
+      "uretimYili": null,
+      "pilSagligi": 100,
+      "degisenParca": "",
+      "kisaAciklama": "Kusursuz · Pil %100 · 136 döngü · 18 ay garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Pil sağlığı %100, şarj döngüsü 136. 18 ay garantili.",
+      "ozellikler": {
+        "islemci": "A19 Pro (6 çekirdekli CPU, 5 çekirdekli GPU)",
+        "ram": "12 GB",
+        "ekran": "6,5 inç Super Retina XDR (OLED), ProMotion 120 Hz",
+        "kamera": "48 MP Fusion Ana",
+        "onKamera": "18 MP Center Stage",
+        "diger": "5,6 mm kalınlık",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-air-256-gb-2el-pamuk-beyazi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": true,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:18:18.415Z",
+      "guncelleme": "2026-09-29T21:18:18.415Z",
+      "pilDongu": 136,
+      "garanti": "18 ay garantili"
+    },
+    {
+      "id": "iphone-17-pro-512-gb-2el",
+      "kod": "SY011",
+      "ad": "iPhone 17 Pro 512 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Çok Temiz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Kozmik Turuncu",
+          "kod": "#e0713a"
+        }
+      ],
+      "cikisYili": 2025,
+      "cikisTarihi": "Eylül 2025",
+      "uretimYili": null,
+      "pilSagligi": 100,
+      "degisenParca": "",
+      "kisaAciklama": "Kozmetik 10 üzerinden 9,5 · Pil %100 · 44 döngü · 23 ay garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik 10 üzerinden 9,5. Pil sağlığı %100, şarj döngüsü 44. 23 ay garantili.",
+      "ozellikler": {
+        "islemci": "A19 Pro (6 çekirdekli CPU, 6 çekirdekli GPU)",
+        "ram": "12 GB",
+        "kamera": "48 MP Fusion Ana + 48 MP Fusion Ultra Geniş + 48 MP Fusion Telefoto (4x)",
+        "onKamera": "18 MP Center Stage",
+        "ekran": "6,3 inç Super Retina XDR (OLED), ProMotion 120 Hz",
+        "depolama": "512 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-17-pro-512-gb-2el-kozmik-turuncu-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": true,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:17:18.415Z",
+      "guncelleme": "2026-09-29T21:17:18.415Z",
+      "pilDongu": 44,
+      "garanti": "23 ay garantili"
+    },
+    {
+      "id": "iphone-17-pro-max-256-gb-2el",
+      "kod": "ZI-1054",
+      "ad": "iPhone 17 Pro Max 256 GB",
+      "marka": "Apple",
+      "seri": "iPhone",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "ikinci-el",
+      "kozmetik": "Kusursuz",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Koyu Mavi",
+          "kod": "#34405e"
+        }
+      ],
+      "cikisYili": 2025,
+      "cikisTarihi": "Eylül 2025",
+      "uretimYili": null,
+      "pilSagligi": 100,
+      "degisenParca": "",
+      "kisaAciklama": "Kusursuz · Pil %100 · 90 döngü · 21 ay garantili",
+      "aciklama": "Fotoğraflar satıştaki cihazın kendisine aittir. Kozmetik olarak kusursuz. Pil sağlığı %100, şarj döngüsü 90. 21 ay garantili.",
+      "ozellikler": {
+        "islemci": "A19 Pro (6 çekirdekli CPU, 6 çekirdekli GPU)",
+        "ram": "12 GB",
+        "kamera": "48 MP Fusion Ana + 48 MP Fusion Ultra Geniş + 48 MP Fusion Telefoto (4x)",
+        "onKamera": "18 MP Center Stage",
+        "ekran": "6,9 inç Super Retina XDR (OLED), ProMotion 120 Hz",
+        "depolama": "256 GB"
+      },
+      "gorseller": [
+        "assets/img/urunler/iphone-17-pro-max-256-gb-2el-koyu-mavi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": true,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:16:18.415Z",
+      "guncelleme": "2026-09-29T21:16:18.415Z",
+      "pilDongu": 90,
+      "garanti": "21 ay garantili"
+    },
+    {
+      "id": "guess-metal-logolu-kilif-iphone-17-pro",
+      "kod": "ZI-1055",
+      "ad": "Guess Metal Logolu Kılıf, iPhone 17 Pro / Pro Max",
+      "marka": "Guess",
+      "seri": "Guess 4G",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Lacivert",
+          "kod": "#3f4658"
+        },
+        {
+          "ad": "Mor",
+          "kod": "#6b3d52"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2b2b2a"
+        },
+        {
+          "ad": "Gri",
+          "kod": "#9d9e99"
+        },
+        {
+          "ad": "Gümüş",
+          "kod": "#a9b3b8"
+        },
+        {
+          "ad": "Turuncu",
+          "kod": "#f05a1e"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Dokulu yüzey, altın rengi metal 4G logo.",
+      "aciklama": "Dokulu yüzey ve altın rengi büyük metal 4G logo. Kamera çevresi ve kenarlar yükseltilmiş.",
+      "ozellikler": {
+        "uyumluluk": "iPhone 17 Pro ve iPhone 17 Pro Max",
+        "malzeme": "Dokulu suni deri yüzey, metal logo",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-lacivert-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-lacivert-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-mor-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-mor-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-siyah-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-gri-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-gumus-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-17-pro-turuncu-1.webp"
+      ],
+      "stok": 8,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:15:18.415Z",
+      "guncelleme": "2026-09-29T21:15:18.415Z",
+      "gorselRenkleri": [
+        "Lacivert",
+        "Lacivert",
+        "Mor",
+        "Mor",
+        "Siyah",
+        "Gri",
+        "Gümüş",
+        "Turuncu"
+      ]
+    },
+    {
+      "id": "guess-metal-logolu-kilif-iphone-pro",
+      "kod": "ZI-1056",
+      "ad": "Guess Metal Logolu Kılıf, iPhone 14–16 Pro",
+      "marka": "Guess",
+      "seri": "Guess 4G",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Taba",
+          "kod": "#c07a3f"
+        },
+        {
+          "ad": "Mor",
+          "kod": "#6b3d52"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2b2b2a"
+        },
+        {
+          "ad": "Gri",
+          "kod": "#9d9e99"
+        },
+        {
+          "ad": "Lacivert",
+          "kod": "#3f4658"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Dokulu yüzey, altın rengi metal 4G logo.",
+      "aciklama": "Dokulu yüzey ve altın rengi büyük metal 4G logo. Kamera çevresi ve kenarlar yükseltilmiş.",
+      "ozellikler": {
+        "uyumluluk": "Kare kameralı iPhone Pro modelleri: 14 Pro, 15 Pro, 16 Pro (Max modelleri dahil)",
+        "malzeme": "Dokulu suni deri yüzey, metal logo",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-taba-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-taba-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-taba-3.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-mor-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-mor-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-mor-3.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-siyah-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-siyah-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-siyah-3.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-gri-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-gri-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-lacivert-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-pro-lacivert-2.webp"
+      ],
+      "stok": 13,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:14:18.415Z",
+      "guncelleme": "2026-09-29T21:14:18.415Z",
+      "gorselRenkleri": [
+        "Taba",
+        "Taba",
+        "Taba",
+        "Mor",
+        "Mor",
+        "Mor",
+        "Siyah",
+        "Siyah",
+        "Siyah",
+        "Gri",
+        "Gri",
+        "Lacivert",
+        "Lacivert"
+      ]
+    },
+    {
+      "id": "guess-metal-logolu-kilif-iphone-16-17",
+      "kod": "ZI-1057",
+      "ad": "Guess Metal Logolu Kılıf, iPhone 16 / 17",
+      "marka": "Guess",
+      "seri": "Guess 4G",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Mor",
+          "kod": "#6b3d52"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2b2b2a"
+        },
+        {
+          "ad": "Lacivert",
+          "kod": "#3f4658"
+        },
+        {
+          "ad": "Gri",
+          "kod": "#9d9e99"
+        },
+        {
+          "ad": "Taba",
+          "kod": "#c07a3f"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Dokulu yüzey, altın rengi metal 4G logo.",
+      "aciklama": "Dokulu yüzey ve altın rengi büyük metal 4G logo. Kamera çevresi ve kenarlar yükseltilmiş.",
+      "ozellikler": {
+        "uyumluluk": "Dikey kameralı iPhone modelleri: iPhone 16, 16 Plus ve iPhone 17",
+        "malzeme": "Dokulu suni deri yüzey, metal logo",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-mor-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-mor-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-siyah-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-lacivert-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-lacivert-2.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-gri-1.webp",
+        "assets/img/urunler/guess-metal-logolu-kilif-iphone-16-17-taba-1.webp"
+      ],
+      "stok": 7,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:13:18.415Z",
+      "guncelleme": "2026-09-29T21:13:18.415Z",
+      "gorselRenkleri": [
+        "Mor",
+        "Mor",
+        "Siyah",
+        "Lacivert",
+        "Lacivert",
+        "Gri",
+        "Taba"
+      ]
+    },
+    {
+      "id": "guess-4g-desenli-kilif-iphone-pro",
+      "kod": "ZI-1058",
+      "ad": "Guess 4G Desenli Kılıf, iPhone 14–16 Pro",
+      "marka": "Guess",
+      "seri": "Guess 4G",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Gri",
+          "kod": "#7d858b"
+        },
+        {
+          "ad": "Pembe",
+          "kod": "#e3c4c6"
+        },
+        {
+          "ad": "Kahverengi",
+          "kod": "#6f6258"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Klasik 4G monogram deseni, metal logo.",
+      "aciklama": "Guess’in klasik 4G monogram deseni ve metal logo.",
+      "ozellikler": {
+        "uyumluluk": "Kare kameralı iPhone Pro modelleri: 14 Pro, 15 Pro, 16 Pro (Max modelleri dahil)",
+        "malzeme": "Desenli suni deri yüzey, metal logo",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/guess-4g-desenli-kilif-iphone-pro-gri-1.webp",
+        "assets/img/urunler/guess-4g-desenli-kilif-iphone-pro-gri-2.webp",
+        "assets/img/urunler/guess-4g-desenli-kilif-iphone-pro-pembe-1.webp",
+        "assets/img/urunler/guess-4g-desenli-kilif-iphone-pro-kahverengi-1.webp"
+      ],
+      "stok": 4,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:12:18.415Z",
+      "guncelleme": "2026-09-29T21:12:18.415Z",
+      "gorselRenkleri": [
+        "Gri",
+        "Gri",
+        "Pembe",
+        "Kahverengi"
+      ]
+    },
+    {
+      "id": "guess-4g-desenli-kilif-iphone-17-pro",
+      "kod": "ZI-1059",
+      "ad": "Guess 4G Desenli Kılıf, iPhone 17 Pro / Pro Max",
+      "marka": "Guess",
+      "seri": "Guess 4G",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Beyaz",
+          "kod": "#ececea"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "4G desenli yüzey, yuvarlak metal logo.",
+      "aciklama": "Açık renk 4G monogram deseni ve yuvarlak metal logo.",
+      "ozellikler": {
+        "uyumluluk": "iPhone 17 Pro ve iPhone 17 Pro Max",
+        "malzeme": "Desenli suni deri yüzey, metal logo",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/guess-4g-desenli-kilif-iphone-17-pro-beyaz-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:11:18.415Z",
+      "guncelleme": "2026-09-29T21:11:18.415Z"
+    },
+    {
+      "id": "logolu-deri-kilif-iphone-17-pro",
+      "kod": "ZI-1060",
+      "ad": "Logolu Deri Kılıf, iPhone 17 Pro / Pro Max",
+      "marka": "Diğer",
+      "seri": "",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Yeşil",
+          "kod": "#4f7d79"
+        },
+        {
+          "ad": "Turuncu",
+          "kod": "#f7700a"
+        },
+        {
+          "ad": "Krem",
+          "kod": "#e8e0d6"
+        },
+        {
+          "ad": "Lacivert",
+          "kod": "#4a5470"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2e2e2e"
+        },
+        {
+          "ad": "Açık Gri",
+          "kod": "#d4d4d2"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Deri görünümlü yüzey, renkli kamera çerçevesi.",
+      "aciklama": "Deri görünümlü yüzey, kamera çevresinde renkli çerçeve ve kabartma logo.",
+      "ozellikler": {
+        "uyumluluk": "iPhone 17 Pro ve iPhone 17 Pro Max",
+        "malzeme": "Deri görünümlü yüzey",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-yesil-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-yesil-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-turuncu-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-krem-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-lacivert-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-siyah-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-siyah-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-17-pro-acik-gri-1.webp"
+      ],
+      "stok": 8,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:10:18.415Z",
+      "guncelleme": "2026-09-29T21:10:18.415Z",
+      "gorselRenkleri": [
+        "Yeşil",
+        "Yeşil",
+        "Turuncu",
+        "Krem",
+        "Lacivert",
+        "Siyah",
+        "Siyah",
+        "Açık Gri"
+      ]
+    },
+    {
+      "id": "logolu-deri-kilif-iphone-pro",
+      "kod": "ZI-1061",
+      "ad": "Logolu Deri Kılıf, iPhone 14–16 Pro",
+      "marka": "Diğer",
+      "seri": "",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Turuncu",
+          "kod": "#f7700a"
+        },
+        {
+          "ad": "Yeşil",
+          "kod": "#4f7d79"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2e2e2e"
+        },
+        {
+          "ad": "Krem",
+          "kod": "#e8e0d6"
+        },
+        {
+          "ad": "Bej",
+          "kod": "#d3bf9f"
+        },
+        {
+          "ad": "Açık Gri",
+          "kod": "#d4d4d2"
+        },
+        {
+          "ad": "Pembe",
+          "kod": "#f58fbf"
+        },
+        {
+          "ad": "Mavi",
+          "kod": "#4fb3ee"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Deri görünümlü yüzey, renkli kamera çerçevesi.",
+      "aciklama": "Deri görünümlü yüzey, kamera çevresinde renkli çerçeve ve kabartma logo.",
+      "ozellikler": {
+        "uyumluluk": "Kare kameralı iPhone Pro modelleri: 14 Pro, 15 Pro, 16 Pro (Max modelleri dahil)",
+        "malzeme": "Deri görünümlü yüzey",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-turuncu-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-turuncu-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-turuncu-3.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-yesil-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-yesil-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-yesil-3.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-siyah-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-siyah-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-siyah-3.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-krem-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-krem-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-krem-3.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-bej-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-bej-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-acik-gri-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-pembe-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-pro-mavi-1.webp"
+      ],
+      "stok": 17,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:09:18.415Z",
+      "guncelleme": "2026-09-29T21:09:18.415Z",
+      "gorselRenkleri": [
+        "Turuncu",
+        "Turuncu",
+        "Turuncu",
+        "Yeşil",
+        "Yeşil",
+        "Yeşil",
+        "Siyah",
+        "Siyah",
+        "Siyah",
+        "Krem",
+        "Krem",
+        "Krem",
+        "Bej",
+        "Bej",
+        "Açık Gri",
+        "Pembe",
+        "Mavi"
+      ]
+    },
+    {
+      "id": "logolu-deri-kilif-iphone-16-17",
+      "kod": "ZI-1062",
+      "ad": "Logolu Deri Kılıf, iPhone 16 / 17",
+      "marka": "Diğer",
+      "seri": "",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Beyaz",
+          "kod": "#e6e5ec"
+        },
+        {
+          "ad": "Siyah",
+          "kod": "#2e2e2e"
+        },
+        {
+          "ad": "Yeşil",
+          "kod": "#4f7d79"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Deri görünümlü yüzey, renkli kamera çerçevesi.",
+      "aciklama": "Deri görünümlü yüzey, kamera çevresinde renkli çerçeve ve kabartma logo.",
+      "ozellikler": {
+        "uyumluluk": "Dikey kameralı iPhone modelleri: iPhone 16, 16 Plus ve iPhone 17",
+        "malzeme": "Deri görünümlü yüzey",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/logolu-deri-kilif-iphone-16-17-beyaz-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-16-17-beyaz-2.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-16-17-siyah-1.webp",
+        "assets/img/urunler/logolu-deri-kilif-iphone-16-17-yesil-1.webp"
+      ],
+      "stok": 4,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:08:18.415Z",
+      "guncelleme": "2026-09-29T21:08:18.415Z",
+      "gorselRenkleri": [
+        "Beyaz",
+        "Beyaz",
+        "Siyah",
+        "Yeşil"
+      ]
+    },
+    {
+      "id": "silikon-kilif-iphone-17-pro",
+      "kod": "ZI-1063",
+      "ad": "Silikon Kılıf, iPhone 17 Pro / Pro Max",
+      "marka": "Diğer",
+      "seri": "",
+      "kategori": "aksesuar",
+      "altKategori": "kilif",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Pembe",
+          "kod": "#ff5c93"
+        },
+        {
+          "ad": "Açık Mavi",
+          "kod": "#d3e3e6"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Yumuşak dokulu, mat silikon kılıf.",
+      "aciklama": "Yumuşak dokulu mat silikon; kamera çevresi yükseltilmiş.",
+      "ozellikler": {
+        "uyumluluk": "iPhone 17 Pro ve iPhone 17 Pro Max",
+        "malzeme": "Silikon",
+        "diger": "Model ve renk stoğu için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/silikon-kilif-iphone-17-pro-pembe-1.webp",
+        "assets/img/urunler/silikon-kilif-iphone-17-pro-acik-mavi-1.webp"
+      ],
+      "stok": 2,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:07:18.415Z",
+      "guncelleme": "2026-09-29T21:07:18.415Z",
+      "gorselRenkleri": [
+        "Pembe",
+        "Açık Mavi"
+      ]
+    },
+    {
+      "id": "marshall-major-v",
+      "kod": "ZI-1064",
+      "ad": "Marshall Major V",
+      "marka": "Marshall",
+      "seri": "Major",
+      "kategori": "aksesuar",
+      "altKategori": "kulaklik",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Kahverengi",
+          "kod": "#5a4133"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Kablosuz kulak üstü kulaklık. 100 saati aşan kullanım süresi.",
+      "aciklama": "Marshall’ın ikonik kulak üstü kulaklığı. Kutusunda belirtildiği üzere 100 saati aşan kablosuz kullanım süresi ve kablosuz şarj desteği sunar.",
+      "ozellikler": {
+        "baglanti": "Bluetooth",
+        "batarya": "100 saati aşan kablosuz kullanım",
+        "ozellik": "Kablosuz şarj desteği"
+      },
+      "gorseller": [
+        "assets/img/urunler/marshall-major-v-kahverengi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:06:18.415Z",
+      "guncelleme": "2026-09-29T21:06:18.415Z"
+    },
+    {
+      "id": "jbl-tune-520bt",
+      "kod": "ZI-1065",
+      "ad": "JBL Tune 520BT",
+      "marka": "JBL",
+      "seri": "Tune",
+      "kategori": "aksesuar",
+      "altKategori": "kulaklik",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Mavi",
+          "kod": "#2f4fa0"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Kablosuz kulak üstü kulaklık. 57 saate kadar kullanım.",
+      "aciklama": "JBL Pure Bass sesiyle kablosuz kulak üstü kulaklık. Eller serbest görüşme desteği ve 57 saate kadar pil ömrü.",
+      "ozellikler": {
+        "baglanti": "Bluetooth",
+        "batarya": "57 saate kadar",
+        "ozellik": "JBL Pure Bass ses, eller serbest görüşme"
+      },
+      "gorseller": [
+        "assets/img/urunler/jbl-tune-520bt-mavi-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:05:18.415Z",
+      "guncelleme": "2026-09-29T21:05:18.415Z"
+    },
+    {
+      "id": "ttec-airbeat-clap",
+      "kod": "ZI-1066",
+      "ad": "ttec AirBeat Clap",
+      "marka": "ttec",
+      "seri": "AirBeat",
+      "kategori": "aksesuar",
+      "altKategori": "kulaklik",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Beyaz",
+          "kod": "#f2f2f2"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Gerçek kablosuz Bluetooth kulaklık. 16 saate kadar kullanım.",
+      "aciklama": "Şarj kutulu, gerçek kablosuz (TWS) Bluetooth kulak içi kulaklık. Düşük gecikme, tanesi yalnızca 3,1 gram.",
+      "ozellikler": {
+        "baglanti": "Bluetooth, gerçek kablosuz (TWS)",
+        "batarya": "16 saate kadar",
+        "ozellik": "Düşük gecikme, tanesi 3,1 gram"
+      },
+      "gorseller": [
+        "assets/img/urunler/ttec-airbeat-clap-beyaz-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:04:18.415Z",
+      "guncelleme": "2026-09-29T21:04:18.415Z"
+    },
+    {
+      "id": "kalp-led-selfie-isigi",
+      "kod": "ZI-1067",
+      "ad": "Kalp Şeklinde LED Selfie Işığı",
+      "marka": "Diğer",
+      "seri": "",
+      "kategori": "aksesuar",
+      "altKategori": "kulaklik",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [
+        {
+          "ad": "Beyaz",
+          "kod": "#f5f5f5"
+        }
+      ],
+      "cikisYili": null,
+      "cikisTarihi": "",
+      "uretimYili": null,
+      "pilSagligi": null,
+      "degisenParca": "",
+      "kisaAciklama": "Fotoğraf ve video çekimleri için kalp şeklinde LED ışık.",
+      "aciklama": "Canlı yayın, video ve selfie çekimleri için kalp şeklinde LED ışık.",
+      "ozellikler": {
+        "diger": "Özellikler için mağazamıza danışın."
+      },
+      "gorseller": [
+        "assets/img/urunler/kalp-led-selfie-isigi-beyaz-1.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "ornek": false,
+      "eklenme": "2026-09-29T21:03:18.415Z",
+      "guncelleme": "2026-09-29T21:03:18.415Z"
+    },
     {
       "id": "iphone-duo",
       "kod": "ZI-1001",
@@ -2200,562 +3442,6 @@ window.ZI_VERI = {
       "guncelleme": "2026-06-01T08:46:00.000Z"
     },
     {
-      "id": "iphone-17-pro-2el",
-      "kod": "ZI-1029",
-      "ad": "iPhone 17 Pro 256 GB",
-      "marka": "Apple",
-      "seri": "iPhone",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Mükemmel",
-      "rozet": "",
-      "fiyat": 94999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Kozmik Turuncu",
-          "kod": "#e0713a"
-        }
-      ],
-      "cikisYili": 2025,
-      "cikisTarihi": "Eylül 2025",
-      "uretimYili": 2025,
-      "pilSagligi": 97,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Mükemmel · Değişen parça yok · 256 GB",
-      "aciklama": "Çok az kullanılmış iPhone 17 Pro. Ekranda ve kasada çizik yok, kutusuyla birlikte.",
-      "ozellikler": {
-        "islemci": "A19 Pro (6 çekirdekli CPU, 6 çekirdekli GPU)",
-        "ram": "12 GB",
-        "depolama": "256 GB",
-        "ekran": "6,3 inç Super Retina XDR (OLED), ProMotion 120 Hz",
-        "kamera": "48 MP Fusion Ana + 48 MP Fusion Ultra Geniş + 48 MP Fusion Telefoto (4x)",
-        "onKamera": "18 MP Center Stage"
-      },
-      "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ucgen"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": true,
-      "ornek": true,
-      "eklenme": "2026-09-25T08:14:00.000Z",
-      "guncelleme": "2026-09-27T08:00:00.000Z"
-    },
-    {
-      "id": "iphone-16-pro-2el",
-      "kod": "ZI-1030",
-      "ad": "iPhone 16 Pro 256 GB",
-      "marka": "Apple",
-      "seri": "iPhone",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Çok Temiz",
-      "rozet": "",
-      "fiyat": 72999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Çöl Titanyum",
-          "kod": "#c8b39a"
-        }
-      ],
-      "cikisYili": 2024,
-      "cikisTarihi": "Eylül 2024",
-      "uretimYili": 2024,
-      "pilSagligi": 89,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Çok temiz · Değişen parça yok · 256 GB",
-      "aciklama": "Titanyum kasada çok hafif kullanım izleri dışında kusursuz. Kutusuyla birlikte.",
-      "ozellikler": {
-        "islemci": "A18 Pro (6 çekirdekli CPU, 6 çekirdekli GPU)",
-        "ram": "8 GB",
-        "depolama": "256 GB",
-        "ekran": "6,3 inç Super Retina XDR (OLED), ProMotion 120 Hz",
-        "kamera": "48 MP Fusion Ana + 48 MP Ultra Geniş + 12 MP Telefoto (5x)",
-        "onKamera": "12 MP TrueDepth"
-      },
-      "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ucgen"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": true,
-      "ornek": true,
-      "eklenme": "2026-09-21T08:42:00.000Z",
-      "guncelleme": "2026-09-23T08:28:00.000Z"
-    },
-    {
-      "id": "iphone-15-2el",
-      "kod": "ZI-1031",
-      "ad": "iPhone 15 128 GB",
-      "marka": "Apple",
-      "seri": "iPhone",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Temiz",
-      "rozet": "",
-      "fiyat": 38999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Mavi",
-          "kod": "#c9d8e2"
-        }
-      ],
-      "cikisYili": 2023,
-      "cikisTarihi": "Eylül 2023",
-      "uretimYili": 2023,
-      "pilSagligi": 86,
-      "degisenParca": "Ekran orijinaliyle değişti",
-      "kisaAciklama": "Temiz · Ekran orijinaliyle değişti · 128 GB",
-      "aciklama": "Ekranı orijinal parçayla değiştirilmiş, Face ID ve tüm fonksiyonlar sorunsuz çalışıyor.",
-      "ozellikler": {
-        "islemci": "A16 Bionic",
-        "ram": "6 GB",
-        "depolama": "128 GB",
-        "ekran": "6,1 inç Super Retina XDR (OLED), Dynamic Island",
-        "kamera": "48 MP Ana + 12 MP Ultra Geniş",
-        "onKamera": "12 MP TrueDepth",
-        "diger": "USB-C bağlantı"
-      },
-      "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ikili"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-18T08:03:00.000Z",
-      "guncelleme": "2026-09-20T08:49:00.000Z"
-    },
-    {
-      "id": "iphone-14-pro-max-2el",
-      "kod": "ZI-1032",
-      "ad": "iPhone 14 Pro Max 256 GB",
-      "marka": "Apple",
-      "seri": "iPhone",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Temiz",
-      "rozet": "",
-      "fiyat": 44999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Derin Mor",
-          "kod": "#5b4b66"
-        }
-      ],
-      "cikisYili": 2022,
-      "cikisTarihi": "Eylül 2022",
-      "uretimYili": 2022,
-      "pilSagligi": 84,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Temiz · Değişen parça yok · 256 GB",
-      "aciklama": "Büyük ekranlı Pro deneyimini uygun fiyata isteyenler için. Kasada küçük kullanım izleri var.",
-      "ozellikler": {
-        "islemci": "A16 Bionic",
-        "ram": "6 GB",
-        "depolama": "256 GB",
-        "ekran": "6,7 inç Super Retina XDR (OLED), ProMotion 120 Hz, Always-On",
-        "kamera": "48 MP Ana + 12 MP Ultra Geniş + 12 MP Telefoto (3x)",
-        "onKamera": "12 MP TrueDepth"
-      },
-      "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "ucgen"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "ada"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-13T08:38:00.000Z",
-      "guncelleme": "2026-09-15T08:24:00.000Z"
-    },
-    {
-      "id": "galaxy-s25-ultra-2el",
-      "kod": "ZI-1033",
-      "ad": "Galaxy S25 Ultra 256 GB",
-      "marka": "Samsung",
-      "seri": "Galaxy S25",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Çok Temiz",
-      "rozet": "",
-      "fiyat": 57999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Titanyum Siyah",
-          "kod": "#2f3033"
-        }
-      ],
-      "cikisYili": 2025,
-      "cikisTarihi": "Ocak 2025",
-      "uretimYili": 2025,
-      "pilSagligi": 92,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Çok temiz · Değişen parça yok · 256 GB",
-      "aciklama": "S Pen dahil, kutulu. Ekran koruyuculu kullanıldığı için ekran kusursuz.",
-      "ozellikler": {
-        "islemci": "Snapdragon 8 Elite for Galaxy",
-        "ram": "12 GB",
-        "depolama": "256 GB",
-        "ekran": "6,9 inç QHD+ Dynamic AMOLED 2X, 120 Hz",
-        "kamera": "200 MP Geniş + 50 MP Ultra Geniş + 50 MP Telefoto (5x) + 10 MP Telefoto (3x)",
-        "onKamera": "12 MP",
-        "batarya": "5.000 mAh · 45W kablolu hızlı şarj"
-      },
-      "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "dikey4"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "delik"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-22T08:35:00.000Z",
-      "guncelleme": "2026-09-24T08:21:00.000Z"
-    },
-    {
-      "id": "galaxy-z-flip6-2el",
-      "kod": "ZI-1034",
-      "ad": "Galaxy Z Flip6 256 GB",
-      "marka": "Samsung",
-      "seri": "Galaxy Z",
-      "kategori": "telefon",
-      "altKategori": "",
-      "katlanabilir": true,
-      "durum": "ikinci-el",
-      "kozmetik": "Temiz",
-      "rozet": "",
-      "fiyat": 28999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Mavi",
-          "kod": "#9db7d6"
-        }
-      ],
-      "cikisYili": 2024,
-      "cikisTarihi": "Temmuz 2024",
-      "uretimYili": 2024,
-      "pilSagligi": 88,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Temiz · Değişen parça yok · 256 GB",
-      "aciklama": "Menteşe sağlam, iç ekranda kırışıklık normal seviyede. Katlanabilir dünyasına uygun fiyatlı giriş.",
-      "ozellikler": {
-        "islemci": "Snapdragon 8 Gen 3 for Galaxy",
-        "ram": "12 GB",
-        "depolama": "256 GB",
-        "ekran": "Ana ekran: 6,7 inç FHD+ Dynamic AMOLED 2X, 120 Hz\nKapak ekranı: 3,4 inç Super AMOLED",
-        "kamera": "50 MP Geniş + 12 MP Ultra Geniş",
-        "onKamera": "10 MP",
-        "batarya": "4.000 mAh · 25W kablolu şarj"
-      },
-      "gorseller": [
-        {
-          "cizim": "flip",
-          "gorunum": "kapali"
-        },
-        {
-          "cizim": "flip",
-          "gorunum": "acik"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-16T08:17:00.000Z",
-      "guncelleme": "2026-09-18T08:03:00.000Z"
-    },
-    {
-      "id": "macbook-air-m2-2el",
-      "kod": "ZI-1035",
-      "ad": "MacBook Air 13 inç (M2) 256 GB",
-      "marka": "Apple",
-      "seri": "MacBook Air",
-      "kategori": "laptop",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "ikinci-el",
-      "kozmetik": "Çok Temiz",
-      "rozet": "",
-      "fiyat": 32999,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Gece Yarısı",
-          "kod": "#2e3642"
-        }
-      ],
-      "cikisYili": 2022,
-      "cikisTarihi": "Temmuz 2022",
-      "uretimYili": 2023,
-      "pilSagligi": 91,
-      "degisenParca": "Değişen parça yok, tüm parçalar orijinal",
-      "kisaAciklama": "Çok temiz · Değişen parça yok · 8 GB / 256 GB",
-      "aciklama": "Şarj döngüsü düşük, klavye ve ekran kusursuz. Orijinal şarj aletiyle birlikte.",
-      "ozellikler": {
-        "islemci": "Apple M2 (8 çekirdekli CPU, 8 çekirdekli GPU)",
-        "ram": "8 GB",
-        "depolama": "256 GB SSD",
-        "ekran": "13,6 inç Liquid Retina",
-        "kamera": "1080p FaceTime HD",
-        "batarya": "18 saate kadar video izleme"
-      },
-      "gorseller": [
-        {
-          "cizim": "laptop"
-        }
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-07T08:20:00.000Z",
-      "guncelleme": "2026-09-09T08:06:00.000Z"
-    },
-    {
-      "id": "seffaf-magsafe-kilif",
-      "kod": "ZI-1036",
-      "ad": "Şeffaf MagSafe Uyumlu Kılıf",
-      "marka": "Diğer",
-      "seri": "",
-      "kategori": "aksesuar",
-      "altKategori": "kilif",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": 649,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Şeffaf",
-          "kod": "#e5e7eb"
-        }
-      ],
-      "cikisYili": null,
-      "cikisTarihi": "",
-      "uretimYili": null,
-      "pilSagligi": null,
-      "degisenParca": "",
-      "kisaAciklama": "iPhone 18 Pro ve 17 serisi için mıknatıslı şeffaf kılıf.",
-      "aciklama": "",
-      "ozellikler": {
-        "uyumluluk": "iPhone 18 Pro / 18 Pro Max / iPhone 17 serisi",
-        "malzeme": "Polikarbonat arka yüzey, TPU kenar",
-        "diger": "MagSafe uyumlu mıknatıs halkası"
-      },
-      "gorseller": [
-        {
-          "cizim": "kilif",
-          "seffaf": true
-        }
-      ],
-      "stok": 25,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-09-19T08:56:00.000Z",
-      "guncelleme": "2026-09-21T08:42:00.000Z"
-    },
-    {
-      "id": "silikon-kilif",
-      "kod": "ZI-1037",
-      "ad": "Silikon Kılıf",
-      "marka": "Diğer",
-      "seri": "",
-      "kategori": "aksesuar",
-      "altKategori": "kilif",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": 449,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Gece Mavisi",
-          "kod": "#1f2a44"
-        },
-        {
-          "ad": "Ada Çayı",
-          "kod": "#b7c3a6"
-        },
-        {
-          "ad": "Pudra",
-          "kod": "#f2d4d7"
-        }
-      ],
-      "cikisYili": null,
-      "cikisTarihi": "",
-      "uretimYili": null,
-      "pilSagligi": null,
-      "degisenParca": "",
-      "kisaAciklama": "İçi mikrofiber, yumuşak dokulu silikon kılıf.",
-      "aciklama": "",
-      "ozellikler": {
-        "uyumluluk": "Popüler iPhone ve Samsung modelleri",
-        "malzeme": "Silikon dış yüzey, mikrofiber iç yüzey"
-      },
-      "gorseller": [
-        {
-          "cizim": "kilif"
-        }
-      ],
-      "stok": 40,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-08-28T08:30:00.000Z",
-      "guncelleme": "2026-08-30T08:16:00.000Z"
-    },
-    {
-      "id": "standli-darbe-kilif",
-      "kod": "ZI-1038",
-      "ad": "Standlı Darbe Emici Kılıf",
-      "marka": "Diğer",
-      "seri": "",
-      "kategori": "aksesuar",
-      "altKategori": "kilif",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": 549,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Siyah",
-          "kod": "#2a2b2f"
-        }
-      ],
-      "cikisYili": null,
-      "cikisTarihi": "",
-      "uretimYili": null,
-      "pilSagligi": null,
-      "degisenParca": "",
-      "kisaAciklama": "Köşe korumalı gövde ve katlanır stand.",
-      "aciklama": "",
-      "ozellikler": {
-        "uyumluluk": "Popüler iPhone ve Samsung modelleri",
-        "malzeme": "TPU + polikarbonat",
-        "diger": "Köşe hava yastıkları, katlanır stand"
-      },
-      "gorseller": [
-        {
-          "cizim": "kilif"
-        }
-      ],
-      "stok": 18,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-08-28T08:30:00.000Z",
-      "guncelleme": "2026-08-30T08:16:00.000Z"
-    },
-    {
-      "id": "cuzdan-kilif",
-      "kod": "ZI-1039",
-      "ad": "Deri Görünümlü Cüzdan Kılıf",
-      "marka": "Diğer",
-      "seri": "",
-      "kategori": "aksesuar",
-      "altKategori": "kilif",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": 499,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Kahve",
-          "kod": "#6e5646"
-        }
-      ],
-      "cikisYili": null,
-      "cikisTarihi": "",
-      "uretimYili": null,
-      "pilSagligi": null,
-      "degisenParca": "",
-      "kisaAciklama": "Kartlıklı, mıknatıslı kapaklı cüzdan kılıf.",
-      "aciklama": "",
-      "ozellikler": {
-        "uyumluluk": "Popüler iPhone ve Samsung modelleri",
-        "malzeme": "Suni deri",
-        "diger": "3 kart bölmesi"
-      },
-      "gorseller": [
-        {
-          "cizim": "kilif"
-        }
-      ],
-      "stok": 12,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-08-28T08:30:00.000Z",
-      "guncelleme": "2026-08-30T08:16:00.000Z"
-    },
-    {
       "id": "adaptor-20w",
       "kod": "ZI-1040",
       "ad": "20W USB-C Hızlı Şarj Adaptörü",
@@ -3235,49 +3921,6 @@ window.ZI_VERI = {
       "ornek": false,
       "eklenme": "2026-07-29T08:00:00.000Z",
       "guncelleme": "2026-07-31T08:46:00.000Z"
-    },
-    {
-      "id": "bluetooth-kulaklik",
-      "kod": "ZI-1051",
-      "ad": "Kablosuz Kulak İçi Kulaklık",
-      "marka": "Diğer",
-      "seri": "",
-      "kategori": "aksesuar",
-      "altKategori": "kulaklik",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": 1199,
-      "secenekler": [],
-      "renkler": [
-        {
-          "ad": "Siyah",
-          "kod": "#2a2b2f"
-        }
-      ],
-      "cikisYili": null,
-      "cikisTarihi": "",
-      "uretimYili": null,
-      "pilSagligi": null,
-      "degisenParca": "",
-      "kisaAciklama": "Dokunmatik kontrol, şarj kutulu Bluetooth kulaklık.",
-      "aciklama": "",
-      "ozellikler": {
-        "baglanti": "Bluetooth 5.3",
-        "batarya": "Kutuyla birlikte 24 saate kadar"
-      },
-      "gorseller": [
-        {
-          "cizim": "kulaklik"
-        }
-      ],
-      "stok": 22,
-      "aktif": true,
-      "oneCikan": false,
-      "ornek": true,
-      "eklenme": "2026-08-18T08:40:00.000Z",
-      "guncelleme": "2026-08-20T08:26:00.000Z"
     },
     {
       "id": "arac-tutucu",

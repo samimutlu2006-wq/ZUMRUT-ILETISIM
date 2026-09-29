@@ -60,7 +60,24 @@
     while (sonuc.length < adet && havuz.length) sonuc.push(havuz.shift());
     return sonuc;
   }
+  /* Vitrin fotoğrafı: yayınlanmamış (data:) ya da yeni yayınlanmış görseller önbellekten gelir */
+  function vitrinGorsel(x) { return (ZI.gorselOnbellek && ZI.gorselOnbellek[x]) || x; }
+  function renkGecerli(c) { return typeof c === 'string' && /^#[0-9a-f]{3,8}$/i.test(c.trim()); }
+  function fotoZemin(s) {
+    var z = (s.zemin || []).filter(renkGecerli);
+    if (!z.length) return '';
+    return z.length === 1 ? z[0] : 'linear-gradient(180deg, ' + z.join(', ') + ')';
+  }
+  function fotoSahne(s) {
+    var liste = (s.gorseller || []).filter(Boolean).slice(0, 3);
+    if (!liste.length) return '';
+    var yer = ['sag', 'alt', 'kart'].indexOf(s.yerlesim) > -1 ? s.yerlesim : 'sag';
+    return '<div class="zi-sahne zi-sahne-foto zi-sahne-foto--' + yer + (liste.length > 1 ? ' coklu' : '') + (s.karistir ? ' karistir' : '') + '" aria-hidden="true">' +
+      liste.map(function (x, i) { return '<img src="' + k(vitrinGorsel(x)) + '" alt="" decoding="async"' + (i ? ' style="--i:' + i + '"' : '') + '>'; }).join('') + '</div>';
+  }
+
   function sahneHTML(s, veri) {
+    if (s.sahne === 'foto') return fotoSahne(s);
     var u = urunBul(veri, s.urunId);
     if (!aktifMi(u)) u = null;
     var urunler = (s.urunler || []).map(function (id) { return urunBul(veri, id); }).filter(aktifMi);
@@ -113,9 +130,11 @@
 
   function slaytHTML(s, i, n, veri) {
     var konum = s.sahne === 'lansman' ? ' ust' : (s.sahne === 'yelpaze' ? ' sol' : (s.sahne === 'tek' ? ' ust' : ''));
+    var foto = s.sahne === 'foto', zemin = foto ? fotoZemin(s) : '';
+    if (foto) konum = s.yerlesim === 'alt' ? ' ust' : ' sol';
     var b1 = s.buton1 && s.buton1.metin ? '<a class="zi-btn zi-btn--dolu" href="' + k(link(s.buton1.link, veri)) + '"' + dis(link(s.buton1.link, veri)) + '>' + k(s.buton1.metin) + '</a>' : '';
     var b2 = s.buton2 && s.buton2.metin ? '<a class="zi-btn zi-btn--cizgi" href="' + k(link(s.buton2.link, veri)) + '"' + dis(link(s.buton2.link, veri)) + '>' + k(s.buton2.metin) + ' ' + ZI.ikon('sag') + '</a>' : '';
-    return '<article class="zi-slayt ' + (s.tema === 'koyu' ? 'zi-slayt--koyu zi-koyu' : 'zi-slayt--acik') + '" data-i="' + i + '" role="group" aria-roledescription="slayt" aria-label="' + (i + 1) + ' / ' + n + ': ' + k(s.baslik) + '">' +
+    return '<article class="zi-slayt ' + (s.tema === 'koyu' ? 'zi-slayt--koyu zi-koyu' : 'zi-slayt--acik') + (foto ? ' zi-slayt--foto' : '') + '" data-i="' + i + '" role="group" aria-roledescription="slayt" aria-label="' + (i + 1) + ' / ' + n + ': ' + k(s.baslik) + '"' + (zemin ? ' style="background:' + k(zemin) + '"' : '') + '>' +
       sahneHTML(s, veri) +
       '<div class="zi-slayt__metin' + konum + '">' +
       (s.etiket ? '<p class="zi-slayt__etiket">' + k(s.etiket) + '</p>' : '') +
@@ -337,20 +356,23 @@
   /* ------------------------------------------------------------------ */
   function aksesuarKur(veri) {
     var kartlar = [
-      { k: 'kilif', no: '01', ad: 'Kılıflar', metin: 'Şeffaf, silikon, cüzdan ve darbe emici modeller.', c: { cizim: 'kilif', renk: '#8fb3d9' } },
+      { k: 'kilif', no: '01', ad: 'Kılıflar', metin: 'Guess, deri görünümlü ve silikon kılıflar.', c: { cizim: 'kilif', renk: '#8fb3d9' } },
       { k: 'sarj', no: '02', ad: 'Şarj Aletleri & Adaptörler', metin: 'Hızlı şarj adaptörleri, kablolar, kablosuz şarj ve powerbank.', c: { cizim: 'adaptor' } },
       { k: 'cam', no: '03', ad: 'Kırılmaz Camlar', metin: 'Temperli, hayalet ve mat ekran koruyucular; lens koruma.', c: { cizim: 'cam' } },
-      { k: 'kulaklik', no: '04', ad: 'Kulaklık & Aksesuarlar', metin: 'Kablosuz kulaklıklar ve araç tutucu gibi günlük yardımcılar.', c: { cizim: 'kulaklik' } }
+      { k: 'kulaklik', no: '04', ad: 'Kulaklık & Aksesuarlar', metin: 'Kulak üstü ve kablosuz kulaklıklar, günlük aksesuarlar.', c: { cizim: 'kulaklik' } }
     ];
     var aktif = ZI.aktifUrunler(veri);
     var izgara = $('#aksesuar-kartlar'), panel = $('#aksesuar-panel'), ic = $('#aksesuar-panel-ic');
     izgara.innerHTML = kartlar.map(function (x, i) {
-      var say = aktif.filter(ZI.kategoriler[x.k].f).length;
+      var grup = aktif.filter(ZI.kategoriler[x.k].f);
+      var say = grup.length;
+      /* Kategoride fotoğraflı ürün varsa kartta onun fotoğrafı görünür */
+      var fotolu = ZI.sirala(grup).map(function (u) { return ZI.gorseller(u)[0]; }).filter(function (gr) { return gr && gr.foto; })[0];
       return '<button class="zi-bento zi-belir" type="button" style="--i:' + i + '" data-k="' + x.k + '" aria-expanded="false" aria-controls="aksesuar-panel-ic">' +
         '<span class="zi-bento__etiket">' + x.no + '</span>' +
         '<span class="zi-bento__baslik">' + k(x.ad) + '</span>' +
         '<span class="zi-bento__metin">' + k(x.metin) + '</span>' +
-        '<span class="zi-bento__gorsel"><img src="' + ZI.cizim.url(x.c) + '" alt=""></span>' +
+        '<span class="zi-bento__gorsel">' + (fotolu ? '<img class="foto" src="' + k(fotolu.src) + '" alt="" loading="lazy" decoding="async">' : '<img src="' + ZI.cizim.url(x.c) + '" alt="">') + '</span>' +
         '<span class="zi-bento__sayi">' + say + ' ürün</span>' +
         '<span class="zi-bento__arti" aria-hidden="true">' + ZI.ikon('arti') + '</span></button>';
     }).join('');
@@ -466,6 +488,7 @@
       address: { '@type': 'PostalAddress', streetAddress: 'Hoca Ahmet Yesevi, Kadir Has Cd. No:131/A', addressLocality: 'Kocasinan', addressRegion: 'Kayseri', postalCode: '38090', addressCountry: 'TR' },
       openingHoursSpecification: saat, url: location.href.split('#')[0].split('?')[0]
     };
+    try { ld.logo = new URL('assets/img/logo.svg', location.href).href; ld.image = new URL('assets/img/og-kapak.jpg', location.href).href; } catch (e) { /* eski tarayıcı */ }
     if (m.konum && m.konum.enlem) ld.geo = { '@type': 'GeoCoordinates', latitude: m.konum.enlem, longitude: m.konum.boylam };
     if (m.eposta) ld.email = m.eposta;
     if (m.adres && m.adres.indexOf('Kadir Has') === -1) ld.address = { '@type': 'PostalAddress', streetAddress: m.adres, addressCountry: 'TR' };

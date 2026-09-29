@@ -31,6 +31,7 @@ body.dp :focus-visible { outline: 2px solid var(--d-turuncu); outline-offset: 2p
 .dp-marka { display: flex; align-items: center; gap: 10px; color: #fff; font-family: var(--zi-font); font-size: 17px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
 .dp-marka:hover { text-decoration: none; color: #fff; }
 .dp-marka .zi-marka__tas { width: 24px; height: 24px; }
+.dp-marka .dp-logo { display: block; height: 28px; width: auto; color: #fff; }
 .dp-etiket { background: var(--d-turuncu); color: #000; font-size: 11px; font-weight: 700; letter-spacing: .02em; padding: 4px 10px; border-radius: 980px; text-transform: uppercase; }
 .dp-sekmeler { display: flex; gap: 2px; margin-left: 8px; overflow-x: auto; scrollbar-width: none; }
 .dp-sekmeler::-webkit-scrollbar { display: none; }
@@ -303,6 +304,50 @@ button.dp-kutu:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px 
 .dp-pil-kaydirici input[type="range"] { flex: 1; accent-color: var(--d-turuncu); }
 .dp-pil-kaydirici .dp-birim { width: 96px; }
 
+/* Fiyat girişi */
+.dp-fiyat-btn { display: inline-flex; align-items: center; justify-content: flex-end; gap: 5px; min-height: 28px; padding: 0 10px; margin-right: -10px; border-radius: 9px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--d-metin); transition: background-color .15s, color .15s; }
+.dp-fiyat-btn:hover { background: var(--d-turuncu-soluk); color: var(--d-turuncu-koyu); }
+.dp-fiyat-btn.bos { color: var(--d-turuncu-koyu); background: var(--d-turuncu-soluk); box-shadow: inset 0 0 0 1px #ffd9ad; font-size: 12px; }
+.dp-fiyat-btn.bos:hover { background: var(--d-turuncu); color: #000; box-shadow: none; }
+.dp-fiyat-btn .zi-ikon { font-size: 13px; stroke-width: 2.4; }
+.dp-birim--fiyat input { font-weight: 700; font-size: 17px; font-variant-numeric: tabular-nums; }
+.dp-tablo--fiyat tbody td { white-space: normal; }
+.dp-fiyat-kutular { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: flex-end; }
+.dp-fiyat-kutu { display: inline-flex; flex-direction: column; gap: 4px; margin: 0; cursor: text; }
+.dp-fiyat-kutu__ad { font-size: 11px; font-weight: 700; color: var(--d-metin-2); }
+.dp-fiyat-kutu .dp-birim { width: 168px; }
+.dp-fiyat-kutu .dp-girdi { height: 38px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.dp-fiyat-kutu.bos .dp-girdi { background: #fffaf3; border-color: #ffd9ad; }
+.dp-fiyat-kutu.bos .dp-girdi::placeholder { color: var(--d-turuncu-koyu); font-weight: 600; }
+.dp-fiyat-kutu.degisti .dp-girdi { border-color: var(--d-turuncu); background: var(--d-turuncu-soluk); box-shadow: 0 0 0 3px rgba(255, 138, 0, .16); }
+.dp-fiyat-kutu.hatali .dp-girdi { border-color: var(--d-kirmizi); box-shadow: 0 0 0 3px rgba(215, 0, 21, .12); }
+.dp-kaydet-cubugu {
+  position: sticky; bottom: 18px; z-index: 80; width: max-content; max-width: calc(100% - 8px); margin: 16px auto 0;
+  display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 20px; border-radius: 980px; background: var(--d-siyah-2); color: #fff; font-size: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .28); animation: dpCubuk .35s cubic-bezier(.28, .11, .32, 1) both;
+}
+.dp-kaydet-cubugu[hidden] { display: none; }
+.dp-kaydet-cubugu b { color: var(--d-turuncu); }
+@keyframes dpCubuk { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Ürün fotoğrafı renk etiketi */
+.dp-gorsel-oge { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.dp-gorsel-renk { width: 100%; height: 30px; border-radius: 8px; border: 1px solid #d2d2d7; background: #fff; font-size: 12px; font-weight: 600; padding: 0 6px; color: var(--d-metin); }
+.dp-gorsel-renk:focus { border-color: var(--d-turuncu); outline: none; }
+
+/* Vitrin fotoğrafları */
+.dp-vitrin-foto { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 10px; }
+.dp-vitrin-foto .dp-gorsel { aspect-ratio: 1; }
+.dp-alan label.dp-yukle { display: flex; margin: 0; font-weight: 400; color: var(--d-metin-2); cursor: pointer; }
+.dp-yukle--kucuk { padding: 12px; gap: 4px; min-height: 112px; font-size: 12px; }
+.dp-yukle--kucuk > .zi-ikon { font-size: 22px; }
+.dp-yukle--kucuk b { font-size: 13px; }
+.dp-zemin { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dp-zemin input[type="color"] { width: 42px; height: 38px; border-radius: 10px; border: 1px solid #d2d2d7; padding: 3px; background: #fff; cursor: pointer; }
+.dp-zemin .dp-btn { height: 38px; }
+.dp-vitrin-onizleme { position: relative; overflow: hidden; }
+.dp-vitrin-onizleme img { position: absolute; right: 2px; bottom: 0; height: 100%; width: auto; }
+
 /* ---------- Modal ---------- */
 .dp-modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(0, 0, 0, .45); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
 .dp-modal.acik { opacity: 1; visibility: visible; }
@@ -374,6 +419,16 @@ button.dp-kutu:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px 
 .dp-yukleniyor span { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(0, 0, 0, .08); border-top-color: var(--d-turuncu); animation: ziDon .8s linear infinite; }
 
 /* ---------- Duyarlı ---------- */
+@media (max-width: 1500px) {
+  .dp-ust__ic { gap: 12px; }
+  .dp-sekme { padding: 0 11px; }
+  .dp-site-link { width: 36px; padding: 0; }
+  .dp-site-link span { display: none; }
+}
+@media (max-width: 1280px) {
+  .dp-durum { display: none; }
+  .dp-ust .dp-etiket { display: none; }
+}
 @media (max-width: 1100px) {
   .dp-ozet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .dp-iki-kolon { grid-template-columns: 1fr; }
@@ -426,6 +481,13 @@ button.dp-kutu:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1px 
   .dp-vitrin-kart { padding: 12px; }
 }
 @media (max-width: 860px) {
+  .dp-tablo--fiyat tbody tr { grid-template-columns: 48px minmax(0, 1fr); grid-template-areas: "gor ad" "fiy fiy"; gap: 8px 10px; }
+  .dp-tablo--fiyat td[data-h="fiyatlar"] { grid-area: fiy; }
+  .dp-tablo--fiyat .dp-fiyat-kutular { gap: 8px; }
+  .dp-tablo--fiyat .dp-fiyat-kutu { flex: 1 1 140px; }
+  .dp-tablo--fiyat .dp-fiyat-kutu .dp-birim { width: 100%; }
+  .dp-kaydet-cubugu { bottom: 12px; padding-left: 14px; gap: 8px; font-size: 13px; }
+  .dp-kaydet-cubugu .dp-btn { padding: 0 12px; }
   .dp-tablo--hareket tbody tr { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
   .dp-tablo--hareket tbody td { flex: 0 0 auto; }
   .dp-tablo--hareket tbody td[data-h="urun"] { flex: 1 1 100%; order: -1; }

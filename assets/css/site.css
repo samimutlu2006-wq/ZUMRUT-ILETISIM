@@ -31,6 +31,7 @@
   --zi-ease: cubic-bezier(0.28, 0.11, 0.32, 1);
   --zi-ease-2: cubic-bezier(0.4, 0, 0.6, 1);
   --zi-nav-h: 48px;
+  --zi-lacivert: #1f2444;
   --zi-kap: 1200px;
   --zi-kenar: 22px;
   --zi-r-xl: 28px;
@@ -142,8 +143,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .zi-nav::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: rgba(0, 0, 0, 0.06); opacity: 1; transition: opacity .3s; }
 .zi-nav.zi-nav--acik::after { opacity: 0; }
 .zi-nav__ic { max-width: 1072px; height: 100%; margin: 0 auto; padding: 0 22px; display: flex; align-items: center; gap: 10px; }
-.zi-marka { display: inline-flex; align-items: center; gap: 8px; color: var(--zi-metin); font-family: var(--zi-font); font-size: 17px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; height: 100%; }
-.zi-marka:hover { text-decoration: none; color: #000; }
+.zi-marka { display: inline-flex; align-items: center; gap: 8px; color: var(--zi-lacivert); font-family: var(--zi-font); font-size: 17px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; height: 100%; flex: none; transition: opacity .2s; }
+.zi-marka:hover { text-decoration: none; opacity: .78; }
+.zi-logo { display: block; height: 30px; width: auto; flex: none; }
 .zi-marka__tas { width: 22px; height: 22px; flex: none; }
 .zi-menu { flex: 1; display: flex; align-items: center; justify-content: space-between; margin: 0 6px 0 28px; height: 100%; }
 .zi-menu__oge { height: 100%; }
@@ -388,6 +390,38 @@ body.zi-kilit { overflow: hidden; }
 .zi-sahne-tek { position: absolute; left: 50%; bottom: 4%; width: min(520px, 46%); height: 52%; transform: translateX(-50%); display: flex; align-items: flex-end; justify-content: center; }
 .zi-sahne-tek img { max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 30px 34px rgba(0, 0, 0, .25)); animation: ziSuzul 6s ease-in-out infinite; }
 
+/* Sahne: Fotoğraf (panelden yüklenen vitrin fotoğrafları) */
+.zi-sahne-foto { display: flex; }
+.zi-sahne-foto img { display: block; flex: none; user-select: none; -webkit-user-drag: none; }
+.zi-slayt.aktif .zi-sahne-foto img { animation: ziFotoGir 1.2s var(--zi-ease) both; }
+.zi-slayt.aktif .zi-sahne-foto img + img { animation-delay: .12s; }
+@keyframes ziFotoGir { from { opacity: 0; transform: translateY(14px) scale(1.02); } to { opacity: 1; transform: none; } }
+/* Beyaz zeminli fotoğraflar: sahne slaytın zeminini devralır, fotoğraf onunla çarpılır (beyaz kaybolur) */
+.zi-sahne-foto.karistir { background: inherit; }
+.zi-sahne-foto.karistir img { mix-blend-mode: multiply; }
+/* Sağda, tam yükseklikte; sol kenarı zemine erir */
+.zi-sahne-foto--sag { justify-content: flex-end; align-items: stretch; padding-left: 40%; }
+.zi-sahne-foto--sag img { height: 100%; width: auto; max-width: 100%; object-fit: cover; object-position: right center;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26%); mask-image: linear-gradient(90deg, transparent 0, #000 26%); }
+/* Birden çok ürün fotoğrafı (ör. beyaz zeminli iki telefon) */
+.zi-sahne-foto--sag.coklu { align-items: center; justify-content: center; padding: 0 3% 0 44%; }
+.zi-sahne-foto--sag.coklu img { height: min(80%, 470px); max-width: 56%; object-fit: contain; -webkit-mask-image: none; mask-image: none; }
+.zi-sahne-foto--sag.coklu img + img { margin-left: -5%; }
+/* Altta, ortada (geniş grup fotoğrafları); kenarları zemine erir */
+.zi-sahne-foto--alt { justify-content: center; align-items: flex-end; }
+.zi-sahne-foto--alt img { height: min(58%, 370px); width: auto; max-width: 84%; object-fit: contain; object-position: center bottom;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%); -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%); mask-composite: intersect; }
+.zi-sahne-foto--alt.coklu img { max-width: 44%; }
+/* Kart: köşeleri yuvarlatılmış fotoğraf */
+.zi-sahne-foto--kart { justify-content: flex-end; align-items: center; padding: 0 5% 0 47%; gap: 16px; }
+.zi-sahne-foto--kart img { width: 100%; max-width: 660px; height: auto; max-height: 80%; object-fit: cover; border-radius: 22px; box-shadow: 0 30px 70px rgba(0, 0, 0, .32); }
+.zi-sahne-foto--kart.coklu img { width: 48%; }
+.zi-slayt--koyu .zi-slayt__metin.sol .zi-slayt__alt { color: rgba(255, 255, 255, .82); }
+.zi-slayt--foto.zi-slayt--acik .zi-slayt__metin .zi-slayt__alt { color: #2c2c2e; }
+.zi-slayt--foto.zi-koyu .zi-btn--cizgi { border-color: rgba(255, 255, 255, .88); color: #fff; }
+.zi-slayt--foto.zi-koyu .zi-btn--cizgi:hover { background: #fff; border-color: #fff; color: var(--zi-metin); }
+
 /* Vitrin kontrolleri */
 .zi-vitrin__kontrol { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
 .zi-daire-btn {
@@ -489,6 +523,8 @@ body.zi-kilit { overflow: hidden; }
 .zi-bento__gorsel { flex: 1; display: flex; align-items: center; justify-content: center; margin: 18px 0 8px; }
 .zi-bento__gorsel img { height: 150px; width: auto; max-width: 100%; object-fit: contain; filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .16)); transition: transform .7s var(--zi-ease); }
 .zi-bento:hover .zi-bento__gorsel img { transform: scale(1.07) rotate(-2deg); }
+.zi-bento__gorsel img.foto { height: 170px; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; filter: none; box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .35); }
+.zi-bento:hover .zi-bento__gorsel img.foto { transform: scale(1.04); }
 .zi-bento__arti {
   position: absolute; right: 22px; bottom: 22px; width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; background: var(--zi-metin); color: #fff; font-size: 18px;
@@ -529,7 +565,7 @@ body.zi-kilit { overflow: hidden; }
 .zi-iletisim-liste small { display: block; font-size: 12px; color: var(--zi-metin-2); }
 .zi-ikon-daire { width: 40px; height: 40px; flex: none; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--zi-metin); box-shadow: 0 1px 2px rgba(0, 0, 0, .06); }
 .zi-saatler { margin-top: 26px; background: #fff; border-radius: 20px; padding: 18px 22px; }
-.zi-saatler__ust { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.zi-saatler__ust { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 8px; }
 .zi-saatler__ust h3 { font-size: 17px; font-weight: 600; }
 .zi-saat-satir { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--zi-gri-2); font-size: 15px; }
 .zi-saat-satir:first-of-type { border-top: 0; }
@@ -584,6 +620,8 @@ body.zi-kilit { overflow: hidden; }
 .zi-alt a:hover { color: var(--zi-metin); }
 .zi-alt__son { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-top: 16px; border-top: 1px solid var(--zi-gri-3); }
 .zi-alt__son nav { display: flex; gap: 16px; flex-wrap: wrap; }
+.zi-alt__marka { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.zi-logo--alt { height: 24px; color: var(--zi-lacivert); }
 
 /* =========================================================================
    ÜRÜN DETAY SAYFASI
@@ -617,6 +655,10 @@ body.zi-kilit { overflow: hidden; }
 }
 .zi-galeri__sahne > img { position: absolute; inset: 9%; width: 82%; height: 82%; object-fit: contain; opacity: 0; transform: scale(.97); transition: opacity .5s var(--zi-ease), transform .7s var(--zi-ease); filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .18)); }
 .zi-galeri__sahne > img.foto { inset: 0; width: 100%; height: 100%; object-fit: cover; filter: none; }
+/* Fotoğraflı ürünlerde sahne dikey (4:5): telefon ve kılıf fotoğrafları kırpılmadan görünür */
+.zi-galeri__sahne.foto-modu { aspect-ratio: 4 / 5; background: #2c2c2e; }
+.zi-galeri__durum .zi-rozet, .zi-galeri__marka { box-shadow: 0 1px 3px rgba(0, 0, 0, .14); }
+.zi-galeri__sahne.foto-modu .zi-galeri__durum .zi-rozet { background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .zi-galeri__sahne > img.aktif { opacity: 1; transform: none; }
 .zi-galeri__marka {
   position: absolute; left: 18px; top: 18px; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
@@ -750,7 +792,7 @@ body.zi-kilit { overflow: hidden; }
 @media (max-width: 1068px) {
   .zi-bento-izgara { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .zi-akordeon__izgara { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .zi-hakkimizda { grid-template-columns: 1fr; padding: 44px; }
+  .zi-hakkimizda { grid-template-columns: minmax(0, 1fr); padding: 44px; }
   .zi-medya { grid-template-rows: none; grid-template-columns: 1fr 1fr; }
   .zi-medya__kutu { min-height: 320px; }
   .zi-urun__izgara { gap: 40px; }
@@ -771,6 +813,14 @@ body.zi-kilit { overflow: hidden; }
   .zi-sahne-yelpaze img:nth-child(2) { left: 35%; }
   .zi-sahne-yelpaze img:nth-child(3) { left: 60%; }
   .zi-sahne-tek { width: 60%; height: 50%; }
+  .zi-sahne-foto--sag { padding: 0; justify-content: center; align-items: flex-end; }
+  .zi-sahne-foto--sag img { height: 58%; max-width: 92%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%); -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 16%, #000 84%, transparent 100%); mask-composite: intersect; }
+  .zi-sahne-foto--sag.coklu { padding: 0 4% 5%; align-items: flex-end; }
+  .zi-sahne-foto--sag.coklu img { height: min(50%, 360px); max-width: 48%; }
+  .zi-sahne-foto--kart { padding: 0 6% 6%; justify-content: center; align-items: flex-end; }
+  .zi-sahne-foto--kart img { width: min(600px, 100%); max-height: 50%; }
 }
 
 @media (max-width: 833px) {
@@ -805,6 +855,11 @@ body.zi-kilit { overflow: hidden; }
   .zi-cip-yuzen--2 { right: 0; top: 22%; }
   .zi-cip-yuzen--3 { left: 8%; bottom: 6%; }
   .zi-sahne-tek { width: 86%; height: 48%; }
+  .zi-sahne-foto--sag img { height: 54%; }
+  .zi-sahne-foto--sag.coklu img { height: min(46%, 300px); max-width: 50%; }
+  .zi-sahne-foto--alt img { height: auto; width: 100%; max-width: 100%; max-height: 50%; }
+  .zi-sahne-foto--kart { padding: 0 4% 5%; }
+  .zi-sahne-foto--kart img { border-radius: 16px; max-height: 46%; }
   .zi-vitrin__kontrol { gap: 10px; margin-top: 18px; }
   .zi-noktalar { padding: 0 16px; }
 
@@ -872,8 +927,8 @@ body.zi-kilit { overflow: hidden; }
    ========================================================================= */
 .zi-giris { min-height: calc(100vh - var(--zi-nav-h)); display: flex; align-items: center; justify-content: center; padding: 56px 16px 80px; background: radial-gradient(1200px 500px at 50% -10%, #f5f5f7, #fff 70%); }
 .zi-giris__kutu { width: 100%; max-width: 440px; text-align: center; animation: ziSayfaGiris .8s var(--zi-ease) both; }
-.zi-giris__tas { width: 72px; height: 72px; margin: 0 auto 22px; border-radius: 22px; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(5, 96, 63, .18), inset 0 0 0 1px rgba(0, 0, 0, .04); }
-.zi-giris__tas .zi-marka__tas { width: 42px; height: 42px; }
+.zi-giris__tas { display: flex; justify-content: center; margin: 0 auto 30px; color: var(--zi-lacivert); }
+.zi-giris__tas .zi-logo { height: 52px; }
 .zi-giris h1 { font-family: var(--zi-font); font-size: 40px; line-height: 1.1; font-weight: 600; letter-spacing: -0.003em; }
 .zi-giris__alt { font-size: 17px; color: var(--zi-metin-2); margin: 10px 0 32px; }
 .zi-giris form { background: #fff; border-radius: 22px; padding: 26px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 18px 50px -20px rgba(0, 0, 0, .18); text-align: left; }
