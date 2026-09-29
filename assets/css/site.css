@@ -398,7 +398,7 @@ body.zi-kilit { overflow: hidden; }
 @keyframes ziFotoGir { from { opacity: 0; transform: translateY(14px) scale(1.02); } to { opacity: 1; transform: none; } }
 /* Beyaz zeminli fotoğraflar: sahne slaytın zeminini devralır, fotoğraf onunla çarpılır (beyaz kaybolur) */
 .zi-sahne-foto.karistir { background: inherit; }
-.zi-sahne-foto.karistir img { mix-blend-mode: multiply; }
+.zi-sahne-foto.karistir img { mix-blend-mode: multiply; -webkit-mask-image: none; mask-image: none; }
 /* Sağda, tam yükseklikte; sol kenarı zemine erir */
 .zi-sahne-foto--sag { justify-content: flex-end; align-items: stretch; padding-left: 40%; }
 .zi-sahne-foto--sag img { height: 100%; width: auto; max-width: 100%; object-fit: cover; object-position: right center;
@@ -667,8 +667,17 @@ body.zi-kilit { overflow: hidden; }
 }
 .zi-galeri__marka i { width: 8px; height: 8px; border-radius: 50%; background: var(--marka-renk, #1d1d1f); }
 .zi-galeri__durum { position: absolute; right: 18px; top: 18px; z-index: 2; }
+.zi-galeri__not {
+  position: absolute; left: 50%; bottom: 16px; z-index: 2; transform: translateX(-50%); max-width: calc(100% - 32px);
+  padding: 7px 14px; border-radius: 980px; background: rgba(255, 255, 255, .88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  font-size: 13px; font-weight: 500; letter-spacing: -0.01em; color: var(--zi-metin); box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
+}
+.zi-galeri__not[hidden] { display: none; }
 .zi-galeri__ok { position: absolute; top: 50%; z-index: 2; transform: translateY(-50%); opacity: 0; transition: opacity .3s, background-color .25s; }
 .zi-galeri__sahne:hover .zi-galeri__ok, .zi-galeri__ok:focus-visible { opacity: 1; }
+/* Basılıyken ok aşağı kaymasın (yoksa üst yarısına tıklayınca geçiş çalışmıyor) */
+.zi-galeri__ok:active { transform: translateY(-50%) scale(.94); }
 .zi-galeri__ok--sol { left: 14px; }
 .zi-galeri__ok--sag { right: 14px; }
 .zi-galeri__kucukler { display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding: 2px; scrollbar-width: none; }

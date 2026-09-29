@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-09-29T22:37:56.119Z",
+  "guncelleme": "2026-09-29T23:53:48.000Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz.",
@@ -120,16 +120,17 @@ window.ZI_VERI = {
     {
       "id": "galaxy-s",
       "aktif": true,
-      "tema": "koyu",
+      "tema": "acik",
       "sahne": "foto",
       "yerlesim": "alt",
       "gorseller": [
         "assets/img/vitrin/galaxy-s.webp"
       ],
       "zemin": [
-        "#000000"
+        "#fbfbfd",
+        "#eceef3"
       ],
-      "karistir": false,
+      "karistir": true,
       "etiket": "Samsung",
       "baslik": "Galaxy S Serisi",
       "altBaslik": "Yapay zekâ gücü.",
@@ -153,7 +154,6 @@ window.ZI_VERI = {
       "sahne": "foto",
       "yerlesim": "sag",
       "gorseller": [
-        "assets/img/vitrin/iphone-16-laciverttas.webp",
         "assets/img/vitrin/iphone-16-pembe.webp"
       ],
       "zemin": [
@@ -1747,16 +1747,18 @@ window.ZI_VERI = {
         "diger": "Nano-SIM + eSIM (Türkiye modeli)"
       },
       "gorseller": [
-        "assets/img/urunler/iphone-17-ada-cayi-1.webp"
+        "assets/img/urunler/iphone-17-ada-cayi-1.webp",
+        "assets/img/urunler/iphone-17-lavanta-1.webp"
       ],
       "stok": 4,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-08-20T08:26:00.000Z",
-      "guncelleme": "2026-09-29T22:37:56.119Z",
+      "guncelleme": "2026-09-29T23:53:48.000Z",
       "gorselRenkleri": [
-        "Ada Çayı"
+        "Ada Çayı",
+        "Lavanta"
       ]
     },
     {
@@ -1894,7 +1896,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-06-29T08:30:00.000Z",
-      "guncelleme": "2026-09-29T22:37:56.109Z",
+      "guncelleme": "2026-09-29T23:53:48.000Z",
       "gorselRenkleri": [
         "Laciverttaş",
         "Siyah",
@@ -1963,23 +1965,14 @@ window.ZI_VERI = {
         "batarya": "5.000 mAh · 60W kablolu hızlı şarj"
       },
       "gorseller": [
-        {
-          "cizim": "telefon",
-          "gorunum": "arka",
-          "kamera": "dikey4"
-        },
-        {
-          "cizim": "telefon",
-          "gorunum": "on",
-          "on": "delik"
-        }
+        "assets/img/urunler/galaxy-s26-ultra-1.webp"
       ],
       "stok": 3,
       "aktif": true,
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-07-19T08:10:00.000Z",
-      "guncelleme": "2026-07-21T08:56:00.000Z"
+      "guncelleme": "2026-09-29T23:53:48.000Z"
     },
     {
       "id": "galaxy-s26-plus",

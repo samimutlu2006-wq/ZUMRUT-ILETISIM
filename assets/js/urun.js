@@ -74,6 +74,7 @@
       '<span class="zi-galeri__durum">' + ZI.durumRozeti(u, true) + '</span>' +
       '<button class="zi-daire-btn zi-galeri__ok zi-galeri__ok--sol" type="button" data-g="-1" aria-label="Önceki görsel">' + ZI.ikon('sol') + '</button>' +
       '<button class="zi-daire-btn zi-galeri__ok zi-galeri__ok--sag" type="button" data-g="1" aria-label="Sonraki görsel">' + ZI.ikon('sag') + '</button>' +
+      '<span class="zi-galeri__not" id="galeri-not" aria-live="polite" hidden></span>' +
       '</div>' +
       '<div class="zi-galeri__kucukler" id="kucukler" role="tablist" aria-label="Görsel seçimi"></div>' +
       '<div class="zi-galeri__noktalar" id="gnoktalar" aria-hidden="true"></div>' +
@@ -166,12 +167,20 @@
   }
 
   function galeriKur(u, secili) {
-    var sahne = $('#sahne'), kucukler = $('#kucukler'), noktalar = $('#gnoktalar');
+    var sahne = $('#sahne'), kucukler = $('#kucukler'), noktalar = $('#gnoktalar'), not = $('#galeri-not'), mevcut = [];
     function listele() { return ZI.gorseller(u, secili.renk); }
+    /* Seçilen rengin fotoğrafı yoksa başka rengin fotoğrafı gösterilir; hangi renk olduğu altta yazar */
+    function notYaz() {
+      var gr = mevcut[secili.gorsel];
+      var r = gr && gr.baskaRenk;
+      not.hidden = !r;
+      not.textContent = r ? 'Fotoğraftaki renk: ' + r : '';
+    }
     /* Ürünün herhangi bir fotoğrafı varsa sahne dikey kalır; renk değiştirirken zıplamaz */
     var fotolu = (u.gorseller || []).some(function (x) { return typeof x === 'string' && !/\.svg(\?|$)/i.test(x); });
     function yenile(ilk) {
       var liste = listele();
+      mevcut = liste;
       if (secili.gorsel >= liste.length) secili.gorsel = 0;
       $$('img', sahne).forEach(function (im) { im.remove(); });
       liste.forEach(function (gr, i) {
@@ -189,6 +198,7 @@
       noktalar.innerHTML = liste.length > 1 ? liste.map(function (x, i) { return '<span class="' + (i === secili.gorsel ? 'aktif' : '') + '"></span>'; }).join('') : '';
       $$('.zi-galeri__ok', sahne).forEach(function (b) { b.hidden = liste.length < 2; });
       sahne.classList.toggle('foto-modu', fotolu);
+      notYaz();
       if (!ilk) $$('img.aktif', sahne).forEach(function (im) { im.animate([{ opacity: 0.2, transform: 'scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: 'cubic-bezier(.28,.11,.32,1)' }); });
     }
     function goster(i) {
@@ -198,6 +208,7 @@
       imgs.forEach(function (im, j) { im.classList.toggle('aktif', j === secili.gorsel); });
       $$('.zi-galeri__kucuk', kucukler).forEach(function (b, j) { b.setAttribute('aria-current', j === secili.gorsel ? 'true' : 'false'); });
       $$('span', noktalar).forEach(function (s, j) { s.classList.toggle('aktif', j === secili.gorsel); });
+      notYaz();
     }
     sahne.addEventListener('click', function (e) { var b = e.target.closest('[data-g]'); if (b) goster(secili.gorsel + Number(b.dataset.g)); });
     kucukler.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) goster(Number(b.dataset.i)); });

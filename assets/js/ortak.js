@@ -241,18 +241,28 @@
     var secili = renk && typeof renk === 'object' ? renk : (renk ? (renkler.filter(function (x) { return x.kod === renk; })[0] || { kod: renk }) : (renkler[0] || null));
     var r = (secili && secili.kod) || null;
     var etiket = Array.isArray(u.gorselRenkleri) ? u.gorselRenkleri : [];
-    var ogeler = [];
+    var ogeler = [], baska = false;
     (u.gorseller || []).forEach(function (x, i) { if (x) ogeler.push({ x: x, renk: etiket[i] || '' }); });
     if (ogeler.length && secili && secili.ad && etiket.some(Boolean)) {
-      /* Seçilen rengin fotoğrafı varsa o (+ renksiz fotoğraflar); yoksa renksiz fotoğraflar; o da yoksa bu renge boyanmış çizim */
+      /* Seçilen rengin fotoğrafı varsa o (+ renksiz fotoğraflar); yoksa renksiz fotoğraflar.
+         İkisi de yoksa çizime düşmez: modelin diğer renklerdeki gerçek fotoğrafları gösterilir, fotoğraftaki renk yazılır. */
       var eslesen = ogeler.filter(function (o) { return o.renk === secili.ad; });
       var genel = ogeler.filter(function (o) { return !o.renk && typeof o.x === 'string'; });
-      ogeler = eslesen.length ? eslesen.concat(genel) : genel;
+      if (eslesen.length) ogeler = eslesen.concat(genel);
+      else if (genel.length) ogeler = genel;
+      else {
+        ogeler = ogeler.filter(function (o) { return typeof o.x === 'string' && !/\.svg(\?|$)/i.test(o.x); });
+        baska = ogeler.length > 0;
+      }
     }
-    var liste = ogeler.map(function (o) { return o.x; });
-    if (!liste.length) liste = ZI.cizim ? ZI.cizim.varsayilan(u, r) : [];
-    return liste.map(function (x) {
-      if (typeof x === 'string') return { src: (ZI.gorselOnbellek && ZI.gorselOnbellek[x]) || x, foto: !/\.svg(\?|$)/i.test(x) };
+    if (!ogeler.length) ogeler = (ZI.cizim ? ZI.cizim.varsayilan(u, r) : []).map(function (x) { return { x: x, renk: '' }; });
+    return ogeler.map(function (o) {
+      var x = o.x;
+      if (typeof x === 'string') {
+        var gr = { src: (ZI.gorselOnbellek && ZI.gorselOnbellek[x]) || x, foto: !/\.svg(\?|$)/i.test(x) };
+        if (baska && o.renk) gr.baskaRenk = o.renk;
+        return gr;
+      }
       var t = Object.assign({}, x);
       if (r && !t.sabitRenk) t.renk = r;
       return { src: ZI.cizim.url(t), foto: false, cizim: true };
