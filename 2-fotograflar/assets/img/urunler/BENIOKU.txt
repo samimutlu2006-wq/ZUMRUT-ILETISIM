@@ -1,1 +1,0 @@
-Bu klasöre depo panelinden yüklenen ürün fotoğrafları otomatik kaydedilir.
