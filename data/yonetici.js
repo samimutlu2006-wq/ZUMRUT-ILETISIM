@@ -1,4 +1,4 @@
-/* Zümrüt İletişim · Yönetici giriş kaydı. Şifre burada SAKLANMAZ; yalnızca doğrulama özeti bulunur. Panelden şifre değiştirildiğinde otomatik güncellenir. */
+/* Zümrüt İletişim · Yönetici giriş kaydı. */
 window.ZI_YONETICI = {
   "surum": 1,
   "kullanici": "tolga",
@@ -6,6 +6,6 @@ window.ZI_YONETICI = {
   "tekrar": 600000,
   "dogrulayici": "34KvhE+rUaG3pT++j1/J4K2BkWyIuL9uC7e/k10wIrg=",
   "anahtar": null,
-  "varsayilan": true,
+  "varsayilan": false,
   "guncelleme": "2026-09-30T22:00:00.000Z"
 };
