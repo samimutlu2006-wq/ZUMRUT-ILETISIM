@@ -4,7 +4,7 @@ window.ZI_YONETICI = {
   "kullanici": "tolga",
   "tuz": "x10YQ2s1ju8jgL4e45LQRA==",
   "tekrar": 600000,
-  "dogrulayici": "Tolga.Zumrut2026",
+  "dogrulayici": "34KvhE+rUaG3pT++j1/J4K2BkWyIuL9uC7e/k10wIrg=",
   "anahtar": null,
   "varsayilan": true,
   "guncelleme": "2026-09-30T22:00:00.000Z"
