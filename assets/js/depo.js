@@ -279,8 +279,8 @@
       b.disabled = false;
       b.title = 'Değişiklikleri siteye aktar';
     } else {
-      el.className = 'dp-durum' + (a ? '' : ' yerel');
-      el.textContent = a ? 'Tüm değişiklikler yayında' : 'GitHub bağlı değil';
+      el.className = 'dp-durum';
+      el.textContent = 'Tüm değişiklikler yayında';
       b.disabled = true;
       b.title = 'Yayınlanacak değişiklik yok';
     }
@@ -578,13 +578,12 @@
     }
     if (oturum.varsayilan) bant('sifre', 'dp-bant--koyu', 'kilit', '<b>Varsayılan şifreyi kullanıyorsunuz.</b> Siteyi yayına almadan önce yönetici şifrenizi değiştirin.', 'sifre', 'Şifreyi değiştir');
     if (oturum.anahtarCozulemedi) bant('anahtar', 'dp-bant--uyari', 'anahtar', '<b>Depodaki GitHub anahtarı çözülemedi.</b> Ayarlar’dan anahtarı yeniden girin.', 'github', 'Ayarlar');
-    if (!a) bant('github', 'dp-bant--uyari', 'bulut', '<b>Değişiklikler şu an yalnızca bu tarayıcıda saklanıyor.</b> Sitenin herkes için güncellenmesi için GitHub bağlantısını bir kez kurun ya da “Yayın paketini indir” ile dosyaları elle yükleyin.', 'github', 'Bağlantıyı kur');
-    else if (!oturum.token) bant('token', 'dp-bant--uyari', 'anahtar', '<b>Bu oturumda GitHub anahtarı yok.</b> Yayınlayabilmek için Ayarlar’dan erişim anahtarınızı girin.', 'github', 'Anahtarı gir');
+    if (a && !oturum.token) bant('token', 'dp-bant--uyari', 'anahtar', '<b>Bu oturumda GitHub anahtarı yok.</b> Yayınlayabilmek için Ayarlar’dan erişim anahtarınızı girin.', 'github', 'Anahtarı gir');
     var fiyatsiz = S.veri.urunler.filter(function (u) { return u.aktif && ZI.baslangicFiyati(u) == null && u.rozet !== 'Yakında'; }).length;
     if (fiyatsiz) bant('fiyat', 'dp-bant--uyari', 'etiket', '<b>' + fiyatsiz + ' üründe fiyat girilmemiş.</b> Bu ürünlerde sitede “Fiyat için mağazamızı arayın” yazar. Fiyatları tek ekrandan hızlıca girebilirsiniz.', 'fiyat', 'Fiyatları gir');
     var ornek = S.veri.urunler.filter(function (u) { return u.ornek; }).length;
     if (ornek) bant('ornek', '', 'bilgi', 'Katalogda <b>' + ornek + ' örnek ürün</b> var (ikinci el cihaz ve genel aksesuar örnekleri, “Örnek” etiketli). Kendi ürünlerinizi ekledikten sonra tek tıkla silebilirsiniz.', 'ornek', 'Örnekleri sil');
-    if (S.yayinlanmadi) bant('yayin', '', 'bulut', '<b>' + S.degisiklik + ' yayınlanmamış değişiklik</b> var. Site ziyaretçileri bu değişiklikleri yayınladıktan sonra görür.', 'yayinla', 'Şimdi yayınla');
+    if (S.yayinlanmadi) bant('yayin', '', 'bulut', '<b>' + S.degisiklik + ' yayınlanmamış değişiklik</b> var. “Yayınla”ya basınca bir paket iner; onu GitHub’a yükleyince site güncellenir.', 'yayinla', 'Şimdi yayınla');
     el.innerHTML = b.join('');
     el.onclick = function (e) {
       var kapat = e.target.closest('[data-bant-kapat]');
@@ -1408,7 +1407,6 @@
       alan('Tanıtım metni', '<textarea name="tanitim" rows="5">' + k(m.tanitim) + '</textarea>', { genis: true }) +
       alan('Instagram adresi', '<input type="text" name="instagram" value="' + k(m.instagram) + '" placeholder="https://www.instagram.com/kullaniciadi/ ya da @kullaniciadi">', { genis: true, ipucu: 'Uzun paylaşım bağlantısını yapıştırsanız da olur; kaydederken sadeleştirilir.' }) +
       '<div class="dp-alan dp-genis"><span class="dp-etiketi">Tamir ve teknik servis</span><label class="dp-satir-anahtar"><span><b>Ana sayfada tamir bölümünü göster</b><small>Menüde ve alt bilgide de “Tamir” bağlantısı çıkar</small></span><span class="dp-anahtar"><input type="checkbox" name="tamirAktif"' + (m.tamir && m.tamir.aktif ? ' checked' : '') + '><span></span></span></label></div>' +
-      alan('Tamir hizmetleri', '<input type="text" name="tamirHizmetler" value="' + k((m.tamir && m.tamir.hizmetler || []).join(', ')) + '">', { genis: true, ipucu: 'Virgülle ayırın. Örn. Ekran değişimi, Batarya değişimi, Şarj soketi' }) +
       alan('Tamir açıklaması', '<textarea name="tamirMetin" rows="3">' + k(m.tamir && m.tamir.metin || '') + '</textarea>', { genis: true }) +
       alan('Fiyat notu', '<textarea name="fiyatNotu" rows="2">' + k(m.fiyatNotu) + '</textarea>', { genis: true, ipucu: 'Ürün sayfalarında fiyatın altında ve alt bilgide görünür.' }) +
       alan('Enlem', '<input type="text" name="enlem" value="' + k(m.konum.enlem) + '" inputmode="decimal">') +
@@ -1444,7 +1442,7 @@
       Object.assign(m, { ad: v('ad'), telefon: v('telefon'), whatsapp: v('whatsapp').replace(/\D/g, ''), eposta: v('eposta'), adres: v('adres'), tanitim: v('tanitim'), instagram: ZI.instagramLink(v('instagram')), fiyatNotu: v('fiyatNotu') });
       m.tamir = {
         aktif: f.querySelector('[name="tamirAktif"]').checked,
-        hizmetler: v('tamirHizmetler').split(/[,\n;]/).map(function (x) { return x.trim(); }).filter(Boolean),
+        hizmetler: (m.tamir && m.tamir.hizmetler) || [],
         metin: v('tamirMetin')
       };
       f.querySelector('[name="instagram"]').value = m.instagram;
@@ -2146,33 +2144,10 @@
      AYARLAR
      ===================================================================== */
   function ayarlarSekmesi() {
-    var a = GH.ayar() || GH.tahmin() || { sahip: '', depo: '', dal: 'main' };
-    var bagli = !!GH.ayar(), token = !!oturum.token;
-    var durum = bagli && token ? ['iyi', 'Bağlı · yayına hazır'] : (bagli ? ['uyari', 'Ayarlar kayıtlı · bu oturumda anahtar yok'] : ['', 'Bağlı değil']);
-    var repoAnahtarli = !!(S.yonetici && S.yonetici.anahtar);
+    var token = !!oturum.token;
     $('#dp-ana').innerHTML =
-      '<div class="dp-sayfa-baslik"><div><h1>Ayarlar</h1><p>GitHub yayın bağlantısı, yönetici hesabı ve yedekleme.</p></div></div>' +
+      '<div class="dp-sayfa-baslik"><div><h1>Ayarlar</h1><p>Yönetici hesabı ve yedekleme.</p></div></div>' +
       '<div class="dp-iki-kolon">' +
-      '<section class="dp-kart dp-kart--cerceve" id="dp-github-kart"><div class="dp-kart__ust">' + ZI.ikon('bulut') + '<div><h2>GitHub bağlantısı</h2><p>Panelde yaptığınız değişikliklerin “Yayınla” ile siteye aktarılması için bir kez kurulur.</p></div></div>' +
-      '<p style="margin-bottom:16px"><span class="dp-baglanti-durum ' + durum[0] + '">' + durum[1] + '</span>' + (repoAnahtarli ? ' <span class="dp-rozet dp-rozet--koyu" style="margin-left:6px">Anahtar depoda şifreli</span>' : '') + '</p>' +
-      '<details style="margin-bottom:16px"><summary class="dp-link" style="cursor:pointer">Erişim anahtarı nasıl alınır?</summary><ol class="dp-adim-liste" style="margin-top:12px">' +
-      '<li><span>GitHub’da sağ üstteki profil resminize tıklayın → <b>Settings</b> → en altta <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</span></li>' +
-      '<li><span><b>Repository access</b> bölümünde <b>Only select repositories</b> seçip bu sitenin deposunu seçin.</span></li>' +
-      '<li><span><b>Permissions → Repository permissions → Contents</b> iznini <b>Read and write</b> yapın. Başka izin gerekmez.</span></li>' +
-      '<li><span>Anahtara bir süre verin (ör. 1 yıl), <b>Generate token</b>’a basın ve <b>github_pat_…</b> ile başlayan anahtarı aşağıya yapıştırın.</span></li></ol></details>' +
-      '<form id="dp-gh-form" class="dp-izgara" novalidate>' +
-      alan('GitHub kullanıcı adı', '<input type="text" name="sahip" value="' + k(a.sahip) + '" autocapitalize="none" spellcheck="false">', { zorunlu: true }) +
-      alan('Depo (repository) adı', '<input type="text" name="depo" value="' + k(a.depo) + '" autocapitalize="none" spellcheck="false">', { zorunlu: true }) +
-      alan('Dal (branch)', '<input type="text" name="dal" value="' + k(a.dal || 'main') + '" autocapitalize="none" spellcheck="false">') +
-      alan('Erişim anahtarı', '<input type="password" name="token" value="" placeholder="' + (token ? '•••••••• (bu oturumda kayıtlı)' : 'github_pat_…') + '" autocomplete="off" spellcheck="false">', { ipucu: token ? 'Değiştirmek istemiyorsanız boş bırakın.' : '' }) +
-      '<div class="dp-genis">' + anahtar('depoyaKaydet', true, 'Anahtarı şifreli olarak depoya kaydet (önerilir)', 'Böylece diğer cihazlardan yalnızca kullanıcı adı ve şifreyle giriş yapıp yayınlayabilirsiniz. Anahtar, yönetici şifrenizle şifrelenir.') + '</div>' +
-      '<div class="dp-genis" id="dp-gh-sifre-alanlari"></div>' +
-      '</form>' +
-      '<div class="dp-kart__alt"><span class="dp-not" id="dp-gh-sonuc"></span><button type="button" class="dp-btn dp-btn--cizgi" id="dp-gh-test">' + ZI.ikon('yenile') + 'Bağlantıyı test et</button><button type="button" class="dp-btn dp-btn--turuncu dp-btn--buyuk" id="dp-gh-kaydet">' + ZI.ikon('tik') + 'Kaydet ve bağlan</button></div>' +
-      (bagli ? '<p style="margin-top:14px;font-size:12px"><button type="button" class="dp-link" id="dp-gh-kaldir">Bu cihazdaki bağlantıyı kaldır</button></p>' : '') +
-      '</section>' +
-
-      '<div class="dp-kartlar">' +
       '<section class="dp-kart" id="dp-sifre-kart"><div class="dp-kart__ust">' + ZI.ikon('kilit') + '<div><h2>Yönetici hesabı</h2><p>Giriş kullanıcı adı ve şifresi. Şifre hiçbir yerde açık olarak saklanmaz.</p></div></div>' +
       '<form id="dp-sifre-form" class="dp-izgara" novalidate>' +
       alan('Kullanıcı adı', '<input type="text" name="kullanici" value="' + k(S.yonetici ? S.yonetici.kullanici : oturum.kullanici) + '" autocomplete="username" autocapitalize="none">', { genis: true }) +
@@ -2181,6 +2156,7 @@
       alan('Yeni şifre (tekrar)', '<input type="password" name="tekrar" autocomplete="new-password">') +
       (token ? '<div class="dp-genis">' + anahtar('anahtarSakla', true, 'GitHub anahtarını yeni şifreyle şifreleyip depoya kaydet', 'Diğer cihazlardan da yayınlayabilmek için') + '</div>' : '') +
       '</form><div class="dp-kart__alt"><button type="button" class="dp-btn dp-btn--turuncu dp-btn--buyuk" id="dp-sifre-kaydet">' + ZI.ikon('kilit') + 'Şifreyi değiştir</button></div></section>' +
+      '<div class="dp-kartlar">' +
 
       '<section class="dp-kart"><div class="dp-kart__ust">' + ZI.ikon('indir') + '<div><h2>Yedekleme ve dışa aktarma</h2><p>Tüm ürün, mağaza ve stok hareketi verilerinizin kopyası.</p></div></div>' +
       '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
@@ -2195,80 +2171,6 @@
       '<button type="button" class="dp-btn dp-btn--tehlike" id="dp-taslak-at">' + ZI.ikon('yenile') + 'Taslağı at, yayındaki sürüme dön</button>' +
       '<button type="button" class="dp-btn dp-btn--tehlike" id="dp-hepsini-sil">' + ZI.ikon('cop') + 'Tüm ürünleri sil</button></div></section>' +
       '</div></div>';
-
-    // GitHub formu: şifre alanları
-    var ghf = $('#dp-gh-form');
-    function sifreAlanlari() {
-      var kaydet = ghf.querySelector('[name="depoyaKaydet"]').checked;
-      var el = $('#dp-gh-sifre-alanlari');
-      if (!kaydet) { el.innerHTML = ''; return; }
-      el.innerHTML = oturum.varsayilan
-        ? '<div class="dp-bant dp-bant--uyari" style="margin-bottom:12px">' + ZI.ikon('kilit') + '<p><b>Varsayılan şifre herkesçe bilinir.</b> Anahtarı depoya kaydetmeden önce yeni bir şifre belirleyin.</p></div>' +
-          '<div class="dp-izgara">' + alan('Yeni şifre', '<input type="password" name="ghYeni" autocomplete="new-password">', { ipucu: 'En az 10 karakter; harf ve rakam.' }) + alan('Yeni şifre (tekrar)', '<input type="password" name="ghTekrar" autocomplete="new-password">') + '</div>'
-        : alan('Yönetici şifreniz', '<input type="password" name="ghSifre" autocomplete="current-password">', { ipucu: 'Anahtarı şifrelemek için gerekli.' });
-    }
-    ghf.addEventListener('change', function (e) { if (e.target.name === 'depoyaKaydet') sifreAlanlari(); });
-    sifreAlanlari();
-
-    function ghDegerler() {
-      var v = function (n) { var el = ghf.querySelector('[name="' + n + '"]'); return el ? (el.type === 'checkbox' ? el.checked : el.value.trim()) : ''; };
-      return { a: { sahip: v('sahip').replace(/^https?:\/\/github\.com\//i, '').split('/')[0], depo: v('depo').replace(/\.git$/i, ''), dal: v('dal') || 'main' }, token: v('token') || oturum.token || '', kaydet: v('depoyaKaydet'), sifre: v('ghSifre'), yeni: v('ghYeni'), tekrar: v('ghTekrar') };
-    }
-    $('#dp-gh-test').onclick = function () {
-      var x = ghDegerler(), sonuc = $('#dp-gh-sonuc');
-      if (!x.a.sahip || !x.a.depo || !x.token) { sonuc.textContent = 'Kullanıcı adı, depo adı ve anahtar gerekli.'; return; }
-      sonuc.textContent = 'Test ediliyor…';
-      GH.test(x.token, x.a).then(function (r) {
-        sonuc.innerHTML = '<b style="color:var(--d-yesil)">Bağlantı başarılı:</b> ' + k(r.depo) + ' · varsayılan dal: ' + k(r.varsayilanDal);
-        if (r.varsayilanDal && r.varsayilanDal !== x.a.dal) { ghf.querySelector('[name="dal"]').value = r.varsayilanDal; }
-      }, function (e) { sonuc.innerHTML = '<b style="color:var(--d-kirmizi)">Hata:</b> ' + k(e.message); });
-    };
-    $('#dp-gh-kaydet').onclick = function () {
-      var x = ghDegerler(), btn = this;
-      if (!x.a.sahip || !x.a.depo) { bildir('GitHub kullanıcı adı ve depo adı gerekli.', true); return; }
-      if (!x.token) { bildir('Erişim anahtarını girin.', true); return; }
-      var hazirlik;
-      if (x.kaydet) {
-        if (oturum.varsayilan) {
-          var guc = GV.sifreGucu(x.yeni);
-          if (!guc.yeterli) { bildir('Yeni şifre en az 10 karakter olmalı ve harf ile rakam içermeli.', true); return; }
-          if (x.yeni !== x.tekrar) { bildir('Yeni şifreler birbirini tutmuyor.', true); return; }
-          hazirlik = Promise.resolve({ kullanici: S.yonetici ? S.yonetici.kullanici : oturum.kullanici, sifre: x.yeni });
-        } else {
-          if (!x.sifre) { bildir('Anahtarı şifrelemek için yönetici şifrenizi girin.', true); return; }
-          hazirlik = GV.dogrula(S.yonetici, S.yonetici.kullanici, x.sifre).then(function (r) {
-            if (!r.tamam) throw new Error('Yönetici şifresi hatalı.');
-            return { kullanici: S.yonetici.kullanici, sifre: x.sifre };
-          });
-        }
-      } else hazirlik = Promise.resolve(null);
-      btn.disabled = true;
-      $('#dp-gh-sonuc').textContent = 'Bağlantı denetleniyor…';
-      hazirlik.then(function (hesap) {
-        return GH.test(x.token, x.a).then(function (r) {
-          if (r.varsayilanDal && r.varsayilanDal !== x.a.dal) x.a.dal = r.varsayilanDal;
-          GH.ayarKaydet(x.a);
-          oturum.token = x.token; oturum.anahtarCozulemedi = false; GV.oturumAc(oturum);
-          if (!hesap) return null;
-          return GV.kayitOlustur(hesap.kullanici, hesap.sifre, x.token).then(function (kayit) { return yoneticiYayinla(kayit, 'GitHub anahtarı şifreli olarak kaydedildi'); });
-        });
-      }).then(function () {
-        btn.disabled = false;
-        bildir('GitHub bağlantısı kuruldu. Artık “Yayınla” ile siteyi güncelleyebilirsiniz.');
-        sekmeAc('ayarlar'); ustDurum();
-      }).catch(function (e) {
-        btn.disabled = false;
-        $('#dp-gh-sonuc').innerHTML = '<b style="color:var(--d-kirmizi)">Hata:</b> ' + k(e.message);
-        bildir(e.message, true);
-      });
-    };
-    var kaldir = $('#dp-gh-kaldir');
-    if (kaldir) kaldir.onclick = function () {
-      onayla('Bağlantı kaldırılsın mı?', 'Bu cihazdaki GitHub ayarları ve oturumdaki anahtar silinir. Depodaki dosyalar etkilenmez.', 'Kaldır', true).then(function (e) {
-        if (!e) return;
-        ZI.yerelSil('zi-github'); oturum.token = null; GV.oturumAc(oturum); sekmeAc('ayarlar'); ustDurum();
-      });
-    };
 
     // Şifre formu
     var sf = $('#dp-sifre-form');
@@ -2343,7 +2245,7 @@
     yerelUygula();
     return modal({
       ikon: 'kilit', baslik: 'Şifre bu cihazda değişti',
-      metin: 'GitHub bağlantısı kurulu olmadığı için yeni kayıt yalnızca bu tarayıcıda geçerli. Diğer cihazlarda da geçerli olması için indirilen <b>yonetici.js</b> dosyasını deponuzdaki <b>data</b> klasörüne yükleyin (eski dosyanın üzerine).',
+      metin: 'Yeni şifre şimdilik yalnızca bu tarayıcıda geçerli. Diğer cihazlarda da geçerli olması için indirilen <b>yonetici.js</b> dosyasını GitHub’da <b>data</b> klasörüne yükleyin (eski dosyanın üzerine).',
       butonlar: [{ metin: 'Kapat', deger: 'iptal', sinif: 'dp-btn--cizgi' }, { metin: 'yonetici.js dosyasını indir', deger: 'indir', sinif: 'dp-btn--turuncu', varsayilan: true, ikon: 'indir' }]
     }).then(function (v) { if (v === 'indir') indir('yonetici.js', metin, 'text/javascript;charset=utf-8'); });
   }
@@ -2389,15 +2291,7 @@
   function yayinla() {
     if (!S.yayinlanmadi) { bildir('Yayınlanacak değişiklik yok.'); return; }
     var a = GH.ayar(), token = oturum.token;
-    if (!a || !token) {
-      return modal({
-        ikon: 'bulut', baslik: 'Nasıl yayınlamak istersiniz?',
-        metin: 'Siteyi güncellemek için değişikliklerin GitHub’daki depoya aktarılması gerekir.',
-        icerik: '<ol class="dp-adim-liste" style="margin-top:14px"><li><span><b>Otomatik (önerilir):</b> GitHub bağlantısını bir kez kurun; sonra tek tıkla yayınlarsınız.</span></li>' +
-          '<li><span><b>Elle:</b> Yayın paketini (ZIP) indirin, açın ve içindeki <b>data</b> ile <b>assets</b> klasörlerini GitHub’da deponuza sürükleyip bırakın (<b>Add file → Upload files → Commit changes</b>).</span></li></ol>',
-        butonlar: [{ metin: 'Vazgeç', deger: 'iptal', sinif: 'dp-btn--cizgi' }, { metin: 'Yayın paketini indir', deger: 'paket', sinif: 'dp-btn--siyah', ikon: 'kutu' }, { metin: 'GitHub’ı bağla', deger: 'github', sinif: 'dp-btn--turuncu', varsayilan: true }]
-      }).then(function (v) { if (v === 'github') sekmeAc('ayarlar'); if (v === 'paket') paketIndir(); });
-    }
+    if (!a || !token) { paketIndir(); return; }
     bildir('Yayın hazırlanıyor…');
     GH.dosyaOku(token, a, 'data/veri.js').catch(function (e) { if (e.durum === 404) return { sha: null }; throw e; }).then(function (uzak) {
       if (S.tabanSha && uzak.sha && uzak.sha !== S.tabanSha) {

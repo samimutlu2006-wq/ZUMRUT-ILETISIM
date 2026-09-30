@@ -45,33 +45,26 @@
   /* ------------------------------------------------------------------ */
   /* Tamir ve teknik servis                                               */
   /* ------------------------------------------------------------------ */
-  function hizmetIkonu(ad) {
-    var n = ZI.normalMetin(ad);
-    if (/ekran|dokunmatik|cam kir/.test(n)) return 'ekran';
-    if (/batarya|pil/.test(n)) return 'pil';
-    if (/sarj|soket|kablo/.test(n)) return 'sarj';
-    if (/kamera|lens/.test(n)) return 'kamera';
-    if (/yazilim|format|guncelle|kurulum|veri/.test(n)) return 'ayar';
-    if (/arka|kasa|kapak|cam/.test(n)) return 'parca';
-    return 'tamir';
-  }
   function tamirKur(veri) {
     var m = veri.magaza, t = m.tamir, el = $('#tamir');
     if (!el) return;
-    if (!t || !t.aktif) { el.hidden = true; return; }
+    var tamir = !!(t && t.aktif), insta = m.instagram ? ZI.instagramLink(m.instagram) : '', ad = ZI.instagramAd(m);
+    if (!tamir && !insta) { el.hidden = true; return; }
     el.hidden = false;
-    el.innerHTML = '<div class="zi-kap"><div class="zi-tamir__kart zi-belir">' +
-      '<div class="zi-tamir__metin">' +
-      '<p class="zi-tamir__etiket">' + ZI.ikon('tamir') + ' Teknik servis</p>' +
-      '<h2 id="tamir-baslik">Tamir de yapıyoruz.</h2>' +
-      (t.metin ? '<p class="zi-tamir__aciklama">' + k(t.metin) + '</p>' : '') +
-      '<div class="zi-btn-grup">' +
-      '<a class="zi-btn zi-btn--dolu" href="' + k(ZI.waLink(ZI.tamirWa, m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' WhatsApp’tan Sorun</a>' +
-      '<a class="zi-btn zi-btn--cizgi" href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' Hemen Arayın</a>' +
-      '</div></div>' +
-      (t.hizmetler.length ? '<ul class="zi-tamir__hizmetler" aria-label="Tamir hizmetleri">' + t.hizmetler.map(function (h) {
-        return '<li><span class="zi-ikon-daire">' + ZI.ikon(hizmetIkonu(h)) + '</span>' + k(h) + '</li>';
-      }).join('') + '</ul>' : '') +
+    if (!tamir) { el.removeAttribute('aria-labelledby'); el.setAttribute('aria-label', 'Instagram'); }
+    el.innerHTML = '<div class="zi-kap"><div class="zi-tamir__izgara' + (tamir && insta ? '' : ' tek') + '">' +
+      (tamir ? '<div class="zi-tamir__kart zi-belir">' +
+        '<p class="zi-tamir__etiket">' + ZI.ikon('tamir') + ' Teknik servis</p>' +
+        '<h2 id="tamir-baslik">Tamir de yapıyoruz.</h2>' +
+        (t.metin ? '<p class="zi-tamir__aciklama">' + k(t.metin) + '</p>' : '') +
+        '<div class="zi-btn-grup">' +
+        '<a class="zi-btn zi-btn--dolu" href="' + k(ZI.waLink(ZI.tamirWa, m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' WhatsApp’tan Sorun</a>' +
+        '<a class="zi-btn zi-btn--cizgi" href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' Hemen Arayın</a>' +
+        '</div></div>' : '') +
+      (insta ? '<a class="zi-insta zi-belir" style="--i:1" href="' + k(insta) + '" target="_blank" rel="noopener" aria-label="Instagram’da ' + k(ad) + ' hesabını açın">' +
+        '<span class="zi-insta__ikon">' + ZI.ikon('instagram') + '</span>' +
+        '<span class="zi-insta__metin"><small>Instagram</small><b>' + k(ad) + '</b><span>Mağazamızı Instagram’da da takip edin.</span></span>' +
+        '<span class="zi-insta__btn">Takip Et ' + ZI.ikon('dis') + '</span></a>' : '') +
       '</div></div>';
   }
 
