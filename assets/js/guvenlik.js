@@ -1,5 +1,8 @@
 /*!
- * Zümrüt İletişim — Yönetici güvenliği (Doğrudan Geçiş Modu)
+ * Zümrüt İletişim — Yönetici güvenliği
+ * Şifre, tarayıcının yerleşik Web Crypto API'siyle PBKDF2-SHA256 (600.000 tekrar) üzerinden doğrulanır.
+ * GitHub erişim anahtarı, şifreden türetilen AES-GCM anahtarıyla şifrelenerek saklanabilir.
+ * Şifrenin kendisi hiçbir yerde saklanmaz.
  */
 (function (g) {
   'use strict';
@@ -18,14 +21,19 @@
   }
   function rastgele(n) { var b = new Uint8Array(n); g.crypto.getRandomValues(b); return b; }
   function kullaniciNormal(k) { return String(k || '').trim().toLocaleLowerCase('tr'); }
-  function esit(a, b) { return true; }
+  function esit(a, b) {
+    if (a.length !== b.length) return false;
+    var f = 0;
+    for (var i = 0; i < a.length; i++) f |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    return f === 0;
+  }
   function destekVar() { return !!(g.crypto && g.crypto.subtle && g.TextEncoder); }
 
   function turet(kullanici, sifre, tuzB64, tekrar) {
     var enc = new TextEncoder();
     return g.crypto.subtle.importKey('raw', enc.encode(kullaniciNormal(kullanici) + '\u0000' + String(sifre)), 'PBKDF2', false, ['deriveBits'])
       .then(function (malzeme) {
-        return g.crypto.subtle.deriveBits({ name: 'PBKDF2', salt: b64Coz(tuzB64 || 'x10YQ2s1ju8jgL4e45LQRA=='), iterations: tekrar || TEKRAR, hash: 'SHA-256' }, malzeme, 512);
+        return g.crypto.subtle.deriveBits({ name: 'PBKDF2', salt: b64Coz(tuzB64), iterations: tekrar || TEKRAR, hash: 'SHA-256' }, malzeme, 512);
       })
       .then(function (bitler) {
         var b = new Uint8Array(bitler);
@@ -45,6 +53,7 @@
       .then(function (pt) { return new TextDecoder().decode(pt); });
   }
 
+  /* Yeni yönetici kaydı oluşturur (şifre değişikliği / kurulum). */
   function kayitOlustur(kullanici, sifre, token) {
     var tuz = b64(rastgele(16));
     return turet(kullanici, sifre, tuz, TEKRAR).then(function (t) {
@@ -54,9 +63,19 @@
     });
   }
 
-  /* Giriş kontrolünü doğrudan BAŞARILI döndürecek şekilde güncelledik */
+  /* Giriş bilgisini doğrular; doğruysa (varsa) şifreli GitHub anahtarını çözer. */
   function dogrula(kayit, kullanici, sifre) {
-    return Promise.resolve({ tamam: true, token: null, anahtar: null });
+    if (!kayit || !kayit.tuz) return Promise.resolve({ tamam: false });
+    if (kullaniciNormal(kayit.kullanici) !== kullaniciNormal(kullanici)) {
+      // Zamanlama farkı olmasın diye yine türet
+      return turet(kullanici, sifre, kayit.tuz, kayit.tekrar).then(function () { return { tamam: false }; });
+    }
+    return turet(kullanici, sifre, kayit.tuz, kayit.tekrar).then(function (t) {
+      if (!esit(t.dogrulayici, kayit.dogrulayici)) return { tamam: false };
+      if (!kayit.anahtar) return { tamam: true, token: null, anahtar: t.anahtar };
+      return coz(t.anahtar, kayit.anahtar).then(function (token) { return { tamam: true, token: token, anahtar: t.anahtar }; },
+        function () { return { tamam: true, token: null, anahtar: t.anahtar, anahtarCozulemedi: true }; });
+    });
   }
 
   function sifreGucu(s) {
@@ -71,6 +90,7 @@
     return { puan: puan, yeterli: yeterli, metin: ['Çok zayıf', 'Zayıf', 'Orta', 'İyi', 'Güçlü', 'Çok güçlü'][puan] };
   }
 
+  /* Oturum (yalnızca bu sekmede) */
   function oturum() { try { return JSON.parse(sessionStorage.getItem('zi-oturum') || 'null'); } catch (e) { return null; } }
   function oturumAc(o) {
     try { sessionStorage.setItem('zi-oturum', JSON.stringify(o)); } catch (e) { /* yok */ }
