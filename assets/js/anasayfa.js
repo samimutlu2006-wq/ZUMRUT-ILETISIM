@@ -12,6 +12,7 @@
     vitrinKur(veri);
     oneCikanlarKur(veri);
     aksesuarKur(veri);
+    tamirKur(veri);
     hakkimizdaKur(veri);
     yapisalVeri(veri);
   });
@@ -37,7 +38,41 @@
       var yeni = liste.some(function (u) { return u.rozet === 'Yeni' || u.rozet === 'Yakında'; });
       return '<a class="zi-altnav__oge" href="urunler.html?k=' + o.k + '"><span class="zi-altnav__gorsel"><img src="' + ZI.cizim.url(o.c) + '" alt="" width="72" height="54"></span>' +
         '<span class="zi-altnav__ad">' + k(o.ad) + '</span>' + (yeni ? '<span class="zi-yeni">Yeni</span>' : '') + '</a>';
-    }).join('');
+    }).join('') +
+      (veri.magaza.tamir && veri.magaza.tamir.aktif ? '<a class="zi-altnav__oge" href="#tamir"><span class="zi-altnav__gorsel zi-altnav__gorsel--ikon">' + ZI.ikon('tamir') + '</span><span class="zi-altnav__ad">Tamir</span></a>' : '');
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Tamir ve teknik servis                                               */
+  /* ------------------------------------------------------------------ */
+  function hizmetIkonu(ad) {
+    var n = ZI.normalMetin(ad);
+    if (/ekran|dokunmatik|cam kir/.test(n)) return 'ekran';
+    if (/batarya|pil/.test(n)) return 'pil';
+    if (/sarj|soket|kablo/.test(n)) return 'sarj';
+    if (/kamera|lens/.test(n)) return 'kamera';
+    if (/yazilim|format|guncelle|kurulum|veri/.test(n)) return 'ayar';
+    if (/arka|kasa|kapak|cam/.test(n)) return 'parca';
+    return 'tamir';
+  }
+  function tamirKur(veri) {
+    var m = veri.magaza, t = m.tamir, el = $('#tamir');
+    if (!el) return;
+    if (!t || !t.aktif) { el.hidden = true; return; }
+    el.hidden = false;
+    el.innerHTML = '<div class="zi-kap"><div class="zi-tamir__kart zi-belir">' +
+      '<div class="zi-tamir__metin">' +
+      '<p class="zi-tamir__etiket">' + ZI.ikon('tamir') + ' Teknik servis</p>' +
+      '<h2 id="tamir-baslik">Tamir de yapıyoruz.</h2>' +
+      (t.metin ? '<p class="zi-tamir__aciklama">' + k(t.metin) + '</p>' : '') +
+      '<div class="zi-btn-grup">' +
+      '<a class="zi-btn zi-btn--dolu" href="' + k(ZI.waLink(ZI.tamirWa, m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' WhatsApp’tan Sorun</a>' +
+      '<a class="zi-btn zi-btn--cizgi" href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' Hemen Arayın</a>' +
+      '</div></div>' +
+      (t.hizmetler.length ? '<ul class="zi-tamir__hizmetler" aria-label="Tamir hizmetleri">' + t.hizmetler.map(function (h) {
+        return '<li><span class="zi-ikon-daire">' + ZI.ikon(hizmetIkonu(h)) + '</span>' + k(h) + '</li>';
+      }).join('') + '</ul>' : '') +
+      '</div></div>';
   }
 
   /* ------------------------------------------------------------------ */
@@ -427,6 +462,7 @@
       '<a href="' + ZI.telLink(m) + '"><span class="zi-ikon-daire">' + ZI.ikon('telefon') + '</span><span><small>Telefon</small>' + k(m.telefon) + '</span></a>',
       '<a href="' + k(ZI.waLink('Merhaba, bilgi almak istiyorum.', m)) + '" target="_blank" rel="noopener"><span class="zi-ikon-daire">' + ZI.ikon('mesaj') + '</span><span><small>WhatsApp</small>Mesaj gönderin</span></a>'
     ];
+    if (m.instagram) liste.push('<a href="' + k(ZI.instagramLink(m.instagram)) + '" target="_blank" rel="noopener"><span class="zi-ikon-daire">' + ZI.ikon('instagram') + '</span><span><small>Instagram</small>' + k(ZI.instagramAd(m)) + '</span></a>');
     if (m.eposta) liste.push('<a href="mailto:' + k(m.eposta) + '"><span class="zi-ikon-daire">' + ZI.ikon('eposta') + '</span><span><small>E-posta</small>' + k(m.eposta) + '</span></a>');
     liste.push('<a href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener"><span class="zi-ikon-daire">' + ZI.ikon('konum') + '</span><span><small>Adres</small>' + k(m.adres) + '</span></a>');
     $('#iletisim-liste').innerHTML = liste.join('');
@@ -491,6 +527,8 @@
     try { ld.logo = new URL('assets/img/logo.svg', location.href).href; ld.image = new URL('assets/img/og-kapak.jpg', location.href).href; } catch (e) { /* eski tarayıcı */ }
     if (m.konum && m.konum.enlem) ld.geo = { '@type': 'GeoCoordinates', latitude: m.konum.enlem, longitude: m.konum.boylam };
     if (m.eposta) ld.email = m.eposta;
+    if (m.instagram) ld.sameAs = [ZI.instagramLink(m.instagram)];
+    ld.description = 'Sıfır ve ikinci el telefon, tablet, laptop ve aksesuar' + (m.tamir && m.tamir.aktif ? '; telefon tamiri ve teknik servis' : '') + '.';
     if (m.adres && m.adres.indexOf('Kadir Has') === -1) ld.address = { '@type': 'PostalAddress', streetAddress: m.adres, addressCountry: 'TR' };
     var s = d.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld);
     d.head.appendChild(s);

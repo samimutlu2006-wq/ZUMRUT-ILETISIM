@@ -94,7 +94,11 @@
     yenile: '<path d="M20 11a8 8 0 0 0-14.3-4.3L4 8.5"/><path d="M4 4v4.5h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.3l1.7-1.8"/><path d="M20 20v-4.5h-4.5"/>',
     yukari: '<path d="M12 19V5M6 11l6-6 6 6"/>',
     asagiOk: '<path d="M12 5v14M6 13l6 6 6-6"/>',
-    uyari: '<path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.2h.01"/>'
+    uyari: '<path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5M12 17.2h.01"/>',
+    sarj: '<path d="M13.2 2.8 5.8 13.2h5.6l-1 8 7.8-10.9h-5.8z"/>',
+    instagram: '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.9"/><path d="M17.2 6.8h.01" stroke-width="2.6"/>',
+    tamir: '<path d="M20.2 6.4 17 9.6l-2.6-2.6 3.2-3.2a5 5 0 0 0-6.4 6.4L4.4 17a1.9 1.9 0 0 0 2.6 2.6l6.8-6.8a5 5 0 0 0 6.4-6.4z"/>',
+    defter: '<path d="M6 3.5h11.5a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1.5 1.5 0 0 1-1.5-1.5v-14A1.5 1.5 0 0 1 6 3.5z"/><path d="M8.5 8h6.5M8.5 11.5h6.5M8.5 15h4"/>'
   };
 
   /* Mağaza logosu (vektör). Renk, kapsayıcının "color" değerinden gelir (currentColor). */
@@ -163,7 +167,14 @@
       { gun: 'Pazar', kapali: true }
     ],
     fiyatNotu: 'Fiyatlar bilgilendirme amaçlıdır. Sitemiz üzerinden satış yapılmamaktadır; güncel fiyat ve stok bilgisi için mağazamızla iletişime geçin.',
-    instagram: ''
+    instagram: '',
+    tamir: null
+  };
+  /* Ana sayfadaki "Tamir ve teknik servis" bölümü (panelden değiştirilebilir) */
+  var VARSAYILAN_TAMIR = {
+    aktif: true,
+    metin: 'Ekranı kırılan, şarjı çabuk biten ya da çalışmayan telefonunuzu mağazamıza getirin. Arızaya bakalım, ne yapılacağını ve ücretini size söyleyelim.',
+    hizmetler: ['Ekran değişimi', 'Batarya değişimi', 'Şarj soketi', 'Kamera', 'Arka cam', 'Yazılım']
   };
   ZI.GUNLER = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
 
@@ -174,6 +185,9 @@
     v.magaza = Object.assign({}, VARSAYILAN_MAGAZA, v.magaza || {});
     if (!Array.isArray(v.magaza.saatler) || v.magaza.saatler.length !== 7) v.magaza.saatler = VARSAYILAN_MAGAZA.saatler;
     v.magaza.konum = Object.assign({}, VARSAYILAN_MAGAZA.konum, v.magaza.konum || {});
+    v.magaza.tamir = Object.assign({}, VARSAYILAN_TAMIR, v.magaza.tamir || {});
+    v.magaza.tamir.hizmetler = (Array.isArray(v.magaza.tamir.hizmetler) ? v.magaza.tamir.hizmetler : VARSAYILAN_TAMIR.hizmetler).map(function (x) { return String(x || '').trim(); }).filter(Boolean);
+    v.magaza.instagram = ZI.instagramLink(v.magaza.instagram);
     v.vitrin = Array.isArray(v.vitrin) ? v.vitrin : [];
     v.urunler = (Array.isArray(v.urunler) ? v.urunler : []).filter(function (u) { return u && u.id; }).map(function (u) {
       u.renkler = Array.isArray(u.renkler) ? u.renkler : [];
@@ -412,6 +426,18 @@
     if (no.indexOf('0') === 0) no = '90' + no.slice(1);
     return 'https://wa.me/' + no + (metin ? '?text=' + encodeURIComponent(metin) : '');
   };
+  /* Instagram: "@kullanici", "kullanici" ya da uzun paylaşım bağlantısı → temiz profil adresi */
+  ZI.instagramLink = function (x) {
+    var s = String(x || '').trim();
+    if (!s) return '';
+    var m = s.match(/instagram\.com\/([A-Za-z0-9._]+)/i) || s.match(/^@?([A-Za-z0-9._]{1,30})$/);
+    return m ? 'https://www.instagram.com/' + m[1] + '/' : s;
+  };
+  ZI.instagramAd = function (m) {
+    var l = ZI.instagramLink((m || ZI.veri.magaza).instagram), a = l.match(/instagram\.com\/([^/]+)/);
+    return a ? '@' + a[1] : '';
+  };
+  ZI.tamirWa = 'Merhaba, cihazımın tamiri için bilgi almak istiyorum.';
   ZI.yolTarifi = function (m) {
     m = m || ZI.veri.magaza;
     var c = m.konum || {};
@@ -465,11 +491,11 @@
      Üst menü, mega menü, mobil menü, arama
      ===================================================================== */
   var MENU = [
-    { id: 'iphone', ad: 'iPhone & Apple', link: 'urunler.html?k=iphone' },
-    { id: 'android', ad: 'Android (Samsung & Diğer)', link: 'urunler.html?k=android' },
-    { id: 'tablet', ad: 'Tabletler & Laptoplar', link: 'urunler.html?k=tablet-laptop' },
+    { id: 'iphone', ad: 'iPhone & Apple', kisa: 'iPhone', link: 'urunler.html?k=iphone' },
+    { id: 'android', ad: 'Android (Samsung & Diğer)', kisa: 'Android', link: 'urunler.html?k=android' },
+    { id: 'tablet', ad: 'Tabletler & Laptoplar', kisa: 'Tablet & Laptop', link: 'urunler.html?k=tablet-laptop' },
     { id: 'aksesuar', ad: 'Aksesuarlar', link: 'urunler.html?k=aksesuar' },
-    { id: 'ikinciel', ad: 'İkinci El & Takas', link: 'urunler.html?k=ikinci-el' },
+    { id: 'ikinciel', ad: 'İkinci El & Takas', kisa: 'İkinci El', link: 'urunler.html?k=ikinci-el' },
     { id: 'iletisim', ad: 'İletişim', link: 'index.html#iletisim' }
   ];
   ZI.MENU = MENU;
@@ -483,7 +509,7 @@
       '<div class="zi-nav__ic">' +
       '<a class="zi-marka" href="index.html" aria-label="Zümrüt İletişim ana sayfa">' + ZI.logo('tam', 'zi-logo') + '</a>' +
       '<ul class="zi-menu" role="list">' + MENU.map(function (m) {
-        return '<li class="zi-menu__oge" data-menu="' + m.id + '"><a class="zi-menu__dugme" href="' + m.link + '" aria-haspopup="true" aria-expanded="false" aria-controls="zi-mega">' + k(m.ad) + '</a></li>';
+        return '<li class="zi-menu__oge" data-menu="' + m.id + '"><a class="zi-menu__dugme' + (m.kisa ? ' zi-menu__dugme--kisa' : '') + '" href="' + m.link + '" aria-haspopup="true" aria-expanded="false" aria-controls="zi-mega"' + (m.kisa ? ' aria-label="' + k(m.ad) + '"' : '') + '><span class="zi-menu__uzun">' + k(m.ad) + '</span>' + (m.kisa ? '<span class="zi-menu__kisa" aria-hidden="true">' + k(m.kisa) + '</span>' : '') + '</a></li>';
       }).join('') + '</ul>' +
       '<div class="zi-nav__sag">' +
       '<button class="zi-nav__ikon" type="button" data-arama aria-label="Ürün ara" aria-expanded="false">' + ZI.ikon('ara') + '</button>' +
@@ -602,16 +628,22 @@
     var durum = ZI.magazaDurumu(m);
     html += '<section class="zi-mega__bolum" data-menu="iletisim" aria-label="İletişim"><div class="zi-mega__izgara" style="--kolon:4">' +
       '<div class="zi-mega__kademe"' + kademe(0) + '><p class="zi-mega__kolon-baslik">Mağaza</p><a class="zi-mega__buyuk-link" href="index.html#iletisim">' + k(m.ad) + '</a>' +
-      '<p class="zi-mega__link" style="font-weight:400">' + k(m.adres) + '</p><span class="zi-acik-durum' + (durum.acik ? '' : ' kapali') + '">' + k(durum.metin) + (durum.detay ? ' · ' + k(durum.detay) : '') + '</span></div>' +
+      '<p class="zi-mega__link" style="font-weight:400">' + k(m.adres) + '</p><span class="zi-acik-durum' + (durum.acik ? '' : ' kapali') + '">' + k(durum.metin) + (durum.detay ? ' · ' + k(durum.detay) : '') + '</span>' +
+      '<a class="zi-mega__link" href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener" style="margin-top:8px">' + ZI.ikon('konum') + ' Yol tarifi al</a></div>' +
       '<div class="zi-mega__kademe"' + kademe(1) + '><p class="zi-mega__kolon-baslik">Bize ulaşın</p>' +
       '<a class="zi-mega__link" href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' ' + k(m.telefon) + '</a>' +
       '<a class="zi-mega__link" href="' + k(ZI.waLink('Merhaba, bilgi almak istiyorum.', m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' WhatsApp ile yazın</a>' +
+      (m.instagram ? '<a class="zi-mega__link" href="' + k(ZI.instagramLink(m.instagram)) + '" target="_blank" rel="noopener">' + ZI.ikon('instagram') + ' ' + k(ZI.instagramAd(m)) + '</a>' : '') +
       (m.eposta ? '<a class="zi-mega__link" href="mailto:' + k(m.eposta) + '">' + ZI.ikon('eposta') + ' ' + k(m.eposta) + '</a>' : '') + '</div>' +
       '<div class="zi-mega__kademe"' + kademe(2) + '><p class="zi-mega__kolon-baslik">Çalışma saatleri</p>' +
       ZI.saatOzeti(m).map(function (s) { return '<p class="zi-mega__link" style="justify-content:space-between;font-weight:400"><span>' + k(s.etiket) + '</span><b>' + k(s.deger) + '</b></p>'; }).join('') + '</div>' +
-      '<div class="zi-mega__kademe"' + kademe(3) + '><p class="zi-mega__kolon-baslik">Yol tarifi</p>' +
-      '<a class="zi-mega__buyuk-link" href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">Haritada aç</a>' +
-      '<a class="zi-mega__buyuk-link" href="index.html#iletisim">Biz kimiz?</a></div>' +
+      (m.tamir && m.tamir.aktif
+        ? '<div class="zi-mega__kademe"' + kademe(3) + '><p class="zi-mega__kolon-baslik">Tamir ve teknik servis</p>' +
+          '<a class="zi-mega__buyuk-link" href="index.html#tamir">Telefon tamiri</a>' +
+          '<a class="zi-mega__link" href="' + k(ZI.waLink(ZI.tamirWa, m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' Arızayı WhatsApp’tan sorun</a></div>'
+        : '<div class="zi-mega__kademe"' + kademe(3) + '><p class="zi-mega__kolon-baslik">Yol tarifi</p>' +
+          '<a class="zi-mega__buyuk-link" href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">Haritada aç</a>' +
+          '<a class="zi-mega__buyuk-link" href="index.html#iletisim">Biz kimiz?</a></div>') +
       '</div></section>';
 
     /* Arama */
@@ -654,9 +686,11 @@
     html += blok('aksesuar', 'Aksesuarlar', tumu('urunler.html?k=kilif', 'Kılıflar') + tumu('urunler.html?k=sarj', 'Şarj Aletleri & Adaptörler') + tumu('urunler.html?k=cam', 'Kırılmaz Camlar') + tumu('urunler.html?k=kulaklik', 'Kulaklık & Aksesuarlar'));
     html += blok('ikinciel', 'İkinci El & Takas', liste(hepsi.filter(ZI.kategoriler['ikinci-el'].f).slice(0, 5)) + tumu('urunler.html?k=ikinci-el', 'Tüm ikinci el cihazlar') +
       '<li><a href="' + k(ZI.waLink('Merhaba, cihazım için takas teklifi almak istiyorum.', m)) + '" target="_blank" rel="noopener">' + ZI.ikon('takas') + ' Takas teklifi alın</a></li>');
-    html += blok('iletisim', 'İletişim', '<li><a href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' ' + k(m.telefon) + '</a></li>' +
+    html += blok('iletisim', m.tamir && m.tamir.aktif ? 'Tamir & İletişim' : 'İletişim', '<li><a href="' + ZI.telLink(m) + '">' + ZI.ikon('telefon') + ' ' + k(m.telefon) + '</a></li>' +
       '<li><a href="' + k(ZI.waLink('Merhaba, bilgi almak istiyorum.', m)) + '" target="_blank" rel="noopener">' + ZI.ikon('mesaj') + ' WhatsApp</a></li>' +
-      '<li><a href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">' + ZI.ikon('konum') + ' Yol tarifi</a></li>' + tumu('index.html#iletisim', 'Biz kimiz?'));
+      (m.instagram ? '<li><a href="' + k(ZI.instagramLink(m.instagram)) + '" target="_blank" rel="noopener">' + ZI.ikon('instagram') + ' Instagram · ' + k(ZI.instagramAd(m)) + '</a></li>' : '') +
+      '<li><a href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">' + ZI.ikon('konum') + ' Yol tarifi</a></li>' +
+      (m.tamir && m.tamir.aktif ? '<li><a href="index.html#tamir">' + ZI.ikon('tamir') + ' Tamir ve teknik servis</a></li>' : '') + tumu('index.html#iletisim', 'Biz kimiz?'));
     html += '</ul><a class="zi-mobil__yonetici" href="giris.html">' + ZI.ikon('kilit') + ' Yönetici Girişi</a>';
     return html;
   };
@@ -796,6 +830,9 @@
     if (ic) { ic.innerHTML = ZI.megaIcerik(veri); ZI._hizli = null; }
     var mobil = $('#zi-mobil');
     if (mobil) mobil.innerHTML = ZI.mobilIcerik(veri);
+    /* Tamir bölümü açıksa üst menüde "Tamir & İletişim" yazar */
+    var t = veri.magaza && veri.magaza.tamir && veri.magaza.tamir.aktif;
+    $$('[data-menu="iletisim"] > .zi-menu__dugme .zi-menu__uzun').forEach(function (a) { a.textContent = t ? 'Tamir & İletişim' : 'İletişim'; });
   };
 
   /* =====================================================================
@@ -815,7 +852,8 @@
       '<div class="zi-alt__kolon"><h3>İkinci El & Takas</h3><ul><li><a href="urunler.html?k=ikinci-el">İkinci el cihazlar</a></li><li><a href="' + k(ZI.waLink('Merhaba, cihazım için takas teklifi almak istiyorum.', m)) + '" target="_blank" rel="noopener">Takas teklifi alın</a></li><li><a href="urunler.html?k=sifir">Sıfır / Kapalı Kutu</a></li></ul></div>' +
       '<div class="zi-alt__kolon"><h3>Mağaza</h3><ul><li><a href="index.html#iletisim">Biz kimiz?</a></li><li><a href="' + ZI.telLink(m) + '">' + k(m.telefon) + '</a></li>' +
       (m.eposta ? '<li><a href="mailto:' + k(m.eposta) + '">' + k(m.eposta) + '</a></li>' : '') +
-      (m.instagram ? '<li><a href="' + k(m.instagram) + '" target="_blank" rel="noopener">Instagram</a></li>' : '') +
+      (m.instagram ? '<li><a href="' + k(ZI.instagramLink(m.instagram)) + '" target="_blank" rel="noopener">Instagram · ' + k(ZI.instagramAd(m)) + '</a></li>' : '') +
+      (m.tamir && m.tamir.aktif ? '<li><a href="index.html#tamir">Tamir ve teknik servis</a></li>' : '') +
       '<li><a href="' + k(ZI.yolTarifi(m)) + '" target="_blank" rel="noopener">Yol tarifi</a></li><li><a href="giris.html">Yönetici Girişi</a></li></ul></div>' +
       '</div>' +
       '<div class="zi-alt__son"><span class="zi-alt__marka">' + ZI.logo('tam', 'zi-logo zi-logo--alt') + '<span>Copyright © ' + yil + ' ' + k(m.ad) + '. Tüm hakları saklıdır.</span></span><nav aria-label="Alt bağlantılar"><span>' + k(m.adres) + '</span></nav></div>' +

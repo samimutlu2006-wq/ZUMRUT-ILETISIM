@@ -1,10 +1,10 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-09-30T00:04:37.000Z",
+  "guncelleme": "2026-09-30T18:06:46.000Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
-    "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz.",
+    "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz. Arızalanan telefonlarınızın tamirini de mağazamızda yapıyoruz.",
     "telefon": "0542 303 24 83",
     "whatsapp": "905423032483",
     "eposta": "",
@@ -51,8 +51,20 @@ window.ZI_VERI = {
       }
     ],
     "fiyatNotu": "Fiyatlar bilgilendirme amaçlıdır. Sitemiz üzerinden satış yapılmamaktadır; güncel fiyat ve stok bilgisi için mağazamızla iletişime geçin.",
-    "instagram": "",
-    "gorsel": "assets/img/magaza.jpg"
+    "instagram": "https://www.instagram.com/zumrutiletisim38/",
+    "gorsel": "assets/img/magaza.jpg",
+    "tamir": {
+      "aktif": true,
+      "metin": "Ekranı kırılan, şarjı çabuk biten ya da çalışmayan telefonunuzu mağazamıza getirin. Arızaya bakalım, ne yapılacağını ve ücretini size söyleyelim.",
+      "hizmetler": [
+        "Ekran değişimi",
+        "Batarya değişimi",
+        "Şarj soketi",
+        "Kamera",
+        "Arka cam",
+        "Yazılım"
+      ]
+    }
   },
   "vitrin": [
     {

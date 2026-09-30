@@ -77,7 +77,7 @@
   function modal(o) {
     return new Promise(function (coz) {
       var m = $('#dp-modal'), kutu = $('.dp-modal__kutu', m);
-      kutu.className = 'dp-modal__kutu' + (o.genis ? ' dp-modal__kutu--genis' : '');
+      kutu.className = 'dp-modal__kutu' + (o.genis ? ' dp-modal__kutu--genis' : '') + (o.sinif ? ' ' + o.sinif : '');
       kutu.innerHTML = (o.ikon ? '<div class="dp-modal__ikon ' + (o.ikonSinif || '') + '">' + ZI.ikon(o.ikon) + '</div>' : '') +
         '<h2 id="dp-modal-baslik">' + k(o.baslik) + '</h2>' + (o.metin ? '<p>' + o.metin + '</p>' : '') + (o.icerik || '') +
         '<div class="dp-modal__alt">' + (o.butonlar || [{ metin: 'Tamam', sinif: 'dp-btn--turuncu', deger: 'tamam', varsayilan: true }]).map(function (b) {
@@ -246,7 +246,7 @@
   /* =====================================================================
      Üst çubuk ve sekmeler
      ===================================================================== */
-  var SEKMELER = [['urunler', 'Ürünler', 'kutu'], ['fiyatlar', 'Fiyatlar', 'etiket'], ['hareketler', 'Stok Hareketleri', 'gecmis'], ['magaza', 'Mağaza & Vitrin', 'magaza'], ['ayarlar', 'Ayarlar', 'ayar']];
+  var SEKMELER = [['urunler', 'Ürünler', 'kutu'], ['fiyatlar', 'Fiyatlar', 'etiket'], ['hareketler', 'Stok Hareketleri', 'gecmis'], ['defter', 'Alım-Satım', 'defter'], ['magaza', 'Mağaza & Vitrin', 'magaza'], ['ayarlar', 'Ayarlar', 'ayar']];
   function ustCiz() {
     $('#dp-ust').innerHTML = '<div class="dp-ust__ic">' +
       '<a class="dp-marka" href="index.html" target="_blank" rel="noopener" title="Siteyi yeni sekmede aç" aria-label="Zümrüt İletişim · siteyi yeni sekmede aç">' + ZI.logo('tam', 'dp-logo') + '</a>' +
@@ -300,9 +300,12 @@
       return;
     }
     S.sekme = ad;
+    d.body.classList.toggle('dp-df-acik', ad === 'defter');
     $$('.dp-sekme').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.sekme === ad ? 'true' : 'false'); });
+    var aktifSekme = $('.dp-sekme[aria-selected="true"]'), cubuk = aktifSekme && aktifSekme.parentNode;
+    if (cubuk && cubuk.scrollWidth > cubuk.clientWidth) cubuk.scrollLeft = aktifSekme.offsetLeft - (cubuk.clientWidth - aktifSekme.offsetWidth) / 2;
     try { history.replaceState(null, '', '#' + ad); } catch (e) { /* yok */ }
-    ({ urunler: urunlerSekmesi, fiyatlar: fiyatlarSekmesi, hareketler: hareketlerSekmesi, magaza: magazaSekmesi, ayarlar: ayarlarSekmesi })[ad]();
+    ({ urunler: urunlerSekmesi, fiyatlar: fiyatlarSekmesi, hareketler: hareketlerSekmesi, defter: defterSekmesi, magaza: magazaSekmesi, ayarlar: ayarlarSekmesi })[ad]();
     if (!ilk) g.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function cikis() {
@@ -1403,7 +1406,10 @@
       alan('E-posta', '<input type="email" name="eposta" value="' + k(m.eposta) + '" placeholder="ornek@alanadi.com">', { ipucu: 'Boş bırakırsanız sitede gösterilmez.' }) +
       alan('Adres', '<textarea name="adres" rows="2">' + k(m.adres) + '</textarea>', { genis: true }) +
       alan('Tanıtım metni', '<textarea name="tanitim" rows="5">' + k(m.tanitim) + '</textarea>', { genis: true }) +
-      alan('Instagram adresi', '<input type="url" name="instagram" value="' + k(m.instagram) + '" placeholder="https://instagram.com/...">', { genis: true }) +
+      alan('Instagram adresi', '<input type="text" name="instagram" value="' + k(m.instagram) + '" placeholder="https://www.instagram.com/kullaniciadi/ ya da @kullaniciadi">', { genis: true, ipucu: 'Uzun paylaşım bağlantısını yapıştırsanız da olur; kaydederken sadeleştirilir.' }) +
+      '<div class="dp-alan dp-genis"><span class="dp-etiketi">Tamir ve teknik servis</span><label class="dp-satir-anahtar"><span><b>Ana sayfada tamir bölümünü göster</b><small>Menüde ve alt bilgide de “Tamir” bağlantısı çıkar</small></span><span class="dp-anahtar"><input type="checkbox" name="tamirAktif"' + (m.tamir && m.tamir.aktif ? ' checked' : '') + '><span></span></span></label></div>' +
+      alan('Tamir hizmetleri', '<input type="text" name="tamirHizmetler" value="' + k((m.tamir && m.tamir.hizmetler || []).join(', ')) + '">', { genis: true, ipucu: 'Virgülle ayırın. Örn. Ekran değişimi, Batarya değişimi, Şarj soketi' }) +
+      alan('Tamir açıklaması', '<textarea name="tamirMetin" rows="3">' + k(m.tamir && m.tamir.metin || '') + '</textarea>', { genis: true }) +
       alan('Fiyat notu', '<textarea name="fiyatNotu" rows="2">' + k(m.fiyatNotu) + '</textarea>', { genis: true, ipucu: 'Ürün sayfalarında fiyatın altında ve alt bilgide görünür.' }) +
       alan('Enlem', '<input type="text" name="enlem" value="' + k(m.konum.enlem) + '" inputmode="decimal">') +
       alan('Boylam', '<input type="text" name="boylam" value="' + k(m.konum.boylam) + '" inputmode="decimal">') +
@@ -1435,7 +1441,13 @@
     $('#dp-magaza-kaydet').onclick = function () {
       var f = $('#dp-magaza-form'), v = function (a) { return f.querySelector('[name="' + a + '"]').value.trim(); };
       if (!v('ad')) { bildir('Mağaza adı boş olamaz.', true); return; }
-      Object.assign(m, { ad: v('ad'), telefon: v('telefon'), whatsapp: v('whatsapp').replace(/\D/g, ''), eposta: v('eposta'), adres: v('adres'), tanitim: v('tanitim'), instagram: v('instagram'), fiyatNotu: v('fiyatNotu') });
+      Object.assign(m, { ad: v('ad'), telefon: v('telefon'), whatsapp: v('whatsapp').replace(/\D/g, ''), eposta: v('eposta'), adres: v('adres'), tanitim: v('tanitim'), instagram: ZI.instagramLink(v('instagram')), fiyatNotu: v('fiyatNotu') });
+      m.tamir = {
+        aktif: f.querySelector('[name="tamirAktif"]').checked,
+        hizmetler: v('tamirHizmetler').split(/[,\n;]/).map(function (x) { return x.trim(); }).filter(Boolean),
+        metin: v('tamirMetin')
+      };
+      f.querySelector('[name="instagram"]').value = m.instagram;
       var en = Number(String(v('enlem')).replace(',', '.')), boy = Number(String(v('boylam')).replace(',', '.'));
       m.konum = { enlem: isNaN(en) || !v('enlem') ? null : en, boylam: isNaN(boy) || !v('boylam') ? null : boy, yerKimligi: v('yerKimligi') };
       degisti('Mağaza bilgileri kaydedildi.');
@@ -1609,6 +1621,525 @@
       s.buton1 = { metin: v('b1metin'), link: v('b1link') || (s.urunId ? 'urun.html?id=' + s.urunId : '') };
       s.buton2 = { metin: v('b2metin'), link: v('b2link') || (s.urunId ? 'urun.html?id=' + s.urunId + '#fiyat' : '') };
     });
+  }
+
+  /* =====================================================================
+     ALIM-SATIM DEFTERİ
+     Alınan / satılan cihazlar, brüt kâr, alacak ve verecekler (Excel tablosunun aynısı).
+     Kayıtlar YALNIZCA bu tarayıcıda (IndexedDB) tutulur; müşteri adları, IMEI ve
+     alış fiyatları herkese açık siteye hiçbir zaman yayınlanmaz. Yedek: Excel'e aktar.
+     ===================================================================== */
+  var ODEMELER = ['Nakit', 'Kredi Kartı', 'Havale / EFT', 'Taksit', 'Takas', 'Beklemede'];
+  var DF_FILTRE = [['tumu', 'Tümü'], ['stok', 'Stokta'], ['satildi', 'Satılan'], ['bekleyen', 'Bekleyen ödeme']];
+  var DF_SUTUN = [
+    ['alisTarihi', 'Alış Tarihi'], ['alisFiyati', 'Alış Fiyatı', 'sag'], ['satisFiyati', 'Satış Fiyatı', 'sag'], ['kar', 'Brüt Kâr', 'sag'],
+    ['model', 'Marka / Model'], ['hafizaRenk', 'Hafıza / Renk'], ['imei', 'IMEI / Seri No'], ['durum', 'Cihaz Durumu'], ['pil', 'Pil %'],
+    ['alinan', 'Alınan Kişi / Firma'], ['satisTarihi', 'Satış Tarihi'], ['satilan', 'Satılan Kişi'], ['odeme', 'Ödeme Şekli']
+  ];
+  var DEFTER = null, dfCiz = function () {};
+  S.df = { q: '', f: 'tumu', sira: 'yeni', sayfa: 1 };
+
+  function defterYukle() {
+    if (DEFTER) return Promise.resolve(DEFTER);
+    return ZI.depo.al('defter').catch(function () { return null; }).then(function (v) {
+      if (!v || !Array.isArray(v.kayitlar)) v = ZI.yerelAl('zi-defter', null);
+      DEFTER = v && Array.isArray(v.kayitlar) ? v : { surum: 1, kayitlar: [], guncelleme: null, sonYedek: null };
+      return DEFTER;
+    });
+  }
+  function defterKaydet() {
+    DEFTER.guncelleme = simdi();
+    try { if (!S.dfKalici && navigator.storage && navigator.storage.persist) { S.dfKalici = true; navigator.storage.persist(); } } catch (e) { /* yok */ }
+    return ZI.depo.koy('defter', DEFTER).catch(function () {
+      try { localStorage.setItem('zi-defter', JSON.stringify(DEFTER)); }
+      catch (e) { bildir('Defter kaydedilemedi: tarayıcı deposu kapalı ya da dolu. Hemen “Excel’e aktar” ile yedek alın.', true); }
+    });
+  }
+
+  function dfIki(n) { return (n < 10 ? '0' : '') + Number(n); }
+  function dfBugun() { var t = new Date(); return t.getFullYear() + '-' + dfIki(t.getMonth() + 1) + '-' + dfIki(t.getDate()); }
+  function dfTarih(t) { if (!t) return ''; var p = String(t).split('-'); return p.length === 3 ? p[2] + '.' + p[1] + '.' + p[0] : String(t); }
+  function dfSatildi(x) { return !!(x.satisTarihi || x.satilan || x.satisFiyati != null || x.satisTakas); }
+  function dfKar(x) { return x.alisFiyati != null && x.satisFiyati != null ? x.satisFiyati - x.alisFiyati : null; }
+  function dfBekleyen(x) { return x.odeme === 'Beklemede'; }
+  function dfImeiSade(s) { return String(s || '').replace(/\D/g, ''); }
+  /* 15 haneli IMEI'de son hane kontrol basamağıdır (Luhn). null: IMEI değil / kontrol edilemez */
+  function imeiDurum(s) {
+    s = String(s || '').replace(/\s/g, '');
+    if (!/^\d{15}$/.test(s)) return null;
+    var t = 0;
+    for (var i = 0; i < 15; i++) { var r = Number(s.charAt(14 - i)); if (i % 2) { r *= 2; if (r > 9) r -= 9; } t += r; }
+    return t % 10 === 0;
+  }
+  function dfOnce(iso) {
+    if (!iso) return 'henüz alınmadı';
+    var gun = Math.floor((Date.now() - Date.parse(iso)) / 86400000);
+    return gun <= 0 ? 'bugün' : (gun === 1 ? 'dün' : gun + ' gün önce');
+  }
+
+  function dfHucre(x, a) {
+    var kr;
+    switch (a) {
+      case 'alisTarihi': case 'satisTarihi': return k(dfTarih(x[a]));
+      case 'alisFiyati': return x.alisFiyati != null ? '<span class="dp-df-para">' + ZI.fiyatYaz(x.alisFiyati) + '</span>' : '';
+      case 'satisFiyati':
+        return (x.satisFiyati != null ? '<span class="dp-df-para">' + ZI.fiyatYaz(x.satisFiyati) + '</span>' : '') +
+          (x.satisTakas ? (x.satisFiyati != null ? ' ' : '') + '<span class="zi-rozet zi-rozet--yakinda">Takas</span>' : '');
+      case 'kar':
+        kr = dfKar(x);
+        return kr != null ? '<span class="dp-df-para dp-kar' + (kr < 0 ? ' eksi' : '') + '">' + (kr > 0 ? '+' : '') + ZI.fiyatYaz(kr) + '</span>' : '';
+      case 'model': return '<span class="dp-df-model">' + k(x.model || '—') + '</span>';
+      case 'imei':
+        if (!x.imei) return '';
+        return '<span class="dp-df-imei">' + k(x.imei) + '</span>' + (imeiDurum(x.imei) === false ? ' <span class="dp-df-uyari" title="IMEI’nin son hanesi tutmuyor; bir rakam yanlış yazılmış olabilir.">' + ZI.ikon('uyari') + '</span>' : '');
+      case 'durum': return x.durum ? '<span class="zi-rozet ' + (/s[ıi]f[ıi]r/i.test(x.durum) ? 'zi-rozet--sifir' : 'zi-rozet--ikinciel') + '">' + k(x.durum) + '</span>' : '';
+      case 'pil': return x.pil != null ? '<span class="dp-df-pil' + (x.pil < 80 ? ' dusuk' : (x.pil < 85 ? ' orta' : '')) + '"><i style="--p:' + x.pil + '%"></i>%' + x.pil + '</span>' : '';
+      case 'odeme':
+        if (!x.odeme) return '';
+        return '<span class="zi-rozet ' + (dfBekleyen(x) ? 'zi-rozet--firsat' : 'zi-rozet--notr') + '">' + k(x.odeme) + (dfBekleyen(x) ? (dfSatildi(x) ? ' · alacak' : ' · verecek') : '') + '</span>';
+      default: return k(x[a] || '');
+    }
+  }
+  function dfSatir(x) {
+    var sat = dfSatildi(x);
+    return '<tr data-id="' + k(x.id) + '" class="' + (sat ? 'satildi' : 'stokta') + (dfBekleyen(x) ? ' bekleyen' : '') + '" tabindex="0">' +
+      DF_SUTUN.map(function (s) { return '<td data-h="df-' + s[0] + '" data-etiket="' + k(s[1]) + '"' + (s[2] ? ' class="' + s[2] + '"' : '') + '>' + dfHucre(x, s[0]) + '</td>'; }).join('') +
+      '<td data-h="df-menu" class="sag"><span class="dp-df-eylem">' + (sat ? '' : '<button type="button" class="zi-btn zi-btn--cizgi" data-df-sat>Satış gir</button>') +
+      '<button type="button" class="dp-df-sil" data-df-sil aria-label="Kaydı sil" title="Sil">' + ZI.ikon('cop') + '</button></span></td></tr>';
+  }
+  function dfListe() {
+    var df = S.df, q = ZI.normalMetin(df.q);
+    return DEFTER.kayitlar.filter(function (x) {
+      if (df.f === 'stok' && dfSatildi(x)) return false;
+      if (df.f === 'satildi' && !dfSatildi(x)) return false;
+      if (df.f === 'bekleyen' && !dfBekleyen(x)) return false;
+      if (q && ZI.normalMetin([x.model, x.hafizaRenk, x.imei, x.alinan, x.satilan, x.durum, x.odeme, x.not].join(' ')).indexOf(q) < 0) return false;
+      return true;
+    }).sort(function (a, b) {
+      var s = String(a.alisTarihi || '').localeCompare(String(b.alisTarihi || '')) || String(a.eklenme || '').localeCompare(String(b.eklenme || ''));
+      return df.sira === 'eski' ? s : -s;
+    });
+  }
+  function dfBilgi(baslik, metin, tehlike) {
+    return modal({ sinif: 'dp-df-modal', ikon: tehlike ? 'uyari' : 'bilgi', ikonSinif: tehlike ? 'tehlike' : '', baslik: baslik, metin: metin,
+      butonlar: [{ metin: 'Tamam', deger: 'tamam', sinif: 'dp-btn--turuncu', varsayilan: true }] });
+  }
+
+  function defterSekmesi() {
+    var df = S.df;
+    $('#dp-ana').innerHTML = '<div class="dp-df">' +
+      '<div class="dp-df-ust"><h1 class="dp-df-baslik">Alım-satım defteri. <span class="gri">Alınan ve satılan cihazlar, kâr, alacak ve verecekler.</span></h1>' +
+      '<div class="zi-btn-grup">' +
+      '<label class="zi-btn zi-btn--cizgi dp-df-dosya">' + ZI.ikon('yukle') + ' Excel’den içe aktar<input type="file" id="dp-df-dosya" accept=".xlsx,.csv,.txt,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label>' +
+      '<button class="zi-btn zi-btn--gri" type="button" id="dp-df-csv">' + ZI.ikon('tablo') + ' Excel’e aktar</button>' +
+      '<button class="zi-btn zi-btn--dolu" type="button" id="dp-df-yeni">' + ZI.ikon('arti') + ' Yeni kayıt</button></div></div>' +
+      '<div class="dp-df-not" id="dp-df-bant">' + ZI.ikon('kilit') + '<p id="dp-df-bant-metin"></p></div>' +
+      '<div class="dp-df-ozet" id="dp-df-ozet"></div>' +
+      '<section aria-label="Alım-satım kayıtları"><div class="dp-df-liste-ust"><h2>Kayıtlar</h2><div class="dp-df-arac">' +
+      '<div class="zi-ciplar" id="dp-df-filtre" role="group" aria-label="Kayıt filtresi">' + DF_FILTRE.map(function (x) { return '<button type="button" class="zi-cip" data-f="' + x[0] + '" aria-pressed="' + (df.f === x[0]) + '">' + x[1] + '</button>'; }).join('') + '</div>' +
+      '<label class="dp-df-ara">' + ZI.ikon('ara') + '<span class="zi-gizli">Defterde ara</span><input type="search" id="dp-df-ara" placeholder="Model, IMEI veya kişi ara" value="' + k(df.q) + '"></label>' +
+      '<label class="dp-df-secim"><span class="zi-gizli">Sıralama</span><select id="dp-df-sira"><option value="yeni"' + (df.sira !== 'eski' ? ' selected' : '') + '>En yeni üstte</option><option value="eski"' + (df.sira === 'eski' ? ' selected' : '') + '>En eski üstte</option></select>' + ZI.ikon('asagi') + '</label>' +
+      '</div></div>' +
+      '<div class="dp-df-kap"><table class="dp-df-tablo"><thead><tr>' +
+      DF_SUTUN.map(function (s) { return '<th' + (s[2] ? ' class="' + s[2] + '"' : '') + ' scope="col">' + k(s[1]) + '</th>'; }).join('') +
+      '<th scope="col"><span class="zi-gizli">İşlemler</span></th></tr></thead>' +
+      '<tbody id="dp-df-govde"><tr class="dp-df-bos"><td colspan="14">Defter yükleniyor…</td></tr></tbody></table></div>' +
+      '<div class="dp-df-alt" id="dp-df-alt"></div></section></div>';
+
+    function bant() {
+      var n = DEFTER.kayitlar.length, eski = n && (!DEFTER.sonYedek || Date.now() - Date.parse(DEFTER.sonYedek) > 7 * 86400000);
+      $('#dp-df-bant').className = 'dp-df-not' + (eski ? ' uyari' : '');
+      $('#dp-df-bant-metin').innerHTML = '<b>Bu defter yalnızca bu bilgisayarda saklanır.</b> Siteye yüklenmez, müşterileriniz göremez; başka cihazda da görünmez. Kaybolmaması için ara ara “Excel’e aktar” ile yedek alın. <b>Son yedek: ' + dfOnce(DEFTER.sonYedek) + '.</b>';
+    }
+    function ozet() {
+      var stok = 0, stokTop = 0, sat = 0, satTop = 0, kar = 0, karN = 0, alacak = 0, alacakN = 0, verecek = 0, verecekN = 0;
+      DEFTER.kayitlar.forEach(function (x) {
+        var s = dfSatildi(x), kr = dfKar(x);
+        if (s) { sat++; if (x.satisFiyati != null) satTop += x.satisFiyati; } else { stok++; if (x.alisFiyati != null) stokTop += x.alisFiyati; }
+        if (kr != null) { kar += kr; karN++; }
+        if (dfBekleyen(x)) { if (s) { alacakN++; alacak += x.satisFiyati || 0; } else { verecekN++; verecek += x.alisFiyati || 0; } }
+      });
+      $('#dp-df-ozet').innerHTML =
+        '<div class="dp-df-kutu"><small>' + ZI.ikon('kutu') + 'Stoktaki cihaz</small><b>' + stok + '</b><span>Alış toplamı ' + ZI.fiyatYaz(stokTop) + '</span></div>' +
+        '<div class="dp-df-kutu"><small>' + ZI.ikon('etiket') + 'Satılan cihaz</small><b>' + sat + '</b><span>Satış toplamı ' + ZI.fiyatYaz(satTop) + '</span></div>' +
+        '<div class="dp-df-kutu"><small>' + ZI.ikon('yildiz') + 'Brüt kâr</small><b class="' + (kar < 0 ? 'eksi' : '') + '">' + ZI.fiyatYaz(kar) + '</b><span>' + (karN ? karN + ' satıştan hesaplandı' : 'Alış ve satış fiyatı girilmiş satış yok') + '</span></div>' +
+        '<button type="button" class="dp-df-kutu dp-df-kutu--koyu" id="dp-df-bekleyen"><small>' + ZI.ikon('saat') + 'Bekleyen ödemeler</small><b>' + (alacakN + verecekN) + '</b><span>Alacak ' + ZI.fiyatYaz(alacak) + ' · Verecek ' + ZI.fiyatYaz(verecek) + '</span></button>';
+      $('#dp-df-bekleyen').onclick = function () { filtrele('bekleyen'); $('.dp-df-liste-ust').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    }
+    function ciz() {
+      if (!$('#dp-df-govde')) return;
+      var l = dfListe(), boy = 50, top = Math.max(1, Math.ceil(l.length / boy));
+      if (df.sayfa > top) df.sayfa = top;
+      var parca = l.slice((df.sayfa - 1) * boy, df.sayfa * boy);
+      var bos = !DEFTER.kayitlar.length
+        ? 'Defter boş. “Yeni kayıt” ile ekleyin ya da Excel dosyanızı “Excel’den içe aktar” ile yükleyin.'
+        : 'Bu filtreye uyan kayıt yok.';
+      $('#dp-df-govde').innerHTML = parca.length ? parca.map(dfSatir).join('') : '<tr class="dp-df-bos"><td colspan="14">' + bos + '</td></tr>';
+      $('#dp-df-alt').innerHTML = '<span class="bilgi">' + l.length + ' kayıt' + (l.length !== DEFTER.kayitlar.length ? ' (toplam ' + DEFTER.kayitlar.length + ')' : '') + '</span>' +
+        (top > 1 ? '<button type="button" data-dfs="-1"' + (df.sayfa <= 1 ? ' disabled' : '') + ' aria-label="Önceki sayfa">' + ZI.ikon('sol') + '</button>' +
+          '<span>' + df.sayfa + ' / ' + top + '</span>' +
+          '<button type="button" data-dfs="1"' + (df.sayfa >= top ? ' disabled' : '') + ' aria-label="Sonraki sayfa">' + ZI.ikon('sag') + '</button>' : '');
+      ozet(); bant();
+    }
+    function filtrele(f) {
+      df.f = f; df.sayfa = 1;
+      $$('#dp-df-filtre [data-f]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.f === f ? 'true' : 'false'); });
+      ciz();
+    }
+    dfCiz = ciz;
+    $('#dp-df-filtre').addEventListener('click', function (e) { var b = e.target.closest('[data-f]'); if (b) filtrele(b.dataset.f); });
+    $('#dp-df-ara').addEventListener('input', function () { df.q = this.value; df.sayfa = 1; ciz(); });
+    $('#dp-df-sira').addEventListener('change', function () { df.sira = this.value; ciz(); });
+    $('#dp-df-alt').addEventListener('click', function (e) { var b = e.target.closest('[data-dfs]'); if (b && !b.disabled) { df.sayfa += Number(b.dataset.dfs); ciz(); } });
+    var govde = $('#dp-df-govde');
+    function kayitBul(el) { var tr = el.closest('tr[data-id]'); return tr && DEFTER.kayitlar.filter(function (x) { return x.id === tr.dataset.id; })[0]; }
+    govde.addEventListener('click', function (e) {
+      var x = kayitBul(e.target); if (!x) return;
+      if (e.target.closest('[data-df-sil]')) { dfSil(x); return; }
+      if (e.target.closest('[data-df-sat]')) { dfForm(x, { satis: true }); return; }
+      dfForm(x);
+    });
+    govde.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.matches('tr[data-id]')) { var x = kayitBul(e.target); if (x) dfForm(x); } });
+    $('#dp-df-yeni').onclick = function () { dfForm(null); };
+    $('#dp-df-csv').onclick = dfCsv;
+    $('#dp-df-dosya').onchange = function () { var f = this.files[0]; this.value = ''; dfIceAktar(f); };
+    defterYukle().then(function () { if (S.sekme === 'defter') ciz(); });
+  }
+
+  function dfSecenekler(alanlar, ek) {
+    var gorulen = {}, l = [];
+    DEFTER.kayitlar.forEach(function (x) { alanlar.forEach(function (a) { var v = String(x[a] || '').trim(); if (v && !gorulen[v.toLocaleLowerCase('tr')]) { gorulen[v.toLocaleLowerCase('tr')] = 1; l.push(v); } }); });
+    (ek || []).forEach(function (v) { if (v && !gorulen[v.toLocaleLowerCase('tr')]) { gorulen[v.toLocaleLowerCase('tr')] = 1; l.push(v); } });
+    return l.slice(0, 300).map(function (v) { return '<option value="' + k(v) + '">'; }).join('');
+  }
+  function dfForm(x, o) {
+    o = o || {};
+    var yeni = !x, r = x ? JSON.parse(JSON.stringify(x)) : { alisTarihi: dfBugun(), durum: 'İkinci El', odeme: 'Nakit' };
+    if (o.satis && !r.satisTarihi) r.satisTarihi = dfBugun();
+    var urunAdlari = S.veri.urunler.filter(function (u) { return u.kategori !== 'aksesuar'; }).map(function (u) { return u.ad; });
+    var para = function (ad, v) { return '<span class="dp-birim"><input type="text" inputmode="numeric" id="df-' + ad + '" value="' + (v != null ? ZI.sayi(v) : '') + '" autocomplete="off" placeholder="0"><span>TL</span></span>'; };
+    var metin = function (ad, v, ek) { return '<input type="text" id="df-' + ad + '" value="' + k(v || '') + '" autocomplete="off"' + (ek || '') + '>'; };
+    var odemeler = ODEMELER.indexOf(r.odeme) < 0 && r.odeme ? ODEMELER.concat([r.odeme]) : ODEMELER;
+    var html = '<div class="dp-df-form">' +
+      '<fieldset><legend>' + ZI.ikon('telefon') + 'Cihaz</legend><div class="dp-izgara">' +
+      alan('Marka / Model', metin('model', r.model, ' list="df-l-model" placeholder="Örn. iPhone 15 Pro Max"'), { zorunlu: true }) +
+      alan('Hafıza / Renk', metin('hafizaRenk', r.hafizaRenk, ' list="df-l-hafiza" placeholder="Örn. 256 Siyah"')) +
+      alan('IMEI / Seri No', metin('imei', r.imei, ' inputmode="numeric" maxlength="24" spellcheck="false"'), { ipucu: '<span id="df-imei-durum">IMEI’yi *#06# ile öğrenebilirsiniz.</span>' }) +
+      '<div class="dp-izgara dp-df-ikili">' +
+      alan('Cihaz durumu', '<select id="df-durum">' + ['İkinci El', 'Sıfır'].concat(['İkinci El', 'Sıfır'].indexOf(r.durum) < 0 && r.durum ? [r.durum] : []).map(function (v) { return '<option' + (v === r.durum ? ' selected' : '') + '>' + k(v) + '</option>'; }).join('') + '</select>') +
+      alan('Pil %', '<span class="dp-birim"><input type="number" id="df-pil" min="0" max="100" step="1" inputmode="numeric" value="' + (r.pil != null ? r.pil : '') + '"><span>%</span></span>') +
+      '</div></div></fieldset>' +
+      '<fieldset><legend>' + ZI.ikon('indir') + 'Alış</legend><div class="dp-izgara dp-izgara--3">' +
+      alan('Alış tarihi', '<input type="date" id="df-alisTarihi" value="' + k(r.alisTarihi || '') + '">') +
+      alan('Alış fiyatı', para('alisFiyati', r.alisFiyati)) +
+      alan('Alınan kişi / firma', metin('alinan', r.alinan, ' list="df-l-kisi"')) +
+      '</div></fieldset>' +
+      '<fieldset><legend>' + ZI.ikon('yukle') + 'Satış <small>Satılmadıysa boş bırakın</small></legend><div class="dp-izgara dp-izgara--3">' +
+      alan('Satış tarihi', '<input type="date" id="df-satisTarihi" value="' + k(r.satisTarihi || '') + '">') +
+      alan('Satış fiyatı', para('satisFiyati', r.satisFiyati) + '<label class="dp-df-takas"><input type="checkbox" id="df-satisTakas"' + (r.satisTakas ? ' checked' : '') + '> Takasla satıldı</label>') +
+      alan('Satılan kişi', metin('satilan', r.satilan, ' list="df-l-kisi"')) +
+      '</div></fieldset>' +
+      '<div class="dp-izgara">' +
+      alan('Ödeme şekli', '<select id="df-odeme"><option value="">—</option>' + odemeler.map(function (v) { return '<option' + (v === r.odeme ? ' selected' : '') + '>' + k(v) + '</option>'; }).join('') + '</select>', { ipucu: '“Beklemede” seçilirse: satıldıysa alacak, satılmadıysa verecek olarak sayılır.' }) +
+      alan('Not', metin('not', r.not, ' placeholder="İsteğe bağlı"')) +
+      '</div><p class="dp-df-kar" id="df-kar" aria-live="polite"></p>' +
+      '<datalist id="df-l-model">' + dfSecenekler(['model'], urunAdlari) + '</datalist>' +
+      '<datalist id="df-l-hafiza">' + dfSecenekler(['hafizaRenk']) + '</datalist>' +
+      '<datalist id="df-l-kisi">' + dfSecenekler(['alinan', 'satilan']) + '</datalist>' +
+      '</div>';
+    function oku(kutu) {
+      var v = function (a) { return $('#df-' + a, kutu).value.trim(); };
+      var pil = v('pil');
+      return {
+        model: v('model'), hafizaRenk: v('hafizaRenk'), imei: v('imei'), durum: v('durum'), pil: pil === '' ? null : Math.max(0, Math.min(100, Math.round(Number(pil)))),
+        alisTarihi: v('alisTarihi'), alisFiyati: sayiAl(v('alisFiyati')), alinan: v('alinan'),
+        satisTarihi: v('satisTarihi'), satisFiyati: sayiAl(v('satisFiyati')), satisTakas: $('#df-satisTakas', kutu).checked, satilan: v('satilan'),
+        odeme: v('odeme'), not: v('not')
+      };
+    }
+    modal({
+      genis: true, sinif: 'dp-df-modal', ikon: 'defter', baslik: yeni ? 'Yeni kayıt' : (o.satis ? 'Satış gir' : 'Kaydı düzenle'),
+      metin: yeni ? '' : '<b>' + k(r.model || '') + '</b>' + (r.hafizaRenk ? ' · ' + k(r.hafizaRenk) : '') + (r.imei ? ' · ' + k(r.imei) : ''),
+      icerik: html,
+      butonlar: [{ metin: 'Vazgeç', deger: 'iptal', sinif: 'dp-btn--cizgi' }, { metin: 'Kaydet', deger: 'kaydet', sinif: 'dp-btn--turuncu', varsayilan: true, ikon: 'tik' }],
+      acildi: function (kutu) {
+        function guncelle() {
+          var y = oku(kutu), kr = dfKar(y), el = $('#df-kar', kutu), im = imeiDurum(y.imei), id = $('#df-imei-durum', kutu);
+          var ayni = y.imei && dfImeiSade(y.imei).length >= 8 && DEFTER.kayitlar.filter(function (z) { return z !== x && dfImeiSade(z.imei) === dfImeiSade(y.imei); })[0];
+          id.innerHTML = ayni ? '<span style="color:var(--d-kirmizi)">Bu IMEI başka bir kayıtta da var: ' + k(ayni.model || '') + ' (' + k(dfTarih(ayni.alisTarihi)) + ')</span>'
+            : (im === false ? '<span style="color:var(--d-kirmizi)">Son hane tutmuyor; bir rakam yanlış olabilir.</span>' : (im === true ? '<span style="color:var(--d-yesil)">IMEI geçerli görünüyor.</span>' : 'IMEI’yi *#06# ile öğrenebilirsiniz.'));
+          el.innerHTML = kr != null ? 'Brüt kâr: <b class="dp-kar' + (kr < 0 ? ' eksi' : '') + '">' + (kr > 0 ? '+' : '') + ZI.fiyatYaz(kr) + '</b>'
+            : (dfBekleyen(y) ? (dfSatildi(y) ? 'Ödeme beklemede: <b>alacak</b> olarak görünecek.' : 'Ödeme beklemede: <b>verecek</b> olarak görünecek.') : '');
+        }
+        kutu.addEventListener('input', guncelle); kutu.addEventListener('change', guncelle);
+        $$('#df-alisFiyati, #df-satisFiyati', kutu).forEach(function (i) {
+          i.addEventListener('blur', function () { var n = sayiAl(i.value); if (n != null) i.value = ZI.sayi(n); });
+        });
+        guncelle();
+        if (o.satis) setTimeout(function () { var f = $('#df-satisFiyati', kutu); if (f) f.focus(); }, 140);
+      },
+      dogrula: function (kutu) {
+        var y = oku(kutu);
+        if (!y.model && !y.imei) { bildir('Marka / model ya da IMEI girin.', true); $('#df-model', kutu).focus(); return false; }
+        var ah = $('#df-alisFiyati', kutu).value.trim(), sh = $('#df-satisFiyati', kutu).value.trim();
+        if ((ah && (y.alisFiyati == null || y.alisFiyati < 0)) || (sh && (y.satisFiyati == null || y.satisFiyati < 0))) { bildir('Fiyatı yalnızca rakamla yazın (örn. 45.000).', true); return false; }
+        if ($('#df-pil', kutu).value && isNaN(Number($('#df-pil', kutu).value))) { bildir('Pil yüzdesi 0 ile 100 arasında olmalı.', true); return false; }
+      },
+      topla: function (kutu) { return oku(kutu); }
+    }).then(function (y) {
+      if (!y) return;
+      var t = simdi();
+      if (yeni) { y.id = 'd' + Date.now().toString(36) + rastgele(4); y.eklenme = t; y.guncelleme = t; DEFTER.kayitlar.push(y); }
+      else { Object.assign(x, y); x.guncelleme = t; }
+      defterKaydet(); dfCiz();
+      bildir(yeni ? 'Kayıt deftere eklendi.' : (o.satis && dfSatildi(y) ? 'Satış kaydedildi.' : 'Kayıt güncellendi.'));
+    });
+  }
+  function dfSil(x) {
+    modal({
+      sinif: 'dp-df-modal', ikon: 'uyari', ikonSinif: 'tehlike', baslik: 'Kayıt silinsin mi?',
+      metin: '<b>' + k(x.model || 'Kayıt') + '</b>' + (x.imei ? ' · ' + k(x.imei) : '') + ' defterden silinecek. Bu işlem geri alınamaz.',
+      butonlar: [{ metin: 'Vazgeç', deger: 'iptal', sinif: 'dp-btn--cizgi' }, { metin: 'Sil', deger: 'evet', sinif: 'dp-btn--tehlike', varsayilan: true }]
+    }).then(function (e) {
+      if (e !== 'evet') return;
+      DEFTER.kayitlar = DEFTER.kayitlar.filter(function (y) { return y !== x; });
+      defterKaydet(); dfCiz(); bildir('Kayıt silindi.');
+    });
+  }
+  function dfCsv() {
+    defterYukle().then(function () {
+      if (!DEFTER.kayitlar.length) { bildir('Defterde kayıt yok.', true); return; }
+      var s = [DF_SUTUN.map(function (x) { return x[1]; }).concat(['Not'])];
+      DEFTER.kayitlar.slice().sort(function (a, b) { return String(a.alisTarihi || '').localeCompare(String(b.alisTarihi || '')) || String(a.eklenme || '').localeCompare(String(b.eklenme || '')); }).forEach(function (x) {
+        var kr = dfKar(x);
+        s.push([dfTarih(x.alisTarihi), x.alisFiyati, x.satisTakas ? (x.satisFiyati != null ? x.satisFiyati + ' (Takas)' : 'TAKAS') : x.satisFiyati, kr,
+          x.model, x.hafizaRenk, x.imei ? '="' + x.imei + '"' : '', x.durum, x.pil != null ? x.pil + '%' : '', x.alinan, dfTarih(x.satisTarihi), x.satilan, x.odeme, x.not]);
+      });
+      indir('alim-satim-defteri-' + dfBugun() + '.csv', csvYaz(s), 'text/csv;charset=utf-8');
+      DEFTER.sonYedek = simdi(); defterKaydet(); dfCiz();
+      bildir('Defter Excel dosyası olarak indirildi.');
+    });
+  }
+
+  /* ---- Excel (.xlsx) ve CSV okuma ---- */
+  function csvOku(metin) {
+    metin = metin.replace(/^﻿/, '');
+    var ilk = metin.split(/\r?\n/, 1)[0] || '';
+    var ayrac = [';', '\t', ','].map(function (a) { return [a, ilk.split(a).length]; }).sort(function (a, b) { return b[1] - a[1]; })[0][0];
+    var satirlar = [], satir = [], h = '', tirnak = false;
+    for (var i = 0; i < metin.length; i++) {
+      var c = metin.charAt(i);
+      if (tirnak) {
+        if (c === '"') { if (metin.charAt(i + 1) === '"') { h += '"'; i++; } else tirnak = false; } else h += c;
+      } else if (c === '"') tirnak = true;
+      else if (c === ayrac) { satir.push(h); h = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && metin.charAt(i + 1) === '\n') i++; satir.push(h); satirlar.push(satir); satir = []; h = ''; }
+      else h += c;
+    }
+    if (h !== '' || satir.length) { satir.push(h); satirlar.push(satir); }
+    return satirlar;
+  }
+  function xlsxOku(buf) {
+    var dv = new DataView(buf), u8 = new Uint8Array(buf), dec = new TextDecoder('utf-8'), son = -1, girdi = {};
+    for (var i = u8.length - 22; i >= Math.max(0, u8.length - 65557); i--) if (dv.getUint32(i, true) === 0x06054b50) { son = i; break; }
+    if (son < 0) return Promise.reject(new Error('Excel dosyası okunamadı.'));
+    var adet = dv.getUint16(son + 10, true), p = dv.getUint32(son + 16, true);
+    for (var j = 0; j < adet && dv.getUint32(p, true) === 0x02014b50; j++) {
+      var aL = dv.getUint16(p + 28, true), eL = dv.getUint16(p + 30, true), nL = dv.getUint16(p + 32, true), ofs = dv.getUint32(p + 42, true);
+      var bas = ofs + 30 + dv.getUint16(ofs + 26, true) + dv.getUint16(ofs + 28, true);
+      girdi[dec.decode(u8.subarray(p + 46, p + 46 + aL))] = { yontem: dv.getUint16(p + 10, true), veri: u8.subarray(bas, bas + dv.getUint32(p + 20, true)) };
+      p += 46 + aL + eL + nL;
+    }
+    function oku(ad) {
+      var x = girdi[ad];
+      if (!x) return Promise.resolve(null);
+      if (x.yontem === 0) return Promise.resolve(dec.decode(x.veri));
+      if (x.yontem !== 8 || typeof DecompressionStream === 'undefined') return Promise.reject(new Error('Bu tarayıcı Excel dosyasını açamıyor. Dosyayı Excel’de “CSV UTF-8” olarak kaydedip onu yükleyin.'));
+      return new Response(new Blob([x.veri]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();
+    }
+    function xml(s) { return s ? new DOMParser().parseFromString(s, 'application/xml') : null; }
+    function el(kok, ad) { return kok ? Array.prototype.slice.call(kok.getElementsByTagNameNS('*', ad)) : []; }
+    return Promise.all([oku('xl/workbook.xml'), oku('xl/_rels/workbook.xml.rels'), oku('xl/sharedStrings.xml'), oku('xl/styles.xml')]).then(function (r) {
+      var wb = xml(r[0]), rels = xml(r[1]), ss = xml(r[2]), st = xml(r[3]), yol = 'xl/worksheets/sheet1.xml';
+      var sayfa = el(wb, 'sheet')[0];
+      if (sayfa && rels) {
+        var rid = sayfa.getAttribute('r:id') || sayfa.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id');
+        el(rels, 'Relationship').forEach(function (x) {
+          if (x.getAttribute('Id') !== rid) return;
+          var t = x.getAttribute('Target') || '';
+          yol = t.charAt(0) === '/' ? t.slice(1) : 'xl/' + t.replace(/^\.\//, '');
+        });
+      }
+      var ortak = el(ss, 'si').map(function (si) { return el(si, 't').map(function (t) { return t.textContent; }).join(''); });
+      var bicim = {};
+      el(st, 'numFmt').forEach(function (n) { bicim[n.getAttribute('numFmtId')] = n.getAttribute('formatCode') || ''; });
+      var xfKok = el(st, 'cellXfs')[0];
+      var tarihStil = xfKok ? el(xfKok, 'xf').map(function (xf) {
+        var id = Number(xf.getAttribute('numFmtId') || 0);
+        if ((id >= 14 && id <= 22) || (id >= 45 && id <= 47)) return true;
+        return /[dy]/i.test(String(bicim[id] || '').replace(/"[^"]*"|\[[^\]]*\]/g, ''));
+      }) : [];
+      return oku(yol).then(function (s) {
+        var doc = xml(s);
+        if (!doc) throw new Error('Excel sayfası bulunamadı.');
+        var satirlar = [];
+        el(doc, 'row').forEach(function (row) {
+          var ri = Number(row.getAttribute('r')) - 1, satir = [];
+          if (isNaN(ri) || ri < 0) ri = satirlar.length;
+          el(row, 'c').forEach(function (c, ci) {
+            var harf = (c.getAttribute('r') || '').replace(/\d+/g, ''), sutun = ci;
+            if (harf) { sutun = 0; for (var q = 0; q < harf.length; q++) sutun = sutun * 26 + (harf.charCodeAt(q) - 64); sutun--; }
+            var t = c.getAttribute('t'), v = el(c, 'v')[0], deger = v ? v.textContent : '';
+            if (t === 's') deger = ortak[Number(deger)] || '';
+            else if (t === 'inlineStr') deger = el(c, 't').map(function (x) { return x.textContent; }).join('');
+            else if (t === 'b') deger = deger === '1' ? 'Evet' : '';
+            else if (t === 'e') deger = '';
+            else if (t !== 'str' && deger !== '') { deger = Number(deger); if (tarihStil[Number(c.getAttribute('s') || 0)]) deger = { tarih: deger }; }
+            satir[sutun] = deger;
+          });
+          satirlar[ri] = satir;
+        });
+        for (var z = 0; z < satirlar.length; z++) if (!satirlar[z]) satirlar[z] = [];
+        return satirlar;
+      });
+    });
+  }
+  function tabloOku(dosya) {
+    return new Promise(function (coz, reddet) {
+      var fr = new FileReader();
+      fr.onload = function () { coz(fr.result); };
+      fr.onerror = function () { reddet(new Error('Dosya okunamadı.')); };
+      fr.readAsArrayBuffer(dosya);
+    }).then(function (buf) {
+      var u8 = new Uint8Array(buf);
+      if (u8[0] === 0x50 && u8[1] === 0x4b) return xlsxOku(buf);
+      if (/\.xls$/i.test(dosya.name)) throw new Error('Eski .xls biçimi okunamıyor. Excel’de “Farklı Kaydet → Excel Çalışma Kitabı (.xlsx)” deyip onu yükleyin.');
+      var metin = new TextDecoder('utf-8').decode(u8);
+      if (metin.indexOf('�') > -1) { try { metin = new TextDecoder('windows-1254').decode(u8); } catch (e) { /* utf-8 kalsın */ } }
+      return csvOku(metin);
+    });
+  }
+  function dfBaslik(b) {
+    var n = ZI.normalMetin(b).replace(/[^a-z0-9%]/g, '');
+    if (!n) return null;
+    if (/tarih/.test(n)) return /satis/.test(n) ? 'satisTarihi' : (/alis|alim/.test(n) ? 'alisTarihi' : null);
+    if (/brut|^kar/.test(n)) return 'kar';
+    if (/fiyat|tutar|ucret/.test(n)) return /satis/.test(n) ? 'satisFiyati' : (/alis|alim/.test(n) ? 'alisFiyati' : null);
+    if (/imei|seri/.test(n)) return 'imei';
+    if (/durum/.test(n)) return 'durum';
+    if (/marka|model/.test(n)) return 'model';
+    if (/hafiza|renk|kapasite/.test(n)) return 'hafizaRenk';
+    if (/pil|batarya|saglik/.test(n)) return 'pil';
+    if (/alinan|satici|kimden/.test(n)) return 'alinan';
+    if (/satilan|alici|musteri|kime/.test(n)) return 'satilan';
+    if (/odeme|tahsil/.test(n)) return 'odeme';
+    if (/^not|aciklama/.test(n)) return 'not';
+    return null;
+  }
+  function dfTarihCoz(v) {
+    if (v == null || v === '') return '';
+    if (typeof v === 'object' && v.tarih != null) v = v.tarih;
+    if (typeof v === 'number') return v > 20000 && v < 80000 ? new Date(Math.round((v - 25569) * 86400000)).toISOString().slice(0, 10) : '';
+    var s = String(v).trim(), m;
+    if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return m[1] + '-' + dfIki(m[2]) + '-' + dfIki(m[3]);
+    if ((m = s.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{2,4})/))) return (m[3].length === 2 ? '20' + m[3] : m[3]) + '-' + dfIki(m[2]) + '-' + dfIki(m[1]);
+    return '';
+  }
+  function dfParaCoz(v) {
+    if (v == null || v === '' || typeof v === 'object') return null;
+    if (typeof v === 'number') return v;
+    var s = String(v).replace(/\s|₺|TL|TRY/gi, '');
+    if (!/\d/.test(s)) return null;
+    if (/,\d{1,2}(\D*)$/.test(s)) s = s.replace(/\./g, '').replace(',', '.');
+    else s = s.replace(/\.(?=\d{3}(\D|$))/g, '').replace(/,/g, '');
+    var n = parseFloat(s.replace(/[^\d.\-]/g, ''));
+    return isNaN(n) ? null : n;
+  }
+  function dfPilCoz(v) {
+    if (v == null || v === '' || typeof v === 'object') return null;
+    var n = typeof v === 'number' ? v : parseFloat(String(v).replace(',', '.').replace(/[^\d.]/g, ''));
+    if (isNaN(n)) return null;
+    if (typeof v === 'number' && n <= 1) n *= 100;
+    return Math.max(0, Math.min(100, Math.round(n)));
+  }
+  function dfDurumCoz(v) {
+    var n = ZI.normalMetin(v);
+    if (!n) return '';
+    if (/sifir|yeni|kapali kutu/.test(n)) return 'Sıfır';
+    if (/ikinci|2\.? ?el|kullanil/.test(n)) return 'İkinci El';
+    return String(v).trim();
+  }
+  function dfOdemeCoz(v) {
+    var n = ZI.normalMetin(v);
+    if (!n) return '';
+    if (/nakit|pesin/.test(n)) return 'Nakit';
+    if (/taksit/.test(n)) return 'Taksit';
+    if (/kart|pos/.test(n)) return 'Kredi Kartı';
+    if (/havale|eft|banka/.test(n)) return 'Havale / EFT';
+    if (/takas/.test(n)) return 'Takas';
+    if (/bekle|sonra|veresiye|borc/.test(n)) return 'Beklemede';
+    return String(v).trim();
+  }
+  function dfSatirKayit(satir, harita) {
+    var ham = {};
+    harita.forEach(function (a, i) { if (a) ham[a] = satir[i]; });
+    var yazi = function (v) { return v == null || typeof v === 'object' ? '' : String(v).trim(); };
+    var imei = ham.imei;
+    var r = {
+      alisTarihi: dfTarihCoz(ham.alisTarihi), alisFiyati: dfParaCoz(ham.alisFiyati), satisFiyati: dfParaCoz(ham.satisFiyati),
+      satisTakas: /takas/i.test(yazi(ham.satisFiyati)), model: yazi(ham.model), hafizaRenk: yazi(ham.hafizaRenk),
+      imei: typeof imei === 'number' ? String(Math.round(imei)) : yazi(imei).replace(/^="?|"$/g, ''),
+      durum: dfDurumCoz(yazi(ham.durum)), pil: dfPilCoz(ham.pil), alinan: yazi(ham.alinan),
+      satisTarihi: dfTarihCoz(ham.satisTarihi), satilan: yazi(ham.satilan), odeme: dfOdemeCoz(yazi(ham.odeme)), not: yazi(ham.not)
+    };
+    var af = yazi(ham.alisFiyati);
+    if (r.alisFiyati == null && af && !/takas/i.test(af)) r.not = [r.not, 'Alış fiyatı hücresinde: ' + af].filter(Boolean).join(' · ');
+    return !r.model && !r.imei && r.alisFiyati == null && r.satisFiyati == null && !r.alinan ? null : r;
+  }
+  function dfSatirlardanKayit(satirlar) {
+    for (var i = 0; i < Math.min(15, satirlar.length); i++) {
+      var gorulen = {}, say = 0;
+      var h = (satirlar[i] || []).map(function (x) {
+        var a = typeof x === 'string' ? dfBaslik(x) : null;
+        if (!a || gorulen[a]) return null;
+        gorulen[a] = 1; say++; return a;
+      });
+      if (say >= 3) return { baslik: true, kayitlar: satirlar.slice(i + 1).map(function (s) { return dfSatirKayit(s || [], h); }).filter(Boolean) };
+    }
+    return { baslik: false, kayitlar: [] };
+  }
+  function dfIceAktar(dosya) {
+    if (!dosya) return;
+    Promise.all([defterYukle(), tabloOku(dosya)]).then(function (r) {
+      var sonuc = dfSatirlardanKayit(r[1]);
+      if (!sonuc.baslik) { dfBilgi('Sütunlar tanınamadı', 'Dosyanın ilk satırlarında “Alış Tarihi, Alış Fiyatı, Marka / Model, IMEI / Seri No” gibi başlıklar bulunamadı.', true); return; }
+      var var_ = {}, yeni = [], ayni = 0;
+      DEFTER.kayitlar.forEach(function (x) { var i = dfImeiSade(x.imei); if (i.length >= 8) var_[i] = 1; });
+      sonuc.kayitlar.forEach(function (x) {
+        var i = dfImeiSade(x.imei);
+        if (i.length >= 8 && var_[i]) { ayni++; return; }
+        if (i.length >= 8) var_[i] = 1;
+        yeni.push(x);
+      });
+      if (!yeni.length) { dfBilgi('Eklenecek kayıt yok', ayni ? 'Dosyadaki ' + ayni + ' kaydın hepsi zaten defterde (aynı IMEI).' : 'Dosyada kayıt bulunamadı.'); return; }
+      var hatali = yeni.filter(function (x) { return imeiDurum(x.imei) === false; }).length;
+      modal({
+        genis: true, sinif: 'dp-df-modal', ikon: 'tablo', baslik: 'Excel’den içe aktar',
+        metin: '<b>' + yeni.length + ' kayıt</b> bulundu' + (ayni ? '; ' + ayni + ' tanesi zaten defterde olduğu için atlanacak' : '') + '.' + (hatali ? ' ' + hatali + ' kayıtta IMEI’nin son hanesi tutmuyor, içe aktardıktan sonra kontrol edin.' : ''),
+        icerik: '<div class="dp-df-kap dp-df-onizleme"><table class="dp-df-tablo"><thead><tr><th>Alış</th><th>Marka / Model</th><th>Hafıza / Renk</th><th>IMEI</th><th class="sag">Alış fiyatı</th><th>Alınan</th></tr></thead><tbody>' +
+          yeni.slice(0, 8).map(function (x) { return '<tr><td>' + k(dfTarih(x.alisTarihi)) + '</td><td><span class="dp-df-model">' + k(x.model) + '</span></td><td>' + k(x.hafizaRenk) + '</td><td><span class="dp-df-imei">' + k(x.imei) + '</span></td><td class="sag">' + k(ZI.fiyatYaz(x.alisFiyati)) + '</td><td>' + k(x.alinan) + '</td></tr>'; }).join('') +
+          (yeni.length > 8 ? '<tr><td colspan="6" style="text-align:center;color:var(--d-metin-2)">… ve ' + (yeni.length - 8) + ' kayıt daha</td></tr>' : '') + '</tbody></table></div>',
+        butonlar: [{ metin: 'Vazgeç', deger: 'iptal', sinif: 'dp-btn--cizgi' }, { metin: yeni.length + ' kaydı ekle', deger: 'ekle', sinif: 'dp-btn--turuncu', varsayilan: true }]
+      }).then(function (v) {
+        if (v !== 'ekle') return;
+        var t0 = Date.now();
+        yeni.forEach(function (x, i) { var t = new Date(t0 + i).toISOString(); x.id = 'd' + (t0 + i).toString(36) + rastgele(4); x.eklenme = t; x.guncelleme = t; DEFTER.kayitlar.push(x); });
+        defterKaydet();
+        S.df.f = 'tumu'; S.df.q = ''; S.df.sayfa = 1;
+        if (S.sekme === 'defter') defterSekmesi(); else sekmeAc('defter');
+        bildir(yeni.length + ' kayıt deftere eklendi.');
+      });
+    }).catch(function (e) { bildir(e && e.message ? e.message : 'Dosya okunamadı.', true); });
   }
 
   /* =====================================================================
@@ -1970,8 +2501,11 @@
     indir('zumrut-urunler-' + new Date().toISOString().slice(0, 10) + '.csv', csvYaz(s), 'text/csv;charset=utf-8');
   }
   function jsonIndir() {
-    var yedek = { tur: 'zumrut-iletisim-yedek', surum: 1, tarih: simdi(), veri: S.veri, hareketler: S.hareketler };
-    indir('zumrut-yedek-' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(yedek, null, 2), 'application/json');
+    defterYukle().then(function () {
+      var yedek = { tur: 'zumrut-iletisim-yedek', surum: 1, tarih: simdi(), veri: S.veri, hareketler: S.hareketler, defter: DEFTER };
+      indir('zumrut-yedek-' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(yedek, null, 2), 'application/json');
+      if (DEFTER.kayitlar.length) { DEFTER.sonYedek = simdi(); defterKaydet(); }
+    });
   }
   function jsonYukle(dosya) {
     if (!dosya) return;
@@ -1981,10 +2515,12 @@
       try { y = JSON.parse(r.result); } catch (e) { bildir('Dosya okunamadı: geçerli bir JSON değil.', true); return; }
       var veri = y && y.veri ? y.veri : (y && y.urunler ? y : null);
       if (!veri || !Array.isArray(veri.urunler)) { bildir('Bu dosya bir Zümrüt İletişim yedeği değil.', true); return; }
-      onayla('Yedek geri yüklensin mi?', '<b>' + veri.urunler.length + ' ürün</b> içeren yedek, paneldeki mevcut verilerin yerine geçecek' + (y.tarih ? ' (yedek tarihi: ' + k(tarihYaz(y.tarih)) + ')' : '') + '. Yayınlayana kadar site etkilenmez.', 'Geri yükle', true).then(function (e) {
+      var dfYedek = y.defter && Array.isArray(y.defter.kayitlar) ? y.defter : null;
+      onayla('Yedek geri yüklensin mi?', '<b>' + veri.urunler.length + ' ürün</b>' + (dfYedek ? ' ve alım-satım defterindeki <b>' + dfYedek.kayitlar.length + ' kayıt</b>' : '') + ' içeren yedek, paneldeki mevcut verilerin yerine geçecek' + (y.tarih ? ' (yedek tarihi: ' + k(tarihYaz(y.tarih)) + ')' : '') + '. Yayınlayana kadar site etkilenmez.', 'Geri yükle', true).then(function (e) {
         if (!e) return;
         S.veri = ZI.normalize(veri);
         if (Array.isArray(y.hareketler)) S.hareketler = y.hareketler;
+        if (dfYedek) { DEFTER = dfYedek; defterKaydet(); }
         degisti('Yedek geri yüklendi.');
         sekmeAc(S.sekme);
       });
