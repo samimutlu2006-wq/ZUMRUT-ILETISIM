@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-09-29T23:53:48.000Z",
+  "guncelleme": "2026-09-30T00:04:37.000Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz.",
@@ -120,15 +120,14 @@ window.ZI_VERI = {
     {
       "id": "galaxy-s",
       "aktif": true,
-      "tema": "acik",
+      "tema": "koyu",
       "sahne": "foto",
-      "yerlesim": "alt",
+      "yerlesim": "sag",
       "gorseller": [
-        "assets/img/vitrin/galaxy-s.webp"
+        "assets/img/vitrin/galaxy-s-ultra.webp"
       ],
       "zemin": [
-        "#fbfbfd",
-        "#eceef3"
+        "#000000"
       ],
       "karistir": true,
       "etiket": "Samsung",
@@ -150,14 +149,14 @@ window.ZI_VERI = {
     {
       "id": "iphone-16",
       "aktif": true,
-      "tema": "acik",
+      "tema": "koyu",
       "sahne": "foto",
       "yerlesim": "sag",
       "gorseller": [
-        "assets/img/vitrin/iphone-16-pembe.webp"
+        "assets/img/vitrin/iphone-16.webp"
       ],
       "zemin": [
-        "#f5f5f7"
+        "#000000"
       ],
       "karistir": true,
       "etiket": "",

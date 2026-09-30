@@ -399,6 +399,8 @@ body.zi-kilit { overflow: hidden; }
 /* Beyaz zeminli fotoğraflar: sahne slaytın zeminini devralır, fotoğraf onunla çarpılır (beyaz kaybolur) */
 .zi-sahne-foto.karistir { background: inherit; }
 .zi-sahne-foto.karistir img { mix-blend-mode: multiply; -webkit-mask-image: none; mask-image: none; }
+/* Koyu slaytta siyah zeminli fotoğraf: siyah, slaytın zeminine karışır */
+.zi-slayt--koyu .zi-sahne-foto.karistir img { mix-blend-mode: screen; }
 /* Sağda, tam yükseklikte; sol kenarı zemine erir */
 .zi-sahne-foto--sag { justify-content: flex-end; align-items: stretch; padding-left: 40%; }
 .zi-sahne-foto--sag img { height: 100%; width: auto; max-width: 100%; object-fit: cover; object-position: right center;
@@ -409,7 +411,7 @@ body.zi-kilit { overflow: hidden; }
 .zi-sahne-foto--sag.coklu img + img { margin-left: -5%; }
 /* Altta, ortada (geniş grup fotoğrafları); kenarları zemine erir */
 .zi-sahne-foto--alt { justify-content: center; align-items: flex-end; }
-.zi-sahne-foto--alt img { height: min(58%, 370px); width: auto; max-width: 84%; object-fit: contain; object-position: center bottom;
+.zi-sahne-foto--alt img { height: min(calc(100% - 280px), 370px); width: auto; max-width: 84%; object-fit: contain; object-position: center bottom;
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%); -webkit-mask-composite: source-in;
   mask-image: linear-gradient(180deg, transparent 0, #000 24%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%); mask-composite: intersect; }
 .zi-sahne-foto--alt.coklu img { max-width: 44%; }
