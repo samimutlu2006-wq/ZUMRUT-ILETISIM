@@ -2,12 +2,12 @@
 window.ZI_YONETICI = {
   "surum": 1,
   "kullanici": "tolga",
-  "tuz": "3zemabAaEWW3qOAb5UWQvw==",
+  "tuz": "3AhYPe4dOlrCjXHDYUgAzQ==",
   "tekrar": 600000,
-  "dogrulayici": "qKWGuqMNhJ/q7dO+boJqye3nazQ5BAqZ7+ZfRvS5cdQ=",
+  "dogrulayici": "mtSDdpnoo2ntpU/GqD0w0XIOTlQkbrzMOugMJSB1cc0=",
   "anahtar": {
-    "iv": "k5FKI3Iatmkiitd/",
-    "veri": "GSN1jHbUHrG20WvwZ2BKB8+vf6iyAvVkDBLF8Am2m7kyOQKY25W5tpDwUzmIUfaeCNUkvBuZDSE="
+    "iv": "mUKaR3dHWCAR9eVU",
+    "veri": "qDwFwm8C0D+z+6XDDSatVZJzx8GMOPCGpBo1k3cJlEIwVm2xddfGAV6tH6tI/PR60to96XFZp4U="
   },
-  "guncelleme": "2026-10-01T15:58:40.217Z"
+  "guncelleme": "2026-10-01T16:30:51.239Z"
 };
