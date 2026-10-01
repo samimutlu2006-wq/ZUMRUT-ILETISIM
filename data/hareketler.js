@@ -1,6 +1,32 @@
 /* Zümrüt İletişim · Stok hareketleri. Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_HAREKETLER = [
   {
+    "id": "hmupr1vvttu8",
+    "urunId": "tffyfy",
+    "urunAd": "tffyfy",
+    "urunKod": "ZI-1068",
+    "tarih": "2026-10-01T16:29:32.201Z",
+    "tip": "silme",
+    "adet": -1,
+    "onceki": 1,
+    "sonraki": 0,
+    "not": "Ürün silindi",
+    "kullanici": "tolga"
+  },
+  {
+    "id": "hmupr1vvth6y",
+    "urunId": "saassasa",
+    "urunAd": "saassasa",
+    "urunKod": "ZI-1069",
+    "tarih": "2026-10-01T16:29:32.201Z",
+    "tip": "silme",
+    "adet": -1,
+    "onceki": 1,
+    "sonraki": 0,
+    "not": "Ürün silindi",
+    "kullanici": "tolga"
+  },
+  {
     "id": "hmupq2m0wror",
     "urunId": "saassasa",
     "urunAd": "saassasa",
