@@ -640,3 +640,13 @@ body.dp.dp-df-acik { background: #fff; }
   .dp-df-kutu b { font-size: 24px; }
   .dp-df-kutu small { font-size: 13px; }
 }
+
+/* GitHub bölüm kilidi */
+.dp-ghk { text-align: center; padding: 20px 10px 8px; }
+.dp-ghk__ikon { width: 54px; height: 54px; margin: 0 auto 14px; border-radius: 50%; background: var(--d-turuncu-soluk); color: var(--d-turuncu-koyu); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.dp-ghk p { color: var(--d-metin-2); max-width: 360px; margin: 0 auto 16px; line-height: 1.5; }
+.dp-ghk__form { display: flex; gap: 8px; max-width: 360px; margin: 0 auto; }
+.dp-ghk__form input { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid var(--d-kenar); border-radius: 10px; font-size: 15px; outline: none; transition: border-color .2s, box-shadow .2s; }
+.dp-ghk__form input:focus { border-color: var(--d-turuncu); box-shadow: 0 0 0 3px rgba(255, 138, 0, .2); }
+.dp-ghk__form .dp-btn { height: 44px; white-space: nowrap; }
+#dp-ghk-hata { color: var(--d-kirmizi); min-height: 18px; margin: 12px auto 0; }
