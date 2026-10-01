@@ -1,6 +1,45 @@
 /* Zümrüt İletişim · Stok hareketleri. Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_HAREKETLER = [
   {
+    "id": "hmuplnm1f36f",
+    "urunId": "asdfasd",
+    "urunAd": "asdfasd",
+    "urunKod": "ZI-1068",
+    "tarih": "2026-10-01T13:58:28.179Z",
+    "tip": "olusturma",
+    "adet": 1,
+    "onceki": 0,
+    "sonraki": 1,
+    "not": "Ürün eklendi",
+    "kullanici": "tolga"
+  },
+  {
+    "id": "hmupl22q7lws",
+    "urunId": "kulaklik",
+    "urunAd": "kulaklık",
+    "urunKod": "ZI-1068",
+    "tarih": "2026-10-01T13:41:43.375Z",
+    "tip": "silme",
+    "adet": -1,
+    "onceki": 1,
+    "sonraki": 0,
+    "not": "Ürün silindi",
+    "kullanici": "tolga"
+  },
+  {
+    "id": "hmupl22q77ga",
+    "urunId": "taasdsadasd",
+    "urunAd": "taasdsadasd",
+    "urunKod": "ZI-1069",
+    "tarih": "2026-10-01T13:41:43.375Z",
+    "tip": "silme",
+    "adet": -1,
+    "onceki": 1,
+    "sonraki": 0,
+    "not": "Ürün silindi",
+    "kullanici": "tolga"
+  },
+  {
     "id": "hmupkzbxzwvi",
     "urunId": "taasdsadasd",
     "urunAd": "taasdsadasd",

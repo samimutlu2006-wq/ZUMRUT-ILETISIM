@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-10-01T13:39:46.622Z",
+  "guncelleme": "2026-10-01T13:58:34.523Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz. Arızalanan telefonlarınızın tamirini de mağazamızda yapıyoruz.",
@@ -217,49 +217,13 @@ window.ZI_VERI = {
   ],
   "urunler": [
     {
-      "id": "taasdsadasd",
-      "kod": "ZI-1069",
-      "ad": "taasdsadasd",
-      "marka": "adasd",
-      "seri": "adsasd",
-      "kategori": "tablet",
-      "altKategori": "",
-      "katlanabilir": false,
-      "durum": "sifir",
-      "kozmetik": "",
-      "rozet": "",
-      "fiyat": null,
-      "secenekler": [],
-      "renkler": [],
-      "cikisYili": 2026,
-      "cikisTarihi": "",
-      "uretimYili": 2026,
-      "pilSagligi": 100,
-      "degisenParca": "Değişen parça yok, kapalı kutu",
-      "kisaAciklama": "",
-      "aciklama": "",
-      "ozellikler": {},
-      "gorseller": [
-        "assets/img/urunler/taasdsadasd-mupkzkn1fk3d.webp",
-        "assets/img/urunler/taasdsadasd-mupkzkn11ply.webp"
-      ],
-      "stok": 1,
-      "aktif": true,
-      "oneCikan": false,
-      "pilDongu": null,
-      "garanti": "",
-      "eklenme": "2026-10-01T13:39:35.350Z",
-      "guncelleme": "2026-10-01T13:39:35.350Z",
-      "ornek": false
-    },
-    {
-      "id": "kulaklik",
+      "id": "asdfasd",
       "kod": "ZI-1068",
-      "ad": "kulaklık",
-      "marka": "jbl",
-      "seri": "",
+      "ad": "asdfasd",
+      "marka": "asdfa",
+      "seri": "adsf",
       "kategori": "aksesuar",
-      "altKategori": "kulaklik",
+      "altKategori": "kilif",
       "katlanabilir": false,
       "durum": "sifir",
       "kozmetik": "",
@@ -276,16 +240,16 @@ window.ZI_VERI = {
       "aciklama": "",
       "ozellikler": {},
       "gorseller": [
-        "assets/img/urunler/kulaklik-mupkzkn14x8w.webp",
-        "assets/img/urunler/kulaklik-mupkzkn1qhuc.webp"
+        "assets/img/urunler/asdfasd-muplnqxnq09y.webp",
+        "assets/img/urunler/asdfasd-muplnqxnd5k8.webp"
       ],
       "stok": 1,
       "aktif": true,
       "oneCikan": false,
       "pilDongu": null,
       "garanti": "",
-      "eklenme": "2026-10-01T13:10:54.756Z",
-      "guncelleme": "2026-10-01T13:10:54.756Z",
+      "eklenme": "2026-10-01T13:58:28.178Z",
+      "guncelleme": "2026-10-01T13:58:28.178Z",
       "ornek": false
     },
     {
