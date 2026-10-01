@@ -2144,6 +2144,8 @@
   /* =====================================================================
      AYARLAR
      ===================================================================== */
+  var GH_KILIT = { tuz: 'xZYihRp+LJB7WWipq3LpxA==', dogrulayici: 'JAzfU1RLNULb+dteryaPX9hoeWNiiBAWADOMa2T8Vgk=' };
+  function ghKilitAcik() { try { return sessionStorage.getItem('zi-gh-kilit') === '1'; } catch (e) { return false; } }
   function ayarlarSekmesi() {
     var a = GH.ayar() || GH.tahmin() || { sahip: '', depo: '', dal: 'main' };
     var bagli = !!GH.ayar(), token = !!oturum.token;
@@ -2153,6 +2155,7 @@
       '<div class="dp-sayfa-baslik"><div><h1>Ayarlar</h1><p>GitHub yayın bağlantısı, yönetici hesabı ve yedekleme.</p></div></div>' +
       '<div class="dp-iki-kolon">' +
       '<section class="dp-kart dp-kart--cerceve" id="dp-github-kart"><div class="dp-kart__ust">' + ZI.ikon('bulut') + '<div><h2>GitHub bağlantısı</h2><p>Panelde yaptığınız değişikliklerin “Yayınla” ile siteye aktarılması için bir kez kurulur.</p></div></div>' +
+      (ghKilitAcik() ? (
       '<p style="margin-bottom:16px"><span class="dp-baglanti-durum ' + durum[0] + '">' + durum[1] + '</span>' + (repoAnahtarli ? ' <span class="dp-rozet dp-rozet--koyu" style="margin-left:6px">Anahtar depoda şifreli</span>' : '') + '</p>' +
       '<details style="margin-bottom:16px"><summary class="dp-link" style="cursor:pointer">Erişim anahtarı nasıl alınır?</summary><ol class="dp-adim-liste" style="margin-top:12px">' +
       '<li><span>GitHub’da sağ üstteki profil resminize tıklayın → <b>Settings</b> → en altta <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</span></li>' +
@@ -2168,7 +2171,8 @@
       '<div class="dp-genis" id="dp-gh-sifre-alanlari"></div>' +
       '</form>' +
       '<div class="dp-kart__alt"><span class="dp-not" id="dp-gh-sonuc"></span><button type="button" class="dp-btn dp-btn--cizgi" id="dp-gh-test">' + ZI.ikon('yenile') + 'Bağlantıyı test et</button><button type="button" class="dp-btn dp-btn--turuncu dp-btn--buyuk" id="dp-gh-kaydet">' + ZI.ikon('tik') + 'Kaydet ve bağlan</button></div>' +
-      (bagli ? '<p style="margin-top:14px;font-size:12px"><button type="button" class="dp-link" id="dp-gh-kaldir">Bu cihazdaki bağlantıyı kaldır</button></p>' : '') +
+      (bagli ? '<p style="margin-top:14px;font-size:12px"><button type="button" class="dp-link" id="dp-gh-kaldir">Bu cihazdaki bağlantıyı kaldır</button></p>' : '')
+      ) : '<div class="dp-ghk"><div class="dp-ghk__ikon">' + ZI.ikon('kilit') + '</div><p>Bu bölüm kilitli. GitHub bağlantı ayarlarını açmak için bölüm şifresini girin.</p><div class="dp-ghk__form"><input type="password" id="dp-ghk-sifre" placeholder="Bölüm şifresi" autocomplete="off" aria-label="Bölüm şifresi"><button type="button" class="dp-btn dp-btn--turuncu" id="dp-ghk-ac">' + ZI.ikon('kilit') + 'Aç</button></div><p class="dp-not" id="dp-ghk-hata"></p></div>') +
       '</section>' +
       '<div class="dp-kartlar">' +
       '<section class="dp-kart" id="dp-sifre-kart"><div class="dp-kart__ust">' + ZI.ikon('kilit') + '<div><h2>Yönetici hesabı</h2><p>Giriş kullanıcı adı ve şifresi. Şifre hiçbir yerde açık olarak saklanmaz.</p></div></div>' +
@@ -2194,6 +2198,22 @@
       '<button type="button" class="dp-btn dp-btn--tehlike" id="dp-hepsini-sil">' + ZI.ikon('cop') + 'Tüm ürünleri sil</button></div></section>' +
       '</div></div>';
 
+    // GitHub bölüm kilidi
+    if (!ghKilitAcik()) {
+      var ghkAc = $('#dp-ghk-ac');
+      function ghkDene() {
+        var val = ($('#dp-ghk-sifre') || {}).value || '';
+        if (!val) { $('#dp-ghk-hata').textContent = 'Şifreyi girin.'; return; }
+        ZI.guvenlik.turet('github-kilit', val, GH_KILIT.tuz, GV.TEKRAR).then(function (t) {
+          if (t.dogrulayici === GH_KILIT.dogrulayici) { try { sessionStorage.setItem('zi-gh-kilit', '1'); } catch (e) { /* yok */ } sekmeAc('ayarlar'); }
+          else { $('#dp-ghk-hata').textContent = 'Bölüm şifresi yanlış.'; var i = $('#dp-ghk-sifre'); if (i) i.select(); }
+        });
+      }
+      if (ghkAc) ghkAc.onclick = ghkDene;
+      var ghkIn = $('#dp-ghk-sifre');
+      if (ghkIn) ghkIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); ghkDene(); } });
+    }
+    if (ghKilitAcik()) {
     // GitHub formu: şifre alanları
     var ghf = $('#dp-gh-form');
     function sifreAlanlari() {
@@ -2267,6 +2287,7 @@
         ZI.yerelSil('zi-github'); oturum.token = null; GV.oturumAc(oturum); sekmeAc('ayarlar'); ustDurum();
       });
     };
+    }
 
     // Şifre formu
     var sf = $('#dp-sifre-form');
