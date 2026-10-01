@@ -1,6 +1,19 @@
 /* Zümrüt İletişim · Stok hareketleri. Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_HAREKETLER = [
   {
+    "id": "hmupq09vreop",
+    "urunId": "tffyfy",
+    "urunAd": "tffyfy",
+    "urunKod": "ZI-1068",
+    "tarih": "2026-10-01T16:00:17.415Z",
+    "tip": "olusturma",
+    "adet": 1,
+    "onceki": 0,
+    "sonraki": 1,
+    "not": "Ürün eklendi",
+    "kullanici": "tolga"
+  },
+  {
     "id": "hmupls1nm8fo",
     "urunId": "asdfasd",
     "urunAd": "asdfasd",

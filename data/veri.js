@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-10-01T14:01:58.066Z",
+  "guncelleme": "2026-10-01T16:00:22.325Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz. Arızalanan telefonlarınızın tamirini de mağazamızda yapıyoruz.",
@@ -216,6 +216,41 @@ window.ZI_VERI = {
     }
   ],
   "urunler": [
+    {
+      "id": "tffyfy",
+      "kod": "ZI-1068",
+      "ad": "tffyfy",
+      "marka": "vggv",
+      "seri": "",
+      "kategori": "telefon",
+      "altKategori": "",
+      "katlanabilir": false,
+      "durum": "sifir",
+      "kozmetik": "",
+      "rozet": "",
+      "fiyat": null,
+      "secenekler": [],
+      "renkler": [],
+      "cikisYili": 2026,
+      "cikisTarihi": "",
+      "uretimYili": 2026,
+      "pilSagligi": 100,
+      "degisenParca": "Değişen parça yok, kapalı kutu",
+      "kisaAciklama": "",
+      "aciklama": "",
+      "ozellikler": {},
+      "gorseller": [
+        "assets/img/urunler/tffyfy-mupq0do4ghyh.webp"
+      ],
+      "stok": 1,
+      "aktif": true,
+      "oneCikan": false,
+      "pilDongu": null,
+      "garanti": "",
+      "eklenme": "2026-10-01T16:00:17.414Z",
+      "guncelleme": "2026-10-01T16:00:17.414Z",
+      "ornek": false
+    },
     {
       "id": "iphone-14-pro-max-256-gb-2el",
       "kod": "SY007",
