@@ -1,7 +1,7 @@
 /* Zümrüt İletişim · Site verileri (ürünler, mağaza, vitrin). Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_VERI = {
   "surum": 1,
-  "guncelleme": "2026-10-01T16:31:45.195Z",
+  "guncelleme": "2026-10-01T21:06:18.735Z",
   "magaza": {
     "ad": "Zümrüt İletişim",
     "tanitim": "Kayseri Kocasinan’da, Kadir Has Caddesi üzerindeki mağazamızda iPhone başta olmak üzere Samsung, Xiaomi ve diğer popüler markaların sıfır ve ikinci el telefon, tablet ve aksesuarlarını bir araya getiriyoruz. İkinci el cihazlarımızın pil sağlığını, değişen parça bilgisini ve çıkış yılını açıkça paylaşıyor; eski cihazınızı takasla yenilemenize yardımcı oluyoruz. Arızalanan telefonlarınızın tamirini de mağazamızda yapıyoruz.",
@@ -228,7 +228,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 56999,
       "secenekler": [],
       "renkler": [
         {
@@ -259,7 +259,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:23:18.415Z",
-      "guncelleme": "2026-09-29T21:23:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.860Z",
       "garanti": "Firma garantili"
     },
     {
@@ -274,7 +274,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 74999,
       "secenekler": [],
       "renkler": [],
       "cikisYili": 2023,
@@ -301,7 +301,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:22:18.415Z",
-      "guncelleme": "2026-09-29T21:22:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "garanti": "Firma garantili"
     },
     {
@@ -316,7 +316,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Çok Temiz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 68999,
       "secenekler": [],
       "renkler": [],
       "cikisYili": 2023,
@@ -343,7 +343,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:21:18.415Z",
-      "guncelleme": "2026-09-29T21:21:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "garanti": "Firma garantili"
     },
     {
@@ -358,7 +358,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 68999,
       "secenekler": [],
       "renkler": [],
       "cikisYili": 2023,
@@ -385,7 +385,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:20:18.415Z",
-      "guncelleme": "2026-09-29T21:20:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "garanti": "Firma garantili"
     },
     {
@@ -400,7 +400,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 82999,
       "secenekler": [],
       "renkler": [
         {
@@ -431,7 +431,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:19:18.415Z",
-      "guncelleme": "2026-09-29T21:19:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "garanti": "23 ay garantili"
     },
     {
@@ -446,7 +446,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 74999,
       "secenekler": [],
       "renkler": [
         {
@@ -478,7 +478,7 @@ window.ZI_VERI = {
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-09-29T21:18:18.415Z",
-      "guncelleme": "2026-09-29T21:18:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "pilDongu": 136,
       "garanti": "18 ay garantili"
     },
@@ -494,7 +494,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Çok Temiz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 104999,
       "secenekler": [],
       "renkler": [
         {
@@ -525,7 +525,7 @@ window.ZI_VERI = {
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-09-29T21:17:18.415Z",
-      "guncelleme": "2026-09-29T21:17:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "pilDongu": 44,
       "garanti": "23 ay garantili"
     },
@@ -541,7 +541,7 @@ window.ZI_VERI = {
       "durum": "ikinci-el",
       "kozmetik": "Kusursuz",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 114999,
       "secenekler": [],
       "renkler": [
         {
@@ -572,7 +572,7 @@ window.ZI_VERI = {
       "oneCikan": true,
       "ornek": false,
       "eklenme": "2026-09-29T21:16:18.415Z",
-      "guncelleme": "2026-09-29T21:16:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "pilDongu": 90,
       "garanti": "21 ay garantili"
     },
@@ -588,7 +588,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -643,7 +643,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:15:18.415Z",
-      "guncelleme": "2026-09-29T21:15:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Lacivert",
         "Lacivert",
@@ -667,7 +667,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -723,7 +723,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:14:18.415Z",
-      "guncelleme": "2026-09-29T21:14:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Taba",
         "Taba",
@@ -752,7 +752,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -802,7 +802,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:13:18.415Z",
-      "guncelleme": "2026-09-29T21:13:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Mor",
         "Mor",
@@ -825,7 +825,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -864,7 +864,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:12:18.415Z",
-      "guncelleme": "2026-09-29T21:12:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Gri",
         "Gri",
@@ -884,7 +884,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -912,7 +912,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:11:18.415Z",
-      "guncelleme": "2026-09-29T21:11:18.415Z"
+      "guncelleme": "2026-10-01T21:05:43.878Z"
     },
     {
       "id": "logolu-deri-kilif-iphone-17-pro",
@@ -926,7 +926,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -981,7 +981,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:10:18.415Z",
-      "guncelleme": "2026-09-29T21:10:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Yeşil",
         "Yeşil",
@@ -1005,7 +1005,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -1077,7 +1077,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:09:18.415Z",
-      "guncelleme": "2026-09-29T21:09:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Turuncu",
         "Turuncu",
@@ -1110,7 +1110,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -1149,7 +1149,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:08:18.415Z",
-      "guncelleme": "2026-09-29T21:08:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Beyaz",
         "Beyaz",
@@ -1169,7 +1169,7 @@ window.ZI_VERI = {
       "durum": "sifir",
       "kozmetik": "",
       "rozet": "",
-      "fiyat": null,
+      "fiyat": 799,
       "secenekler": [],
       "renkler": [
         {
@@ -1202,7 +1202,7 @@ window.ZI_VERI = {
       "oneCikan": false,
       "ornek": false,
       "eklenme": "2026-09-29T21:07:18.415Z",
-      "guncelleme": "2026-09-29T21:07:18.415Z",
+      "guncelleme": "2026-10-01T21:05:43.878Z",
       "gorselRenkleri": [
         "Pembe",
         "Açık Mavi"
