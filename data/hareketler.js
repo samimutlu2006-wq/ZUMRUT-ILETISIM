@@ -1,6 +1,32 @@
 /* Zümrüt İletişim · Stok hareketleri. Bu dosya depo panelinden otomatik güncellenir. */
 window.ZI_HAREKETLER = [
   {
+    "id": "hmupkzbxzwvi",
+    "urunId": "taasdsadasd",
+    "urunAd": "taasdsadasd",
+    "urunKod": "ZI-1069",
+    "tarih": "2026-10-01T13:39:35.351Z",
+    "tip": "olusturma",
+    "adet": 1,
+    "onceki": 0,
+    "sonraki": 1,
+    "not": "Ürün eklendi",
+    "kullanici": "tolga"
+  },
+  {
+    "id": "hmupjygbofdm",
+    "urunId": "kulaklik",
+    "urunAd": "kulaklık",
+    "urunKod": "ZI-1068",
+    "tarih": "2026-10-01T13:10:54.756Z",
+    "tip": "olusturma",
+    "adet": 1,
+    "onceki": 0,
+    "sonraki": 1,
+    "not": "Ürün eklendi",
+    "kullanici": "tolga"
+  },
+  {
     "id": "hmun6nz0ve0",
     "urunId": "iphone-14-pro-max-256-gb-2el",
     "urunAd": "iPhone 14 Pro Max 256 GB",
